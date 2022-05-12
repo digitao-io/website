@@ -19,8 +19,4 @@ export default Vue.extend({})
     display: flex;
     justify-content: space-between;
   }
-
-  .menu {
-    justify-content: flex-end;
-  }
 </style>
