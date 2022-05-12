@@ -1,10 +1,24 @@
 <template>
-  <div>
-    <div class="box">
-      <div class="logo">logo DigiTAO Software</div>
-      <div class="menu">Menu</div>
-    </div>
-    <div class="content">content</div>
+  <div class="page">
+    <header class="header">
+      <div class="title">
+        <div class="logo">
+          Logo
+        </div>
+
+        <div class="text">
+          DigiTAO Software
+        </div>
+      </div>
+
+      <div class="menu">
+        Menu
+      </div>
+    </header>
+
+    <main class="content">
+      Content
+    </main>
   </div>
 </template>
 
@@ -14,9 +28,13 @@ import Vue from 'vue'
 export default Vue.extend({})
 </script>
 
-<style>
-  .box {
+<style scoped>
+  .header {
     display: flex;
     justify-content: space-between;
+  }
+
+  .title {
+    display: flex;
   }
 </style>
