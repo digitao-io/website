@@ -29,12 +29,12 @@ export default Vue.extend({})
 </script>
 
 <style scoped>
-  .header {
-    display: flex;
-    justify-content: space-between;
-  }
+.header {
+  display: flex;
+  justify-content: space-between;
+}
 
-  .title {
-    display: flex;
-  }
+.title {
+  display: flex;
+}
 </style>
