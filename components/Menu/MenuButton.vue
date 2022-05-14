@@ -1,5 +1,5 @@
 <template functional>
-  <button class="menu-button">
+  <button class="menu-button" @click.native="listeners['click']">
     <svg
       class="menu-button__icon"
       xmlns="http://www.w3.org/2000/svg"
