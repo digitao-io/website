@@ -10,12 +10,15 @@
       </div>
 
       <div class="menu">
-        Menu
+        <button v-on:click="show">
+          Menu
+        </button>
       </div>
     </header>
 
     <main class="content">
       Content
+      {{isenum}}
     </main>
   </div>
 </template>
@@ -23,7 +26,23 @@
 <script lang="ts">
 import Vue from 'vue'
 
-export default Vue.extend({})
+export default Vue.extend({
+  data () {
+    return {
+      isenum: true
+    }
+  },
+
+  methods: {
+    show () {
+      if (!this.isenum) {
+        this.isenum = true
+      } else {
+        this.isenum = false
+      }
+    }
+  }
+})
 </script>
 
 <style scoped>
