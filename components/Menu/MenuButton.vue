@@ -8,8 +8,8 @@
       fill="none"
       viewBox="0 0 24 24"
     >
-      <path v-if="props.open" d="M0 3h24M0 21h24M0 12h24" />
-      <path v-else d="M1 23 23 1M1 1l22 22" />
+      <path v-if="props.showMenu" d="M1 23 23 1M1 1l22 22" />
+      <path v-else d="M0 3h24M0 21h24M0 12h24" />
     </svg>
   </button>
 </template>
@@ -18,7 +18,7 @@
 import Vue from 'vue'
 export default Vue.extend({
   props: {
-    open: { type: Boolean, required: true }
+    showMenu: { type: Boolean, required: true }
   }
 })
 </script>
