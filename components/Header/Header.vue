@@ -10,9 +10,7 @@
         </div>
       </div>
 
-      <button class="header__menu-toggle-button" @click="toggleShowMenu">
-        Menu
-      </button>
+      <HeaderMenuToggleButton :show-menu="showMenu" @click="toggleShowMenu" />
     </div>
 
     <nav class="header__navigation">
@@ -29,7 +27,7 @@ import Vue from 'vue'
 export default Vue.extend({
   data () {
     return {
-      showMenu: true
+      showMenu: false
     }
   },
 
