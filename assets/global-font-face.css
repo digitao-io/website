@@ -1,0 +1,55 @@
+@font-face {
+  font-family: Raleway;
+  font-weight: normal;
+  font-style: normal;
+  src: url("/fonts/Raleway.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: Raleway;
+  font-weight: bold;
+  font-style: normal;
+  src: url("/fonts/Raleway.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: Raleway;
+  font-weight: normal;
+  font-style: italic;
+  src: url("/fonts/Raleway-Italic.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: Raleway;
+  font-weight: bold;
+  font-style: italic;
+  src: url("/fonts/Raleway-Italic.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: OpenSans;
+  font-weight: normal;
+  font-style: normal;
+  src: url("/fonts/OpenSans.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: OpenSans;
+  font-weight: bold;
+  font-style: normal;
+  src: url("/fonts/OpenSans.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: OpenSans;
+  font-weight: normal;
+  font-style: italic;
+  src: url("/fonts/OpenSans-Italic.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: OpenSans;
+  font-weight: bold;
+  font-style: italic;
+  src: url("/fonts/OpenSans-Italic.ttf") format("truetype");
+}

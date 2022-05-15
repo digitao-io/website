@@ -1,7 +1,7 @@
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'digitao-official-website',
+    title: 'DigiTAO Software :: Organize the dataflow',
     htmlAttrs: {
       lang: 'en'
     },
@@ -18,6 +18,10 @@ export default {
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
+    '@/assets/global-variables.css',
+    '@/assets/global-font-face.css',
+    '@/assets/global-reset.css',
+    '@/assets/global-style.css'
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
