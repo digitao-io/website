@@ -13,7 +13,7 @@
       <HeaderMenuToggleButton :show-menu="showMenu" @click="toggleShowMenu" />
     </div>
 
-    <nav v-show="isShow" class="header__navigation" @click="toggleShowMenu">
+    <nav v-show="showMenu" class="header__navigation">
       <ul>
         <li>Home</li>
       </ul>
@@ -35,7 +35,6 @@ export default Vue.extend({
   methods: {
     toggleShowMenu () {
       this.showMenu = !this.showMenu
-      this.isShow = !this.isShow
     }
   }
 })
