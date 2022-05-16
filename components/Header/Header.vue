@@ -13,7 +13,7 @@
       <HeaderMenuToggleButton :show-menu="showMenu" @click="toggleShowMenu" />
     </div>
 
-    <nav class="header__navigation">
+    <nav v-show="isShow" class="header__navigation" @click="toggleShowMenu">
       <ul>
         <li>Home</li>
       </ul>
@@ -27,13 +27,15 @@ import Vue from 'vue'
 export default Vue.extend({
   data () {
     return {
-      showMenu: false
+      showMenu: false,
+      isShow: false
     }
   },
 
   methods: {
     toggleShowMenu () {
       this.showMenu = !this.showMenu
+      this.isShow = !this.isShow
     }
   }
 })
