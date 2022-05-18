@@ -7,6 +7,7 @@
       height="24"
       fill="none"
       viewBox="0 0 24 24"
+      :class="{button_withe: showMenu}"
     >
       <path v-if="showMenu" d="M1 23 23 1M1 1l22 22" />
       <path v-else d="M0 3h24M0 21h24M0 12h24" />
@@ -40,5 +41,10 @@ export default Vue.extend({
 .header-menu-toggle-button__icon {
   stroke: var(--primary-color);
   stroke-width: 2;
+}
+
+.button_withe {
+  stroke: var(--secondary-color);
+  margin-right: 8px;
 }
 </style>
