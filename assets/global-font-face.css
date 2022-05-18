@@ -28,6 +28,13 @@
 
 @font-face {
   font-family: OpenSans;
+  font-weight: 300;
+  font-style: normal;
+  src: url("/fonts/OpenSans.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: OpenSans;
   font-weight: normal;
   font-style: normal;
   src: url("/fonts/OpenSans.ttf") format("truetype");

@@ -10,6 +10,6 @@
 
 <style scoped>
 .page {
-  margin: 8px;
+  margin: 16px;
 }
 </style>

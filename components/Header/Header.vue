@@ -1,24 +1,35 @@
 <template>
-  <header class="header" :class="{header_white: showMenu}">
-    <div class="header__toolbar" :class="{header_toolbar_white: showMenu}">
-      <div class="header__logo" :class="{header_logo_white: showMenu}">
-        <HeaderLogo class="header__logo-image" :class="{headerLogoWhite: showMenu}" />
+  <header class="header">
+    <div
+      class="header__content"
+      :class="{
+        'header__content--show-menu': showMenu
+      }"
+    >
+      <div class="header__toolbar">
+        <div class="header__logo">
+          <HeaderLogo class="header__logo-image" />
 
-        <div class="header__logo-title" :class="{logo_title_white: showMenu}">
-          DigiTAO<br>
-          Software
+          <div class="header__logo-title">
+            DigiTAO<br>
+            Software
+          </div>
         </div>
+
+        <HeaderMenuToggleButton
+          class="header__menu-toggle-button"
+          :show-menu="showMenu"
+          @click="toggleShowMenu"
+        />
       </div>
-      <HeaderMenuToggleButton :show-menu="showMenu" @click="toggleShowMenu" />
+
+      <HeaderMenu
+        class="header__menu"
+        :show-menu="showMenu"
+      />
     </div>
-    <nav v-show="showMenu" @click="toggleShowMenu">
-      <ul class="nemu_font">
-        <li>Home</li>
-        <li>Resume</li>
-        <li>Showcae</li>
-        <li>Contact</li>
-      </ul>
-    </nav>
+
+    <div v-show="showMenu" class="header__spacer" />
   </header>
 </template>
 
@@ -67,49 +78,34 @@ export default Vue.extend({
   font-size: 14px;
 }
 
-.header_toolbar_white {
-  display: flex;
-  justify-content: space-between;
+.header__menu {
+  display: none;
+  margin-top: 48px;
 }
 
-.header_logo_white {
-  display: flex;
-  align-items: flex-end;
+.header__spacer {
+  height: 42px;
 }
 
-.header_white {
+.header__content.header__content--show-menu {
   position: absolute;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: #242424;
+  width: 100%;
+  height: 100%;
+  padding: 16px;
+  background-color: var(--primary-color);
 }
 
-.headerLogoWhite {
-  margin-right: 8px;
-  margin-top: 8px;
-  margin-left: 8px;
-  width: 32px;
-  height: 42px;
+.header__content.header__content--show-menu .header__logo-image {
   stroke: var(--secondary-color);
 }
 
-.logo_title_white {
-  margin-bottom: -3px;
-  color: white;
-  line-height: 1.3;
-  font-family: Raleway, sans-serif;
-  font-weight: bold;
-  font-size: 14px;
+.header__content.header__content--show-menu .header__logo-title {
+  color: var(--secondary-color);
 }
 
-.nemu_font {
-  display: flex;
-  flex-direction: column;
-  justify-content: content;
-  align-items: center;
-  color: var(--secondary-color);
-  list-style: none;
+.header__content.header__content--show-menu .header__menu {
+  display: block;
 }
 </style>
