@@ -1,10 +1,12 @@
 <template>
-  <header class="header">
+  <header
+    class="header"
+    :class="{
+      'header--show-menu': showMenu
+    }"
+  >
     <div
       class="header__content"
-      :class="{
-        'header__content--show-menu': showMenu
-      }"
     >
       <div class="header__toolbar">
         <div class="header__logo">
@@ -28,8 +30,6 @@
         :show-menu="showMenu"
       />
     </div>
-
-    <div v-show="showMenu" class="header__spacer" />
   </header>
 </template>
 
@@ -80,14 +80,10 @@ export default Vue.extend({
 
 .header__menu {
   display: none;
-  margin-top: 48px;
+  margin-top: 50px;
 }
 
-.header__spacer {
-  height: 42px;
-}
-
-.header__content.header__content--show-menu {
+.header.header--show-menu {
   position: absolute;
   top: 0;
   left: 0;
@@ -97,15 +93,15 @@ export default Vue.extend({
   background-color: var(--primary-color);
 }
 
-.header__content.header__content--show-menu .header__logo-image {
+.header.header--show-menu .header__logo-image {
   stroke: var(--secondary-color);
 }
 
-.header__content.header__content--show-menu .header__logo-title {
+.header.header--show-menu .header__logo-title {
   color: var(--secondary-color);
 }
 
-.header__content.header__content--show-menu .header__menu {
+.header.header--show-menu .header__menu {
   display: block;
 }
 </style>
