@@ -4,10 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "nuxt",
+    "devenv:up": "docker compose up -d",
+    "devenv:down": "docker compose down",
     "build": "nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate",
-    "devenv:up": "docker compose up",
     "lint:js": "eslint --ext \".js,.vue\" --ignore-path .gitignore .",
     "lint:style": "stylelint \"**/*.{vue,css}\" --ignore-path .gitignore",
     "lint": "npm run lint:js && npm run lint:style",
