@@ -12,5 +12,3 @@ type TagIdentifier struct {
 type TagData struct {
 	Name string `json:"name"`
 }
-
-

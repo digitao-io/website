@@ -13,5 +13,5 @@ type FileEntryData struct {
 	Name        string `json:"name"`
 	Title       string `json:"title"`
 	MimeType    string `json:"mimeType"`
-	SizeInBytes int    `json:"sizeInBytes"`
+	SizeInBytes uint   `json:"sizeInBytes"`
 }
