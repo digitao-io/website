@@ -1,0 +1,20 @@
+{
+  "port": 3000,
+
+  "database": {
+    "host": "localhost",
+    "port": 3306,
+    "user": "root",
+    "password": "no-password",
+    "database": "website-test",
+    "maxIdleConnections": 1,
+    "maxOpenConnections": 1
+  },
+
+  "users": [
+    {
+      "username": "testuser",
+      "passwordHash": "916f37ba7eb4459bc5c2e7a13a5b89882c2ced553dc8e29c753b12b74eb46412"
+    }
+  ]
+}
