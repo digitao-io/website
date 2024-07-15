@@ -5,7 +5,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func DoHealthCheck(ctx *app.Context) gin.HandlerFunc {
+func HealthCheck(ctx *app.Context) gin.HandlerFunc {
 	return func(g *gin.Context) {
 		ResponseWithOk(g)
 	}

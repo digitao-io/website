@@ -8,7 +8,7 @@ import (
 func SetupRoutes(ctx *app.Context) *gin.Engine {
 	r := gin.Default()
 
-	r.GET("/do-health-check", DoHealthCheck(ctx))
+	r.GET("/health-check", HealthCheck(ctx))
 
 	return r
 }
