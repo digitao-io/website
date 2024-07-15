@@ -4,16 +4,16 @@ import (
 	"fmt"
 
 	"digitao.io/website/app"
-	"digitao.io/website/endpoint"
+	"digitao.io/website/setup"
 )
 
 func main() {
-	configuration, err := app.ReadConfiguration()
+	configuration, err := setup.ReadConfiguration()
 	if err != nil {
 		panic(err)
 	}
 
-	database, err := app.InitializeDatabase(configuration)
+	database, err := setup.SetupDatabase(configuration)
 	if err != nil {
 		panic(err)
 	}
@@ -23,7 +23,7 @@ func main() {
 	ctx.Configuration = configuration
 	ctx.Database = database
 
-	r := endpoint.SetupRoutes(&ctx)
+	r := setup.SetupRoutes(&ctx)
 
 	r.Run(fmt.Sprintf(":%d", configuration.Port))
 }

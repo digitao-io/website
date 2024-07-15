@@ -7,6 +7,6 @@ import (
 
 func HealthCheck(ctx *app.Context) gin.HandlerFunc {
 	return func(g *gin.Context) {
-		ResponseWithOk(g)
+		app.ResponseWithOk(g)
 	}
 }

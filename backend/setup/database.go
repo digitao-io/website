@@ -1,13 +1,14 @@
-package app
+package setup
 
 import (
 	"database/sql"
 	"fmt"
 
+	"digitao.io/website/app"
 	"github.com/go-sql-driver/mysql"
 )
 
-func InitializeDatabase(configuration *Configuration) (*sql.DB, error) {
+func SetupDatabase(configuration *app.Configuration) (*sql.DB, error) {
 	dbConfig := mysql.NewConfig()
 
 	dbConfig.Addr = fmt.Sprintf("%s:%d", configuration.Database.Host, configuration.Database.Port)
