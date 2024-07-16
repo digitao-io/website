@@ -47,7 +47,7 @@ func ResponseWithEntityNotFound(g *gin.Context) {
 func ResponseWithUnknownError(g *gin.Context, err error) {
 	g.JSON(200, gin.H{
 		"status": STATUS_UNKNOWN_ERROR,
-		"error":  err.Error(),
+		"error":  "An unknown error occurs",
 	})
 
 	fmt.Println(err)

@@ -3,6 +3,7 @@ module digitao.io/website
 go 1.22.5
 
 require (
+	github.com/doug-martin/goqu/v9 v9.19.0
 	github.com/gin-gonic/gin v1.10.0
 	github.com/go-sql-driver/mysql v1.8.1
 )

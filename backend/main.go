@@ -19,9 +19,12 @@ func main() {
 	}
 	defer database.Close()
 
+	sqlBuilder := setup.SetupSqlBuilder()
+
 	ctx := app.Context{}
 	ctx.Configuration = configuration
 	ctx.Database = database
+	ctx.SqlBuilder = sqlBuilder
 
 	r := setup.SetupRoutes(&ctx)
 

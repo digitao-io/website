@@ -5,6 +5,8 @@ import (
 	"fmt"
 
 	"digitao.io/website/app"
+	"github.com/doug-martin/goqu/v9"
+	_ "github.com/doug-martin/goqu/v9/dialect/mysql"
 	"github.com/go-sql-driver/mysql"
 )
 
@@ -27,4 +29,9 @@ func SetupDatabase(configuration *app.Configuration) (*sql.DB, error) {
 	database.SetMaxOpenConns(configuration.Database.MaxOpenConnections)
 
 	return database, nil
+}
+
+func SetupSqlBuilder() *goqu.DialectWrapper {
+	sqlBuilder := goqu.Dialect("mysql")
+	return &sqlBuilder
 }
