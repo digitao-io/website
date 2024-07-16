@@ -1,0 +1,19 @@
+###
+POST http://localhost:3000/file-entry-create HTTP/1.1
+Content-Type: application/json
+
+{
+  "title": "file entry 1",
+  "mimeType": "image/png",
+  "sizeInBytes": 234567
+}
+
+###
+POST http://localhost:3000/file-entry-create HTTP/1.1
+Content-Type: application/json
+
+{
+  "title": "file entry 2",
+  "mimeType": "image/jpg",
+  "sizeInBytes": 2345674
+}

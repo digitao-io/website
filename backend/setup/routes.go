@@ -15,5 +15,9 @@ func SetupRoutes(ctx *app.Context) *gin.Engine {
 	r.POST("/tag-get", endpoint.TagGet(ctx))
 	r.POST("/tag-list", endpoint.TagList(ctx))
 
+	r.POST("/file-entry-create", endpoint.FileEntryCreate(ctx))
+
+	r.POST("/page-create", endpoint.PageCreate(ctx))
+
 	return r
 }
