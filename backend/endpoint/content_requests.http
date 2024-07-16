@@ -38,36 +38,11 @@ Content-Type: application/json
 @contentId2 = {{CreateContent2.response.body.$.data.newContentId}}
 
 ###
-POST http://localhost:3000/page-create HTTP/1.1
-Content-Type: application/json
-
-{
-  "key": "contact",
-  "menuName": "Contact Us",
-  "contentId": "{{contentId1}}"
-}
+POST http://localhost:3000/content-get?id={{contentId1}} HTTP/1.1
 
 ###
-POST http://localhost:3000/page-create HTTP/1.1
-Content-Type: application/json
+POST http://localhost:3000/content-get?id={{contentId2}} HTTP/1.1
 
-{
-  "key": "profile",
-  "menuName": "About Us",
-  "contentId": "{{contentId2}}"
-}
-
-###
-POST http://localhost:3000/page-get?key=contact HTTP/1.1
-
-###
-POST http://localhost:3000/page-get?key=profile HTTP/1.1
-
-###
-POST http://localhost:3000/page-delete?key=contact HTTP/1.1
-
-###
-POST http://localhost:3000/page-delete?key=profile HTTP/1.1
 
 ###
 POST http://localhost:3000/content-delete?id={{contentId1}} HTTP/1.1

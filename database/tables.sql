@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS articles (
+CREATE TABLE IF NOT EXISTS contents (
   `id`         VARCHAR(36)           NOT NULL,
   `type`       ENUM('BLOG', 'PAGE')  NOT NULL,
   `title`      VARCHAR(500)          NOT NULL,
@@ -18,12 +18,12 @@ CREATE TABLE IF NOT EXISTS tags (
   PRIMARY KEY (`key`)
 ) ENGINE=InnoDB;
 
-CREATE TABLE IF NOT EXISTS article_tag_links (
-  `article_id`  VARCHAR(36)  NOT NULL,
+CREATE TABLE IF NOT EXISTS content_tag_links (
+  `content_id`  VARCHAR(36)  NOT NULL,
   `tag_key`     VARCHAR(30)  NOT NULL,
 
-  PRIMARY KEY (`article_id`, `tag_key`),
-  FOREIGN KEY (`article_id`) REFERENCES articles(`id`),
+  PRIMARY KEY (`content_id`, `tag_key`),
+  FOREIGN KEY (`content_id`) REFERENCES contents(`id`),
   FOREIGN KEY (`tag_key`) REFERENCES tags(`key`)
 ) ENGINE=InnoDB;
 
@@ -39,8 +39,8 @@ CREATE TABLE IF NOT EXISTS file_entries (
 CREATE TABLE IF NOT EXISTS pages (
   `key`         VARCHAR(30)  NOT NULL,
   `menu_name`   VARCHAR(30)  NOT NULL,
-  `article_id`  VARCHAR(36)  NOT NULL,
+  `content_id`  VARCHAR(36)  NOT NULL,
 
   PRIMARY KEY (`key`),
-  FOREIGN KEY (`article_id`) REFERENCES articles(`id`)
+  FOREIGN KEY (`content_id`) REFERENCES contents(`id`)
 ) ENGINE=InnoDB;

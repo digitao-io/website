@@ -21,7 +21,7 @@ func PageGet(ctx *app.Context) gin.HandlerFunc {
 			Select(
 				"key",
 				"menu_name",
-				"article_id",
+				"content_id",
 			).
 			Where(
 				goqu.C("key").Eq(param.Key),
@@ -41,7 +41,7 @@ func PageGet(ctx *app.Context) gin.HandlerFunc {
 		pages := []model.Page{}
 		for result.Next() {
 			page := model.Page{}
-			err = result.Scan(&page.Key, &page.MenuName, &page.ArticleId)
+			err = result.Scan(&page.Key, &page.MenuName, &page.ContentId)
 			if err != nil {
 				app.ResponseWithUnknownError(g, err)
 				return

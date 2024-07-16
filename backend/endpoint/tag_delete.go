@@ -17,6 +17,23 @@ func TagDelete(ctx *app.Context) gin.HandlerFunc {
 		}
 
 		query, args, err := ctx.SqlBuilder.
+			Delete("content_tag_links").
+			Where(
+				goqu.C("tag_key").Eq(param.Key),
+			).
+			ToSQL()
+		if err != nil {
+			app.ResponseWithUnknownError(g, err)
+			return
+		}
+
+		_, err = ctx.Database.Exec(query, args...)
+		if err != nil {
+			app.ResponseWithUnknownError(g, err)
+			return
+		}
+
+		query, args, err = ctx.SqlBuilder.
 			Delete("tags").
 			Where(
 				goqu.C("key").Eq(param.Key),

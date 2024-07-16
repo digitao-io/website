@@ -11,6 +11,10 @@ func SetupRoutes(ctx *app.Context) *gin.Engine {
 
 	r.GET("/health-check", endpoint.HealthCheck(ctx))
 
+	r.POST("/content-create", endpoint.ContentCreate(ctx))
+	r.POST("/content-delete", endpoint.ContentDelete(ctx))
+	r.POST("/content-get", endpoint.ContentGet(ctx))
+
 	r.POST("/tag-create", endpoint.TagCreate(ctx))
 	r.POST("/tag-get", endpoint.TagGet(ctx))
 	r.POST("/tag-list", endpoint.TagList(ctx))
@@ -23,9 +27,6 @@ func SetupRoutes(ctx *app.Context) *gin.Engine {
 	r.POST("/page-create", endpoint.PageCreate(ctx))
 	r.POST("/page-get", endpoint.PageGet(ctx))
 	r.POST("/page-delete", endpoint.PageDelete(ctx))
-
-	r.POST("/article-create", endpoint.ArticleCreate(ctx))
-	r.POST("/article-delete", endpoint.ArticleDelete(ctx))
 
 	return r
 }

@@ -9,22 +9,22 @@ import (
 	"github.com/google/uuid"
 )
 
-func ArticleCreate(ctx *app.Context) gin.HandlerFunc {
+func ContentCreate(ctx *app.Context) gin.HandlerFunc {
 	return func(g *gin.Context) {
-		data := model.ArticleData{}
+		data := model.ContentData{}
 		err := g.ShouldBindJSON(&data)
 		if err != nil {
 			app.ResponseWithParseError(g, "Cannot parse request body")
 			return
 		}
 
-		articleId := uuid.NewString()
+		contentId := uuid.NewString()
 
 		query, args, err := ctx.SqlBuilder.
-			Insert("articles").
+			Insert("contents").
 			Rows(
 				goqu.Record{
-					"id":        articleId,
+					"id":        contentId,
 					"type":      data.Type,
 					"title":     data.Title,
 					"createdAt": data.CreatedAt,
@@ -44,21 +44,23 @@ func ArticleCreate(ctx *app.Context) gin.HandlerFunc {
 			return
 		}
 
-		if len(data.TagKeys) != 0 {
-			tageRelationships := []goqu.Record{}
+		if len(*data.TagKeys) != 0 {
+			contentTagLinks := []goqu.Record{}
 
-			for _, tageKey := range data.TagKeys {
-				tageRelationships = append(tageRelationships, goqu.Record{
-					"article_id": articleId,
-					"tag_key":    tageKey,
-				})
+			for _, tagKey := range *data.TagKeys {
+				contentTagLinks = append(
+					contentTagLinks,
+					goqu.Record{
+						"content_id": contentId,
+						"tag_key":    tagKey,
+					},
+				)
 			}
-			query, args, err := ctx.SqlBuilder.
-				Insert("article_tag_links").
-				Rows(
-					tageRelationships,
-				).ToSQL()
 
+			query, args, err := ctx.SqlBuilder.
+				Insert("content_tag_links").
+				Rows(contentTagLinks).
+				ToSQL()
 			if err != nil {
 				app.ResponseWithUnknownError(g, err)
 				return
@@ -69,9 +71,8 @@ func ArticleCreate(ctx *app.Context) gin.HandlerFunc {
 				app.ResponseWithUnknownError(g, err)
 				return
 			}
-
-			app.ResponseWithData(g, gin.H{"newArticleId": articleId})
 		}
 
+		app.ResponseWithData(g, gin.H{"newContentId": contentId})
 	}
 }

@@ -23,7 +23,7 @@ func PageCreate(ctx *app.Context) gin.HandlerFunc {
 				goqu.Record{
 					"key":        data.Key,
 					"menu_name":  data.MenuName,
-					"article_id": data.ArticleId,
+					"content_id": data.ContentId,
 				},
 			).ToSQL()
 		if err != nil {

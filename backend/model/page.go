@@ -6,10 +6,10 @@ type Page struct {
 }
 
 type PageIdentifier struct {
-	Key string `json:"key" form:"key" validation:"required"`
+	Key *string `json:"key" form:"key" validation:"required"`
 }
 
 type PageData struct {
-	MenuName  string `json:"menuName"`
-	ArticleId string `json:"articleId"`
+	MenuName  *string `json:"menuName"`
+	ContentId *string `json:"contentId"`
 }

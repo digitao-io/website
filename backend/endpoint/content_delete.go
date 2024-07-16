@@ -7,9 +7,9 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func ArticleDelete(ctx *app.Context) gin.HandlerFunc {
+func ContentDelete(ctx *app.Context) gin.HandlerFunc {
 	return func(g *gin.Context) {
-		param := model.ArticleIdentifier{}
+		param := model.ContentIdentifier{}
 		err := g.ShouldBindQuery(&param)
 		if err != nil {
 			app.ResponseWithParseError(g, "Cannot parse request query parameters")
@@ -17,9 +17,9 @@ func ArticleDelete(ctx *app.Context) gin.HandlerFunc {
 		}
 
 		query, args, err := ctx.SqlBuilder.
-			Delete("article_tag_links").
+			Delete("content_tag_links").
 			Where(
-				goqu.C("article_id").Eq(param.Id),
+				goqu.C("content_id").Eq(param.Id),
 			).
 			ToSQL()
 		if err != nil {
@@ -34,7 +34,7 @@ func ArticleDelete(ctx *app.Context) gin.HandlerFunc {
 		}
 
 		query, args, err = ctx.SqlBuilder.
-			Delete("articles").
+			Delete("contents").
 			Where(
 				goqu.C("id").Eq(param.Id),
 			).

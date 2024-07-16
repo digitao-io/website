@@ -1,11 +1,11 @@
 # Core Data Structure
 
-## Article
+## Content
 
 ```json
 {
   "id": "00000000-0000-0000-0000-000000000000",
-  "type": "BLOG",
+  "template": "BlogArticle",
   "title": "Use Gin to create HTTP Web-Service",
   "createdAt": "2024-07-15 12:00:00",
   "updatedAt": "2024-07-15 12:00:00",
@@ -43,6 +43,6 @@
 {
   "key": "contact",
   "menuName": "Contact",
-  "articleId": "00000000-0000-0000-0000-000000000000"
+  "contentId": "00000000-0000-0000-0000-000000000000"
 }
 ```

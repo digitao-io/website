@@ -1,28 +1,37 @@
 ###
+# @name CreateFileEntry1
 POST http://localhost:3000/file-entry-create HTTP/1.1
 Content-Type: application/json
 
 {
-  "title": "file entry 1",
+  "title": "An illustration of the project structure",
   "mimeType": "image/png",
   "sizeInBytes": 234567
 }
 
+@fileEntryId1 = {{CreateFileEntry1.response.body.$.data.newFileEntryId}}
+
 ###
+# @name CreateFileEntry2
 POST http://localhost:3000/file-entry-create HTTP/1.1
 Content-Type: application/json
 
 {
-  "title": "file entry 2",
-  "mimeType": "image/jpg",
+  "title": "A beautiful picture",
+  "mimeType": "image/jpeg",
   "sizeInBytes": 2345674
 }
 
-###
-POST http://localhost:3000/file-entry-get?id=da8d43a3-16dd-415f-b331-d06f5dcf450d HTTP/1.1
+@fileEntryId2 = {{CreateFileEntry2.response.body.$.data.newFileEntryId}}
 
 ###
-POST http://localhost:3000/file-entry-delete?id=366557cd-c3fd-4aa4-b51a-bf0d9c799227 HTTP/1.1
+POST http://localhost:3000/file-entry-get?id={{fileEntryId1}} HTTP/1.1
 
 ###
-POST http://localhost:3000/file-entry-delete?id=3a2ddb2b-84b8-41a8-b585-6b3d48578ca6 HTTP/1.1
+POST http://localhost:3000/file-entry-get?id={{fileEntryId2}} HTTP/1.1
+
+###
+POST http://localhost:3000/file-entry-delete?id={{fileEntryId1}} HTTP/1.1
+
+###
+POST http://localhost:3000/file-entry-delete?id={{fileEntryId2}} HTTP/1.1
