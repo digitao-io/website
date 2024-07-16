@@ -1,8 +1,6 @@
 package endpoint
 
 import (
-	"fmt"
-
 	"digitao.io/website/app"
 	"digitao.io/website/model"
 	"github.com/doug-martin/goqu/v9"
@@ -35,30 +33,34 @@ func FileEntryGet(ctx *app.Context) gin.HandlerFunc {
 			return
 		}
 
-		fmt.Println(query)
-		result, err := ctx.Database.Query(query, args...)
+		results, err := ctx.Database.Query(query, args...)
 		if err != nil {
 			app.ResponseWithUnknownError(g, err)
 			return
 		}
 
-		fileEntrys := []model.FileEntry{}
-		for result.Next() {
+		fileEntries := []model.FileEntry{}
+		for results.Next() {
 			fileEntry := model.FileEntry{}
-			err = result.Scan(&fileEntry.Id, &fileEntry.Title, &fileEntry.MimeType, &fileEntry.SizeInBytes)
+			err = results.Scan(
+				&fileEntry.Id,
+				&fileEntry.Title,
+				&fileEntry.MimeType,
+				&fileEntry.SizeInBytes,
+			)
 			if err != nil {
 				app.ResponseWithUnknownError(g, err)
 				return
 			}
 
-			fileEntrys = append(fileEntrys, fileEntry)
+			fileEntries = append(fileEntries, fileEntry)
 		}
 
-		if len(fileEntrys) < 1 {
+		if len(fileEntries) < 1 {
 			app.ResponseWithEntityNotFound(g)
 			return
 		}
 
-		app.ResponseWithData(g, fileEntrys[0])
+		app.ResponseWithData(g, fileEntries[0])
 	}
 }

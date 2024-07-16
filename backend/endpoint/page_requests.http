@@ -61,7 +61,7 @@ Content-Type: application/json
 POST http://localhost:3000/page-get?key=contact HTTP/1.1
 
 ###
-POST http://localhost:3000/page-get?key=profile HTTP/1.1
+POST http://localhost:3000/page-list HTTP/1.1
 
 ###
 POST http://localhost:3000/page-delete?key=contact HTTP/1.1

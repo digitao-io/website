@@ -26,6 +26,7 @@ func SetupRoutes(ctx *app.Context) *gin.Engine {
 
 	r.POST("/page-create", endpoint.PageCreate(ctx))
 	r.POST("/page-get", endpoint.PageGet(ctx))
+	r.POST("/page-list", endpoint.PageList(ctx))
 	r.POST("/page-delete", endpoint.PageDelete(ctx))
 
 	return r
