@@ -11,19 +11,20 @@ import (
 
 func ArticleCreate(ctx *app.Context) gin.HandlerFunc {
 	return func(g *gin.Context) {
-		data := model.Article{}
+		data := model.ArticleData{}
 		err := g.ShouldBindJSON(&data)
 		if err != nil {
 			app.ResponseWithParseError(g, "Cannot parse request body")
 			return
 		}
 
-		data.Id = uuid.NewString()
+		articleId := uuid.NewString()
 
 		query, args, err := ctx.SqlBuilder.
 			Insert("articles").
 			Rows(
 				goqu.Record{
+					"id":        articleId,
 					"type":      data.Type,
 					"title":     data.Title,
 					"createdAt": data.CreatedAt,
@@ -48,7 +49,7 @@ func ArticleCreate(ctx *app.Context) gin.HandlerFunc {
 
 			for _, tageKey := range data.TagKeys {
 				tageRelationships = append(tageRelationships, goqu.Record{
-					"article_id": data.Id,
+					"article_id": articleId,
 					"tag_key":    tageKey,
 				})
 			}
@@ -69,7 +70,7 @@ func ArticleCreate(ctx *app.Context) gin.HandlerFunc {
 				return
 			}
 
-			app.ResponseWithData(g, gin.H{"newArticleId": data.Id})
+			app.ResponseWithData(g, gin.H{"newArticleId": articleId})
 		}
 
 	}

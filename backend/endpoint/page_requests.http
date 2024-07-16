@@ -5,7 +5,7 @@ Content-Type: application/json
 {
     "key": "live",
     "menuName": "daily",
-    "articleId": "3344"
+    "articleId": "f5236e58-6bad-4bd8-be2e-7b4b4ae636d1"
 }
 
 ###
@@ -15,5 +15,14 @@ Content-Type: application/json
 {
     "key": "work",
     "menuName": "daily",
-    "articleId": "33445"
+    "articleId": "4d6fbcc8-3607-46e0-8c5a-ab6729363974"
 }
+
+###
+POST http://localhost:3000/page-get?key=live HTTP/1.1
+
+###
+POST http://localhost:3000/page-delete?key=live HTTP/1.1
+
+###
+POST http://localhost:3000/page-delete?key=work HTTP/1.1

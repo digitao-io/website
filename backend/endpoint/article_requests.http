@@ -1,0 +1,33 @@
+###
+POST http://localhost:3000/article-create HTTP/1.1
+Content-Type: application/json
+
+{
+    "type": "BLOG",
+    "title": "title article",
+    "createdAt": "2024-07-16",
+    "updatedAt": "2024-07-17",
+    "tagKeys": ["cpp", "sdl"],
+    "summary": "Record every bit of my life",
+    "content": "Today I have to finish the work in hand!"
+}
+
+###
+POST http://localhost:3000/article-create HTTP/1.1
+Content-Type: application/json
+
+{
+    "type": "PAGE",
+    "title": "title article",
+    "createdAt": "2024-07-17",
+    "updatedAt": "2024-07-18",
+    "tagKeys": ["cpp", "sdl"],
+    "summary": "Record every bit of my life",
+    "content": "Today I have to finish the work in hand!"
+}
+
+###
+POST http://localhost:3000/article-delete?id=3af526f4-2585-43ea-89a8-8fb48980325d HTTP/1.1
+
+###
+POST http://localhost:3000/article-delete?id=03760d6d-804b-491f-99ac-3762031ec176 HTTP/1.1

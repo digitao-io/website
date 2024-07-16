@@ -6,11 +6,10 @@ type FileEntry struct {
 }
 
 type FileEntryIdentifier struct {
-	Id string `json:"id"`
+	Id string `json:"id" form:"id" validation:"required"`
 }
 
 type FileEntryData struct {
-	Name        string `json:"name"`
 	Title       string `json:"title"`
 	MimeType    string `json:"mimeType"`
 	SizeInBytes uint   `json:"sizeInBytes"`

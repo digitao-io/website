@@ -17,8 +17,15 @@ func SetupRoutes(ctx *app.Context) *gin.Engine {
 	r.POST("/tag-delete", endpoint.TagDelete(ctx))
 
 	r.POST("/file-entry-create", endpoint.FileEntryCreate(ctx))
+	r.POST("/file-entry-get", endpoint.FileEntryGet(ctx))
+	r.POST("/file-entry-delete", endpoint.FileEntryDelete(ctx))
 
 	r.POST("/page-create", endpoint.PageCreate(ctx))
+	r.POST("/page-get", endpoint.PageGet(ctx))
+	r.POST("/page-delete", endpoint.PageDelete(ctx))
+
+	r.POST("/article-create", endpoint.ArticleCreate(ctx))
+	r.POST("/article-delete", endpoint.ArticleDelete(ctx))
 
 	return r
 }

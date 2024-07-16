@@ -11,20 +11,20 @@ import (
 
 func FileEntryCreate(ctx *app.Context) gin.HandlerFunc {
 	return func(g *gin.Context) {
-		data := model.FileEntry{}
+		data := model.FileEntryData{}
 		err := g.ShouldBindJSON(&data)
 		if err != nil {
 			app.ResponseWithValidationFailed(g, err.Error())
 			return
 		}
 
-		data.Id = uuid.NewString()
+		fileEntryId := uuid.NewString()
 
 		query, args, err := ctx.SqlBuilder.
 			Insert("file_entries").
 			Rows(
 				goqu.Record{
-					"id":            data.Id,
+					"id":            fileEntryId,
 					"title":         data.Title,
 					"mime_type":     data.MimeType,
 					"size_in_bytes": data.SizeInBytes,
@@ -41,6 +41,6 @@ func FileEntryCreate(ctx *app.Context) gin.HandlerFunc {
 			return
 		}
 
-		app.ResponseWithData(g, gin.H{"newFileEntryId": data.Id})
+		app.ResponseWithData(g, gin.H{"newFileEntryId": fileEntryId})
 	}
 }

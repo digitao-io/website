@@ -17,3 +17,12 @@ Content-Type: application/json
   "mimeType": "image/jpg",
   "sizeInBytes": 2345674
 }
+
+###
+POST http://localhost:3000/file-entry-get?id=da8d43a3-16dd-415f-b331-d06f5dcf450d HTTP/1.1
+
+###
+POST http://localhost:3000/file-entry-delete?id=366557cd-c3fd-4aa4-b51a-bf0d9c799227 HTTP/1.1
+
+###
+POST http://localhost:3000/file-entry-delete?id=3a2ddb2b-84b8-41a8-b585-6b3d48578ca6 HTTP/1.1
