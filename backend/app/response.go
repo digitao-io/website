@@ -7,6 +7,7 @@ import (
 )
 
 const STATUS_OK = "OK"
+const STATUS_PARSE_ERROR = "PARSE_ERROR"
 const STATUS_VALIDATION_FAILED = "VALIDATION_FAILED"
 const STATUS_AUTHENTICATION_FAILED = "AUTHENTICATION_FAILED"
 const STATUS_ENTITY_NOT_FOUND = "ENTITY_NOT_FOUND"
@@ -22,6 +23,13 @@ func ResponseWithData(g *gin.Context, data any) {
 	g.JSON(200, gin.H{
 		"status": STATUS_OK,
 		"data":   data,
+	})
+}
+
+func ResponseWithParseError(g *gin.Context, err string) {
+	g.JSON(200, gin.H{
+		"status": STATUS_PARSE_ERROR,
+		"error":  err,
 	})
 }
 

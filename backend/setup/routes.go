@@ -12,6 +12,8 @@ func SetupRoutes(ctx *app.Context) *gin.Engine {
 	r.GET("/health-check", endpoint.HealthCheck(ctx))
 
 	r.POST("/tag-create", endpoint.TagCreate(ctx))
+	r.POST("/tag-get", endpoint.TagGet(ctx))
+	r.POST("/tag-list", endpoint.TagList(ctx))
 
 	return r
 }

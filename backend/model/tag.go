@@ -6,9 +6,9 @@ type Tag struct {
 }
 
 type TagIdentifier struct {
-	Key string `json:"key"`
+	Key *string `json:"key" form:"key" validation:"required"`
 }
 
 type TagData struct {
-	Name string `json:"name"`
+	Name *string `json:"name" validation:"required"`
 }

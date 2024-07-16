@@ -13,7 +13,7 @@ func TagCreate(ctx *app.Context) gin.HandlerFunc {
 		data := model.Tag{}
 		err := g.ShouldBindJSON(&data)
 		if err != nil {
-			app.ResponseWithValidationFailed(g, err.Error())
+			app.ResponseWithParseError(g, "Cannot parse request body")
 			return
 		}
 
