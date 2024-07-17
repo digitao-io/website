@@ -1,4 +1,22 @@
 ###
+POST http://localhost:3000/tag-create HTTP/1.1
+Content-Type: application/json
+
+{
+  "key": "cpp",
+  "name": "C++"
+}
+
+###
+POST http://localhost:3000/tag-create HTTP/1.1
+Content-Type: application/json
+
+{
+  "key": "sdl",
+  "name": "SDL"
+}
+
+###
 # @name CreateContent1
 POST http://localhost:3000/content-create HTTP/1.1
 Content-Type: application/json
@@ -6,10 +24,7 @@ Content-Type: application/json
 {
   "type": "BLOG",
   "title": "This is a Blog Article",
-  "createdAt": "2024-07-17 20:40:00",
-  "updatedAt": "2024-07-17 21:00:00",
   "tagKeys": [
-    "cpp",
     "sdl"
   ],
   "summary": "Record every bit of my life",
@@ -26,8 +41,6 @@ Content-Type: application/json
 {
   "type": "PAGE",
   "title": "This is a Normal Page",
-  "createdAt": "2024-07-16 22:40:00",
-  "updatedAt": "2024-07-16 21:00:00",
   "tagKeys": [
     "cpp"
   ],
@@ -41,11 +54,28 @@ Content-Type: application/json
 POST http://localhost:3000/content-get?id={{contentId1}} HTTP/1.1
 
 ###
-POST http://localhost:3000/content-get?id={{contentId2}} HTTP/1.1
+POST http://localhost:3000/content-update?id={{contentId1}} HTTP/1.1
+Content-Type: application/json
 
+{
+  "type": "BLOG",
+  "title": "This is an Updated Blog Article",
+  "tagKeys": [
+    "cpp",
+    "sdl"
+  ],
+  "summary": "A short C++ tutorial to setup SDL in a C++ project",
+  "content": "..."
+}
 
 ###
 POST http://localhost:3000/content-delete?id={{contentId1}} HTTP/1.1
 
 ###
 POST http://localhost:3000/content-delete?id={{contentId2}} HTTP/1.1
+
+###
+POST http://localhost:3000/tag-delete?key=cpp HTTP/1.1
+
+###
+POST http://localhost:3000/tag-delete?key=sdl HTTP/1.1

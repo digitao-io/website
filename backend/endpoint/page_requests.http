@@ -60,7 +60,6 @@ POST http://localhost:3000/page-update?key=contact HTTP/1.1
 Content-Type: application/json
 
 {
-  "key": "contact",
   "menuName": "Contact Us Immediately",
   "contentId": "{{contentId2}}"
 }

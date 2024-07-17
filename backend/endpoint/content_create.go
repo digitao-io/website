@@ -1,6 +1,8 @@
 package endpoint
 
 import (
+	"time"
+
 	"digitao.io/website/app"
 	"digitao.io/website/model"
 	"github.com/doug-martin/goqu/v9"
@@ -19,6 +21,7 @@ func ContentCreate(ctx *app.Context) gin.HandlerFunc {
 		}
 
 		contentId := uuid.NewString()
+		currentTime := time.Now().Format("2006-01-02 15:04:05")
 
 		query, args, err := ctx.SqlBuilder.
 			Insert("contents").
@@ -27,8 +30,8 @@ func ContentCreate(ctx *app.Context) gin.HandlerFunc {
 					"id":        contentId,
 					"type":      data.Type,
 					"title":     data.Title,
-					"createdAt": data.CreatedAt,
-					"updatedAt": data.UpdatedAt,
+					"createdAt": currentTime,
+					"updatedAt": currentTime,
 					"summary":   data.Summary,
 					"content":   data.Content,
 				},

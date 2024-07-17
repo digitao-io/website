@@ -3,6 +3,7 @@ package model
 type Content struct {
 	ContentIdentifier
 	ContentData
+	ContentExtra
 }
 
 type ContentIdentifier struct {
@@ -10,11 +11,14 @@ type ContentIdentifier struct {
 }
 
 type ContentData struct {
-	Type      *string   `json:"type"`
-	Title     *string   `json:"title"`
-	CreatedAt *string   `json:"createdAt"`
-	UpdatedAt *string   `json:"updatedAt"`
-	TagKeys   *[]string `json:"tagKeys"`
-	Summary   *string   `json:"summary"`
-	Content   *string   `json:"content"`
+	Type    *string   `json:"type"`
+	Title   *string   `json:"title"`
+	TagKeys *[]string `json:"tagKeys"`
+	Summary *string   `json:"summary"`
+	Content *string   `json:"content"`
+}
+
+type ContentExtra struct {
+	CreatedAt *string `json:"createdAt"`
+	UpdatedAt *string `json:"updatedAt"`
 }

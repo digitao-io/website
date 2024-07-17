@@ -14,6 +14,7 @@ func SetupRoutes(ctx *app.Context) *gin.Engine {
 	r.POST("/content-create", endpoint.ContentCreate(ctx))
 	r.POST("/content-delete", endpoint.ContentDelete(ctx))
 	r.POST("/content-get", endpoint.ContentGet(ctx))
+	r.POST("/content-update", endpoint.ContentUpdate(ctx))
 
 	r.POST("/tag-create", endpoint.TagCreate(ctx))
 	r.POST("/tag-get", endpoint.TagGet(ctx))

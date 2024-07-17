@@ -17,7 +17,7 @@ func PageUpdate(ctx *app.Context) gin.HandlerFunc {
 			return
 		}
 
-		data := model.Page{}
+		data := model.PageData{}
 		err = g.ShouldBindJSON(&data)
 		if err != nil {
 			app.ResponseWithParseError(g, "Cannot parse request body")
@@ -28,7 +28,6 @@ func PageUpdate(ctx *app.Context) gin.HandlerFunc {
 			Update("pages").
 			Set(
 				goqu.Record{
-					"key":        data.Key,
 					"menu_name":  data.MenuName,
 					"content_id": data.ContentId,
 				},
