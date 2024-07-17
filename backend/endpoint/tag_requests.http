@@ -1,4 +1,4 @@
-###
+### Create a tag
 POST http://localhost:3000/tag-create HTTP/1.1
 Content-Type: application/json
 
@@ -7,7 +7,7 @@ Content-Type: application/json
   "name": "C++"
 }
 
-###
+### Create another tag
 POST http://localhost:3000/tag-create HTTP/1.1
 Content-Type: application/json
 
@@ -16,14 +16,14 @@ Content-Type: application/json
   "name": "SDL"
 }
 
-###
+### Get a tag with its key
 POST http://localhost:3000/tag-get?key=cpp HTTP/1.1
 
-###
+### List all tags
 POST http://localhost:3000/tag-list HTTP/1.1
 
-###
+### Delete a tag
 POST http://localhost:3000/tag-delete?key=cpp HTTP/1.1
 
-###
+### Delete another tag
 POST http://localhost:3000/tag-delete?key=sdl HTTP/1.1

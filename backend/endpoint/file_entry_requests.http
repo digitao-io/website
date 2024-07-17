@@ -1,4 +1,4 @@
-### Create a file entry entity
+### Create a file entry
 # @name CreateFileEntry1
 POST http://localhost:3000/file-entry-create HTTP/1.1
 Content-Type: application/json
@@ -11,7 +11,7 @@ Content-Type: application/json
 
 @fileEntryId1 = {{CreateFileEntry1.response.body.$.data.newFileEntryId}}
 
-### Create another file entry entity
+### Create another file entry
 # @name CreateFileEntry2
 POST http://localhost:3000/file-entry-create HTTP/1.1
 Content-Type: application/json
@@ -24,16 +24,16 @@ Content-Type: application/json
 
 @fileEntryId2 = {{CreateFileEntry2.response.body.$.data.newFileEntryId}}
 
-### Get file entry should return its content
+### Get file entry with its ID
 POST http://localhost:3000/file-entry-get?id={{fileEntryId1}} HTTP/1.1
 
-### List file entry without any filter queries should make it list all the file entries
+### List file entries without any filter queries should make it list all the file entries
 POST http://localhost:3000/file-entry-list?sort=created_at&order=DESC&take=5&skip=0 HTTP/1.1
 
-### List file entry with query string should filter file entries with its ID or title
+### List file entries with query string should filter file entries with its ID or title
 POST http://localhost:3000/file-entry-list?q=picture&sort=created_at&order=DESC&take=5&skip=0 HTTP/1.1
 
-### List file entry with mime-type should filter file entries accroding to its mime-type
+### List file entries with mime-type should filter file entries accroding to its mime-type
 POST http://localhost:3000/file-entry-list?mimeType=image/png&sort=created_at&order=DESC&take=5&skip=0 HTTP/1.1
 
 ### Delete a file entry
