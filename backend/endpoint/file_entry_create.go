@@ -1,6 +1,8 @@
 package endpoint
 
 import (
+	"time"
+
 	"digitao.io/website/app"
 	"digitao.io/website/model"
 	"github.com/doug-martin/goqu/v9"
@@ -19,6 +21,7 @@ func FileEntryCreate(ctx *app.Context) gin.HandlerFunc {
 		}
 
 		fileEntryId := uuid.NewString()
+		currentTime := time.Now().Format("2006-01-02 15:04:05")
 
 		query, args, err := ctx.SqlBuilder.
 			Insert("file_entries").
@@ -28,6 +31,7 @@ func FileEntryCreate(ctx *app.Context) gin.HandlerFunc {
 					"title":         data.Title,
 					"mime_type":     data.MimeType,
 					"size_in_bytes": data.SizeInBytes,
+					"created_at":    currentTime,
 				},
 			).ToSQL()
 		if err != nil {

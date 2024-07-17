@@ -32,8 +32,10 @@ CREATE TABLE IF NOT EXISTS file_entries (
   `title`          VARCHAR(500)  NOT NULL,
   `mime_type`      VARCHAR(30)   NOT NULL,
   `size_in_bytes`  INT UNSIGNED  NOT NULL,
+  `created_at`     DATETIME      NOT NULL,
 
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  FULLTEXT(`title`)
 ) ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS pages (

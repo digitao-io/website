@@ -23,6 +23,7 @@ func FileEntryGet(ctx *app.Context) gin.HandlerFunc {
 				"title",
 				"mime_type",
 				"size_in_bytes",
+				"created_at",
 			).
 			Where(
 				goqu.C("id").Eq(param.Id),
@@ -47,6 +48,7 @@ func FileEntryGet(ctx *app.Context) gin.HandlerFunc {
 				&fileEntry.Title,
 				&fileEntry.MimeType,
 				&fileEntry.SizeInBytes,
+				&fileEntry.CreatedAt,
 			)
 			if err != nil {
 				app.ResponseWithUnknownError(g, err)
