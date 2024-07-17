@@ -20,18 +20,18 @@ func ContentGet(ctx *app.Context) gin.HandlerFunc {
 			From("contents").
 			LeftJoin(
 				goqu.T("content_tag_links"),
-				goqu.On(goqu.Ex{"contents.id": goqu.I("content_tag_links.content_id")}),
+				goqu.On(goqu.I("contents.id").Eq(goqu.I("content_tag_links.content_id"))),
 			).
 			LeftJoin(
 				goqu.T("tags"),
-				goqu.On(goqu.Ex{"tags.key": goqu.I("content_tag_links.tag_key")}),
+				goqu.On(goqu.I("tags.key").Eq(goqu.I("content_tag_links.tag_key"))),
 			).
 			Select(
 				"contents.id",
 				"contents.type",
 				"contents.title",
-				"contents.createdAt",
-				"contents.updatedAt",
+				"contents.created_at",
+				"contents.updated_at",
 				"contents.summary",
 				"contents.content",
 				"tags.key",

@@ -27,13 +27,13 @@ func ContentCreate(ctx *app.Context) gin.HandlerFunc {
 			Insert("contents").
 			Rows(
 				goqu.Record{
-					"id":        contentId,
-					"type":      data.Type,
-					"title":     data.Title,
-					"createdAt": currentTime,
-					"updatedAt": currentTime,
-					"summary":   data.Summary,
-					"content":   data.Content,
+					"id":         contentId,
+					"type":       data.Type,
+					"title":      data.Title,
+					"created_at": currentTime,
+					"updated_at": currentTime,
+					"summary":    data.Summary,
+					"content":    data.Content,
 				},
 			).ToSQL()
 		if err != nil {

@@ -22,3 +22,15 @@ type ContentExtra struct {
 	CreatedAt *string `json:"createdAt"`
 	UpdatedAt *string `json:"updatedAt"`
 }
+
+type ContentSearchParams struct {
+	Query *string   `form:"q"`
+	Type  *string   `form:"type"`
+	Tags  *[]string `form:"tag"`
+
+	Sort  *string `form:"sort"`
+	Order *string `form:"order"`
+
+	Skip *uint `form:"skip"`
+	Take *uint `form:"take"`
+}

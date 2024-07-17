@@ -53,6 +53,12 @@ Content-Type: application/json
 ### Get a content with its ID
 POST http://localhost:3000/content-get?id={{contentId1}} HTTP/1.1
 
+### List all contents without any filters
+POST http://localhost:3000/content-list?sort=created_at&order=DESC&take=5&skip=0 HTTP/1.1
+
+### List contents according to match results
+POST http://localhost:3000/content-list?q=Blog Article Life&sort=score&order=DESC&take=5&skip=0 HTTP/1.1
+
 ### Update a content with its ID
 POST http://localhost:3000/content-update?id={{contentId1}} HTTP/1.1
 Content-Type: application/json
@@ -67,6 +73,9 @@ Content-Type: application/json
   "summary": "A short C++ tutorial to setup SDL in a C++ project",
   "content": "..."
 }
+
+### List contents according to tags
+POST http://localhost:3000/content-list?tag=sdl&tag=cpp&sort=created_at&order=DESC&take=5&skip=0 HTTP/1.1
 
 ### Delete a content
 POST http://localhost:3000/content-delete?id={{contentId1}} HTTP/1.1

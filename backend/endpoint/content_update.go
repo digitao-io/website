@@ -34,7 +34,7 @@ func ContentUpdate(ctx *app.Context) gin.HandlerFunc {
 				goqu.Record{
 					"type":      data.Type,
 					"title":     data.Title,
-					"updatedAt": currentTime,
+					"updated_at": currentTime,
 					"summary":   data.Summary,
 					"content":   data.Content,
 				},

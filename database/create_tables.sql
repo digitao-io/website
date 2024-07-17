@@ -2,8 +2,8 @@ CREATE TABLE IF NOT EXISTS contents (
   `id`         VARCHAR(36)           NOT NULL,
   `type`       ENUM('BLOG', 'PAGE')  NOT NULL,
   `title`      VARCHAR(500)          NOT NULL,
-  `createdAt`  DATETIME              NOT NULL,
-  `updatedAt`  DATETIME              NOT NULL,
+  `created_at`  DATETIME              NOT NULL,
+  `updated_at`  DATETIME              NOT NULL,
   `summary`    VARCHAR(1000)         NOT NULL,
   `content`    TEXT                  NOT NULL,
 
