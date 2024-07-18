@@ -11,6 +11,9 @@ func SetupRoutes(ctx *app.Context) *gin.Engine {
 
 	r.GET("/health-check", endpoint.HealthCheck(ctx))
 
+	r.POST("/user-login", endpoint.UserLogin(ctx))
+	r.POST("/user-logout", endpoint.UserLogout(ctx))
+
 	r.POST("/content-create", endpoint.ContentCreate(ctx))
 	r.POST("/content-delete", endpoint.ContentDelete(ctx))
 	r.POST("/content-get", endpoint.ContentGet(ctx))

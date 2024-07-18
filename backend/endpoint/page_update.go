@@ -10,6 +10,11 @@ import (
 
 func PageUpdate(ctx *app.Context) gin.HandlerFunc {
 	return func(g *gin.Context) {
+		if !app.CheckPermission(g, ctx.Configuration) {
+			app.ResponseWithAuthenticationFailed(g)
+			return
+		}
+
 		param := model.PageIdentifier{}
 		err := g.ShouldBindQuery(&param)
 		if err != nil {

@@ -9,6 +9,11 @@ import (
 
 func ContentDelete(ctx *app.Context) gin.HandlerFunc {
 	return func(g *gin.Context) {
+		if !app.CheckPermission(g, ctx.Configuration) {
+			app.ResponseWithAuthenticationFailed(g)
+			return
+		}
+
 		param := model.ContentIdentifier{}
 		err := g.ShouldBindQuery(&param)
 		if err != nil {

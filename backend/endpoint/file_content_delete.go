@@ -10,6 +10,11 @@ import (
 
 func FileContentDelete(ctx *app.Context) gin.HandlerFunc {
 	return func(g *gin.Context) {
+		if !app.CheckPermission(g, ctx.Configuration) {
+			app.ResponseWithAuthenticationFailed(g)
+			return
+		}
+
 		fileEntryId := g.Param("file-entry-id")
 
 		err := ctx.Objstorage.RemoveObject(

@@ -1,10 +1,12 @@
 package app
 
 type Configuration struct {
+	Domain     string                    `json:"domain"`
 	Port       uint                      `json:"port"`
 	Database   ConfigurationDatabase     `json:"database"`
 	Objstorage ConfigurationObjstorage   `json:"objstorage"`
 	Users      []ConfigurationCredential `json:"users"`
+	Jwt        ConfigurationJwt          `json:"jwt"`
 }
 
 type ConfigurationDatabase struct {
@@ -28,4 +30,9 @@ type ConfigurationObjstorage struct {
 type ConfigurationCredential struct {
 	Username     string `json:"username"`
 	PasswordHash string `json:"passwordHash"`
+}
+
+type ConfigurationJwt struct {
+	ServerSecret string `json:"serverSecret"`
+	ExpireIn     string `json:"expireIn"`
 }

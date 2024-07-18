@@ -9,6 +9,11 @@ import (
 
 func TagDelete(ctx *app.Context) gin.HandlerFunc {
 	return func(g *gin.Context) {
+		if !app.CheckPermission(g, ctx.Configuration) {
+			app.ResponseWithAuthenticationFailed(g)
+			return
+		}
+
 		param := model.TagIdentifier{}
 		err := g.ShouldBindQuery(&param)
 		if err != nil {

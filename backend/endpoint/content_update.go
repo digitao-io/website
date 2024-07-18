@@ -12,6 +12,11 @@ import (
 
 func ContentUpdate(ctx *app.Context) gin.HandlerFunc {
 	return func(g *gin.Context) {
+		if !app.CheckPermission(g, ctx.Configuration) {
+			app.ResponseWithAuthenticationFailed(g)
+			return
+		}
+
 		param := model.ContentIdentifier{}
 		err := g.ShouldBindQuery(&param)
 		if err != nil {
@@ -32,11 +37,11 @@ func ContentUpdate(ctx *app.Context) gin.HandlerFunc {
 			Update("contents").
 			Set(
 				goqu.Record{
-					"type":      data.Type,
-					"title":     data.Title,
+					"type":       data.Type,
+					"title":      data.Title,
 					"updated_at": currentTime,
-					"summary":   data.Summary,
-					"content":   data.Content,
+					"summary":    data.Summary,
+					"content":    data.Content,
 				},
 			).ToSQL()
 		if err != nil {

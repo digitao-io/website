@@ -10,6 +10,11 @@ import (
 
 func TagCreate(ctx *app.Context) gin.HandlerFunc {
 	return func(g *gin.Context) {
+		if !app.CheckPermission(g, ctx.Configuration) {
+			app.ResponseWithAuthenticationFailed(g)
+			return
+		}
+
 		data := model.Tag{}
 		err := g.ShouldBindJSON(&data)
 		if err != nil {

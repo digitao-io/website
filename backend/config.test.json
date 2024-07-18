@@ -1,4 +1,5 @@
 {
+  "domain": "localhost",
   "port": 3000,
 
   "database": {
@@ -22,7 +23,12 @@
   "users": [
     {
       "username": "testuser",
-      "passwordHash": "916f37ba7eb4459bc5c2e7a13a5b89882c2ced553dc8e29c753b12b74eb46412"
+      "passwordHash": "kW83un60RZvFwuehOluJiCws7VU9yOKcdTsSt060ZBI="
     }
-  ]
+  ],
+
+  "jwt": {
+    "serverSecret": "no-secret",
+    "expireIn": "10h"
+  }
 }
