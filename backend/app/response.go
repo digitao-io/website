@@ -27,36 +27,36 @@ func ResponseWithData(g *gin.Context, data any) {
 }
 
 func ResponseWithParseError(g *gin.Context, err string) {
-	g.JSON(200, gin.H{
+	g.AbortWithStatusJSON(200, gin.H{
 		"status": STATUS_PARSE_ERROR,
 		"error":  err,
 	})
 }
 
 func ResponseWithValidationFailed(g *gin.Context, err string) {
-	g.JSON(200, gin.H{
+	g.AbortWithStatusJSON(200, gin.H{
 		"status": STATUS_VALIDATION_FAILED,
 		"error":  err,
 	})
 }
 
 func ResponseWithAuthenticationFailed(g *gin.Context) {
-	g.JSON(200, gin.H{
+	g.AbortWithStatusJSON(200, gin.H{
 		"status": STATUS_AUTHENTICATION_FAILED,
 	})
 }
 
 func ResponseWithEntityNotFound(g *gin.Context) {
-	g.JSON(200, gin.H{
+	g.AbortWithStatusJSON(200, gin.H{
 		"status": STATUS_ENTITY_NOT_FOUND,
 	})
 }
 
 func ResponseWithUnknownError(g *gin.Context, err error) {
-	g.JSON(200, gin.H{
+	fmt.Println(err)
+
+	g.AbortWithStatusJSON(200, gin.H{
 		"status": STATUS_UNKNOWN_ERROR,
 		"error":  "An unknown error occurs",
 	})
-
-	fmt.Println(err)
 }

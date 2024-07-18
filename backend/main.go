@@ -21,10 +21,16 @@ func main() {
 
 	sqlBuilder := setup.SetupSqlBuilder()
 
+	objstorage, err := setup.SetupObjstorage(configuration)
+	if err != nil {
+		panic(err)
+	}
+
 	ctx := app.Context{}
 	ctx.Configuration = configuration
 	ctx.Database = database
 	ctx.SqlBuilder = sqlBuilder
+	ctx.Objstorage = objstorage
 
 	r := setup.SetupRoutes(&ctx)
 

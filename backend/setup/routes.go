@@ -22,6 +22,10 @@ func SetupRoutes(ctx *app.Context) *gin.Engine {
 	r.POST("/tag-list", endpoint.TagList(ctx))
 	r.POST("/tag-delete", endpoint.TagDelete(ctx))
 
+	r.POST("/file-content-upload/:file-entry-id", endpoint.FileContentUpload(ctx))
+	r.POST("/file-content-delete/:file-entry-id", endpoint.FileContentDelete(ctx))
+	r.GET("/file-content-download/:file-entry-id", endpoint.FileContentDownload(ctx))
+
 	r.POST("/file-entry-create", endpoint.FileEntryCreate(ctx))
 	r.POST("/file-entry-get", endpoint.FileEntryGet(ctx))
 	r.POST("/file-entry-list", endpoint.FileEntryList(ctx))

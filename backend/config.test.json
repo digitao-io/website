@@ -11,6 +11,14 @@
     "maxOpenConnections": 1
   },
 
+  "objstorage": {
+    "host": "localhost",
+    "port": 9000,
+    "user": "root",
+    "password": "no-password",
+    "bucket": "website-test"
+  },
+
   "users": [
     {
       "username": "testuser",

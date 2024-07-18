@@ -1,0 +1,32 @@
+### Create a file entry
+# @name CreateFileEntry
+POST http://localhost:3000/file-entry-create HTTP/1.1
+Content-Type: application/json
+
+{
+  "title": "A Test File",
+  "mimeType": "text/plain",
+  "sizeInBytes": 29
+}
+
+@fileEntryId = {{CreateFileEntry.response.body.$.data.newFileEntryId}}
+
+### Upload the file content
+POST http://localhost:3000/file-content-upload/{{fileEntryId}} HTTP/1.1
+Content-Type: multipart/form-data; boundary=just-some-random-boundary
+
+--just-some-random-boundary
+Content-Disposition: form-data; name="file"; filename="file_content_test.txt"
+Content-Type: text/plain
+
+This is just a file for test.
+--just-some-random-boundary--
+
+### Download the file content
+GET http://localhost:3000/file-content-download/{{fileEntryId}} HTTP/1.1
+
+### Delete the file content
+POST http://localhost:3000/file-content-delete/{{fileEntryId}} HTTP/1.1
+
+### Delete the file entry
+POST http://localhost:3000/file-entry-delete?id={{fileEntryId}} HTTP/1.1

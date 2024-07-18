@@ -13,7 +13,7 @@ type FileEntryIdentifier struct {
 type FileEntryData struct {
 	Title       *string `json:"title"`
 	MimeType    *string `json:"mimeType"`
-	SizeInBytes *uint   `json:"sizeInBytes"`
+	SizeInBytes *int64  `json:"sizeInBytes"`
 }
 
 type FileEntryExtra struct {
