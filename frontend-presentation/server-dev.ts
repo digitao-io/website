@@ -34,10 +34,12 @@ const BASE_URL="/";
       res.set({ "Content-Type": "text/html" });
       res.send(html);
     } catch (e) {
-      vite.ssrFixStacktrace(e);
-      console.log(e.stack);
+      vite.ssrFixStacktrace(e as Error);
+
+      console.log((e as Error).stack);
+
       res.status(500);
-      res.end(e.stack);
+      res.end((e as Error).stack);
     }
   });
   
