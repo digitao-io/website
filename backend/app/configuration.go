@@ -10,13 +10,11 @@ type Configuration struct {
 }
 
 type ConfigurationDatabase struct {
-	Host               string `json:"host"`
-	Port               int    `json:"port"`
-	User               string `json:"user"`
-	Password           string `json:"password"`
-	Database           string `json:"database"`
-	MaxIdleConnections int    `json:"maxIdleConnections"`
-	MaxOpenConnections int    `json:"maxOpenConnections"`
+	Host     string `json:"host"`
+	Port     int    `json:"port"`
+	User     string `json:"user"`
+	Password string `json:"password"`
+	Database string `json:"database"`
 }
 
 type ConfigurationObjstorage struct {

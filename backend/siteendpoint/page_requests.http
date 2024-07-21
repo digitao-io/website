@@ -1,0 +1,43 @@
+### Create a page
+POST http://localhost:3000/site/page-create HTTP/1.1
+Content-Type: application/json
+
+{
+  "key": "home",
+  "title": "Home",
+  "description": "The home page of the website",
+  "urlPattern": "/",
+  "details": {
+    "stringField": "hello world",
+    "numberField": 10,
+    "booleanField": true,
+    "arrayField": ["foo", 10, true],
+    "objectField": {
+      "foo": "bar"
+    },
+    "nullField": null
+  }
+}
+
+### Get a page
+POST http://localhost:3000/site/page-get?key=home HTTP/1.1
+
+### Update a page
+POST http://localhost:3000/site/page-update?key=home HTTP/1.1
+Content-Type: application/json
+
+{
+  "key": "new-home",
+  "title": "New Home Page",
+  "description": "The updated home page of the website",
+  "urlPattern": "/new-home",
+  "details": {
+    "message": "this is updated"
+  }
+}
+
+### List all pages
+POST http://localhost:3000/site/page-list HTTP/1.1
+
+### Delete a page
+POST http://localhost:3000/site/page-delete?key=new-home

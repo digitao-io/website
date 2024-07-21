@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-mysql --protocol=tcp -uroot -pno-password website-test
+mongosh "mongodb://localhost:27017/website_test" --username root --password no-password --authenticationDatabase admin

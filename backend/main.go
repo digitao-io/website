@@ -1,10 +1,14 @@
 package main
 
 import (
+	"context"
 	"fmt"
 
 	"digitao.io/website/app"
+	"digitao.io/website/dataendpoint"
 	"digitao.io/website/setup"
+	"digitao.io/website/siteendpoint"
+	"github.com/gin-gonic/gin"
 )
 
 func main() {
@@ -17,9 +21,12 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	defer database.Close()
-
-	sqlBuilder := setup.SetupSqlBuilder()
+	defer (func() {
+		err := database.Client().Disconnect(context.Background())
+		if err != nil {
+			panic(err)
+		}
+	})()
 
 	objstorage, err := setup.SetupObjstorage(configuration)
 	if err != nil {
@@ -29,10 +36,12 @@ func main() {
 	ctx := app.Context{}
 	ctx.Configuration = configuration
 	ctx.Database = database
-	ctx.SqlBuilder = sqlBuilder
 	ctx.Objstorage = objstorage
 
-	r := setup.SetupRoutes(&ctx)
+	r := gin.Default()
+
+	siteendpoint.SetupRoutes(&ctx, r)
+	dataendpoint.SetupRoutes(&ctx, r)
 
 	r.Run(fmt.Sprintf(":%d", configuration.Port))
 }

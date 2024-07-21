@@ -1,37 +1,42 @@
 package setup
 
 import (
-	"database/sql"
+	"context"
 	"fmt"
 
 	"digitao.io/website/app"
-	"github.com/doug-martin/goqu/v9"
 	_ "github.com/doug-martin/goqu/v9/dialect/mysql"
-	"github.com/go-sql-driver/mysql"
+	"go.mongodb.org/mongo-driver/mongo"
+	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
-func SetupDatabase(configuration *app.Configuration) (*sql.DB, error) {
-	dbConfig := mysql.NewConfig()
+func SetupDatabase(configuration *app.Configuration) (*mongo.Database, error) {
+	opts := options.Client().
+		SetHosts(
+			[]string{
+				fmt.Sprintf(
+					"%s:%d",
+					configuration.Database.Host,
+					configuration.Database.Port,
+				),
+			},
+		).
+		SetAuth(
+			options.Credential{
+				Username: configuration.Database.User,
+				Password: configuration.Database.Password,
+			},
+		).
+		SetServerAPIOptions(
+			options.ServerAPI(options.ServerAPIVersion1),
+		)
 
-	dbConfig.Addr = fmt.Sprintf("%s:%d", configuration.Database.Host, configuration.Database.Port)
-	dbConfig.User = configuration.Database.User
-	dbConfig.Passwd = configuration.Database.Password
-	dbConfig.DBName = configuration.Database.Database
-
-	database, err := sql.Open("mysql", dbConfig.FormatDSN())
+	client, err := mongo.Connect(context.Background(), opts)
 	if err != nil {
-		return nil, fmt.Errorf("cannot connect to database: %w", err)
+		return nil, err
 	}
 
-	database.SetConnMaxIdleTime(0)
-	database.SetConnMaxLifetime(0)
-	database.SetMaxIdleConns(configuration.Database.MaxIdleConnections)
-	database.SetMaxOpenConns(configuration.Database.MaxOpenConnections)
+	db := client.Database(configuration.Database.Database)
 
-	return database, nil
-}
-
-func SetupSqlBuilder() *goqu.DialectWrapper {
-	sqlBuilder := goqu.Dialect("mysql")
-	return &sqlBuilder
+	return db, nil
 }

@@ -1,0 +1,58 @@
+### Create a file
+# @name CreateFile1
+POST http://localhost:3000/data/file-create HTTP/1.1
+Content-Type: application/json
+
+{
+  "title": "A Test File",
+  "mimeType": "text/plain",
+  "sizeInBytes": 29
+}
+
+@fileId1 = {{CreateFile1.response.body.$.data.newFileId}}
+@fileUploadUrl = {{CreateFile1.response.body.$.data.fileUploadUrl}}
+
+### Create another file
+# @name CreateFile2
+POST http://localhost:3000/data/file-create HTTP/1.1
+Content-Type: application/json
+
+{
+  "title": "A beautiful picture",
+  "mimeType": "image/jpeg",
+  "sizeInBytes": 2345674
+}
+
+@fileId2 = {{CreateFile2.response.body.$.data.newFileId}}
+
+### Get file with its ID
+POST http://localhost:3000/data/file-get?id={{fileId1}} HTTP/1.1
+
+### List file entries without any filter queries should make it list all the file entries
+POST http://localhost:3000/data/file-list?sort=createdAt&order=DESC&take=5&skip=0 HTTP/1.1
+
+### List file entries with query string should filter file entries with its ID or title
+POST http://localhost:3000/data/file-list?q=picture&sort=score&order=DESC&take=5&skip=0 HTTP/1.1
+
+### List file entries with mime-type should filter file entries accroding to its mime-type
+POST http://localhost:3000/data/file-list?mimeType=image/jpeg&sort=createdAt&order=DESC&take=5&skip=0 HTTP/1.1
+
+### Upload the file content
+POST http://localhost:3000{{fileUploadUrl}} HTTP/1.1
+Content-Type: multipart/form-data; boundary=just-some-random-boundary
+
+--just-some-random-boundary
+Content-Disposition: form-data; name="file"; filename="file_content_test.txt"
+Content-Type: text/plain
+
+This is just a file for test.
+--just-some-random-boundary--
+
+### Download the file
+GET http://localhost:3000/data/file-download/{{fileId1}} HTTP/1.1
+
+### Delete the file
+POST http://localhost:3000/data/file-delete?id={{fileId1}} HTTP/1.1
+
+### Delete the other file
+POST http://localhost:3000/data/file-delete?id={{fileId2}} HTTP/1.1

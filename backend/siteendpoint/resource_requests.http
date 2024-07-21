@@ -1,0 +1,56 @@
+### Create a resource
+POST http://localhost:3000/site/resource-create HTTP/1.1
+Content-Type: application/json
+
+{
+  "key": "paragraph-component",
+  "title": "Paragraph Component",
+  "description": "A paragraph of text in the webpage",
+  "type": "component",
+  "details": {
+    "message": "this is a paragraph"
+  }
+}
+
+### Create another resource
+POST http://localhost:3000/site/resource-create HTTP/1.1
+Content-Type: application/json
+
+{
+  "key": "default-page-template",
+  "title": "Default Page Template",
+  "description": "The basic page structure of the website",
+  "type": "template",
+  "details": {
+    "message": "this is a page template"
+  }
+}
+
+### Get a resource
+POST http://localhost:3000/site/resource-get?key=paragraph-component HTTP/1.1
+
+### Update a resource
+POST http://localhost:3000/site/resource-update?key=paragraph-component HTTP/1.1
+Content-Type: application/json
+
+{
+  "key": "paragraph-component",
+  "title": "New Paragraph Component",
+  "description": "An updated paragraph of text in the webpage",
+  "type": "component",
+  "details": {
+    "message": "this is updated"
+  }
+}
+
+### List all resources
+POST http://localhost:3000/site/resource-list HTTP/1.1
+
+### List resources filtered by type
+POST http://localhost:3000/site/resource-list?type=template HTTP/1.1
+
+### Delete a resource
+POST http://localhost:3000/site/resource-delete?key=paragraph-component HTTP/1.1
+
+### Delete another resource
+POST http://localhost:3000/site/resource-delete?key=default-page-template HTTP/1.1

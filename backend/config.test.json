@@ -4,12 +4,10 @@
 
   "database": {
     "host": "localhost",
-    "port": 3306,
+    "port": 27017,
     "user": "root",
     "password": "no-password",
-    "database": "website-test",
-    "maxIdleConnections": 1,
-    "maxOpenConnections": 1
+    "database": "website_test"
   },
 
   "objstorage": {

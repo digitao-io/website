@@ -1,0 +1,56 @@
+### Create an article
+# @name CreateArticle1
+POST http://localhost:3000/data/article-create HTTP/1.1
+Content-Type: application/json
+
+{
+  "title": "How to Setup SDL2 in a C++ Project",
+  "tagKeys": [ "cpp", "sdl" ],
+  "summary": "In this article, we have introduced a way to use CMake to setup SDL2 in a C++ project.",
+  "content": "..."
+}
+
+@articleId1 = {{CreateArticle1.response.body.$.data.newArticleId}}
+
+### Create another article
+# @name CreateArticle2
+POST http://localhost:3000/data/article-create HTTP/1.1
+Content-Type: application/json
+
+{
+  "title": "SSR with Vue Explained",
+  "tagKeys": [ "javascript", "vue" ],
+  "summary": "What is SSR? Why it is good? And how to implement SSR using vue3? In this article, we will explain everything you need about SSR.",
+  "content": "..."
+}
+
+@articleId2 = {{CreateArticle2.response.body.$.data.newArticleId}}
+
+### Get an article
+POST http://localhost:3000/data/article-get?id={{articleId1}} HTTP/1.1
+
+### Update an article
+POST http://localhost:3000/data/article-update?id={{articleId1}} HTTP/1.1
+Content-Type: application/json
+
+{
+  "title": "How to Setup SDL2 in a C++ Project Using CMake",
+  "tagKeys": [ "cpp", "sdl", "cmake" ],
+  "summary": "In this article, we will introduce a way to setup SDL2 in a C++ project with CMake.",
+  "content": "updated"
+}
+
+### List all articles
+POST http://localhost:3000/data/article-list?sort=createdAt&order=DESC&take=5&skip=0 HTTP/1.1
+
+### List articles filtered by query
+POST http://localhost:3000/data/article-list?q=this%20article&sort=score&order=DESC&take=5&skip=0 HTTP/1.1
+
+### List articles filtered by tags
+POST http://localhost:3000/data/article-list?tag=cpp&tag=sdl&sort=createdAt&order=DESC&take=5&skip=0 HTTP/1.1
+
+### Delete an article
+POST http://localhost:3000/data/article-delete?id={{articleId1}} HTTP/1,1
+
+### Delete another article
+POST http://localhost:3000/data/article-delete?id={{articleId2}} HTTP/1,1
