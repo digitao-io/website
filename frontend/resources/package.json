@@ -1,0 +1,54 @@
+{
+  "name": "frontend-resources",
+  "version": "0.0.0",
+  "type": "module",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "import": "./dist/index.es.js",
+      "types": "./dist/types/index.d.ts"
+    },
+    "./index.css": {
+      "import": "./dist/index.css"
+    }
+  },
+  "scripts": {
+    "dev": "storybook dev -p 6006",
+    "build": "vite build && vue-tsc --build --force && mv dist/src dist/types"
+  },
+  "dependencies": {
+    "vue": "^3.4.33"
+  },
+  "devDependencies": {
+    "@chromatic-com/storybook": "^1.6.1",
+    "@storybook/addon-essentials": "^8.2.5",
+    "@storybook/addon-interactions": "^8.2.5",
+    "@storybook/addon-links": "^8.2.5",
+    "@storybook/addon-onboarding": "^8.2.5",
+    "@storybook/blocks": "^8.2.5",
+    "@storybook/test": "^8.2.5",
+    "@storybook/vue3": "^8.2.5",
+    "@storybook/vue3-vite": "^8.2.5",
+    "@stylistic/eslint-plugin": "^2.3.0",
+    "@tsconfig/node20": "^20.1.4",
+    "@types/node": "^20.14.11",
+    "@typescript-eslint/parser": "^7.16.1",
+    "@vitejs/plugin-vue": "^5.0.5",
+    "@vue/tsconfig": "^0.5.1",
+    "eslint": "^8.57.0",
+    "eslint-plugin-storybook": "^0.8.0",
+    "eslint-plugin-vue": "^9.27.0",
+    "storybook": "^8.2.5",
+    "stylistic-default": "github:path-undefined/stylistic-default",
+    "typescript": "^5.5.3",
+    "vite": "^5.3.4",
+    "vue-tsc": "^2.0.26"
+  },
+  "eslintConfig": {
+    "extends": [
+      "plugin:storybook/recommended"
+    ]
+  }
+}
