@@ -8,18 +8,21 @@ export default [
   ...eslintPluginVue.configs["flat/recommended"],
 
   {
-    files: ["*.ts", "*.mjs", "**/*.ts"],
-
-    languageOptions: {
-      parser: typescriptEslintParser,
-    },
-  },
-
-  {
-    files: ["*.ts", "*.mjs", "src/**/*.ts", "src/**/*.vue"],
-
     plugins: {
       "@stylistic": stylistic,
+    },
+
+    files: [
+      "*.mjs",
+      "*.ts",
+      "src/**/*",
+    ],
+
+    languageOptions: {
+      parserOptions: {
+        parser: typescriptEslintParser,
+        sourceType: "module",
+      },
     },
 
     rules: {

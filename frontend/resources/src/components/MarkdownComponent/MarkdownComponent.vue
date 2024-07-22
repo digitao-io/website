@@ -12,7 +12,9 @@ const props = defineProps({
 </script>
 
 <template>
-  <div class="markdown-component">{{ config.markdown }}</div>
+  <div class="markdown-component">
+    {{ config.markdown }}
+  </div>
 </template>
 
 <style scoped>

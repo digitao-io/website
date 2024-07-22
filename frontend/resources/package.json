@@ -16,7 +16,8 @@
   },
   "scripts": {
     "dev": "storybook dev -p 6006",
-    "build": "vite build && vue-tsc --build --force && mv dist/src dist/types"
+    "build": "vite build && vue-tsc --build --force && mv dist/src dist/types",
+    "lint": "eslint ."
   },
   "dependencies": {
     "vue": "^3.4.33"
