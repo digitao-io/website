@@ -1,6 +1,7 @@
-import stylistic from "@stylistic/eslint-plugin";
+import stylisticEslintPlugin from "@stylistic/eslint-plugin";
+import typescriptEslintPlugin from "@typescript-eslint/eslint-plugin";
 import typescriptEslintParser from "@typescript-eslint/parser";
-import stylisticDefault from "stylistic-default";
+import myEslintRules from "my-eslint-rules";
 
 import eslintPluginVue from "eslint-plugin-vue";
 
@@ -9,7 +10,8 @@ export default [
 
   {
     plugins: {
-      "@stylistic": stylistic,
+      "@stylistic": stylisticEslintPlugin,
+      "@typescript-eslint": typescriptEslintPlugin,
     },
 
     files: [
@@ -26,7 +28,7 @@ export default [
     },
 
     rules: {
-      ...stylisticDefault,
+      ...myEslintRules,
     },
   },
 ];
