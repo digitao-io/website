@@ -1,6 +1,7 @@
 import fs from "node:fs/promises";
 import express from "express";
 import { createServer } from "vite";
+import type { RenderResult } from "./src/entry-server";
 
 const BASE_URL="/";
 
@@ -19,16 +20,17 @@ const BASE_URL="/";
     try {
       const url = req.originalUrl.replace(BASE_URL, "");
   
-      const originalHtml = await fs.readFile("./index.html", "utf-8");
+      const originalHtml = await fs.readFile("./public/index.html", "utf-8");
       const template = await vite.transformIndexHtml(url, originalHtml);
   
-      const render: () => string = (await vite.ssrLoadModule("./src/entry-server.ts")).render;
-      const renderResult = render();
+      const vueSsrRender: () => Promise<RenderResult> = (await vite.ssrLoadModule("./src/entry-server.ts")).vueSsrRender;
+      const renderResult = await vueSsrRender();
 
       const html = template
-        .replace("<!--PAGE_TITLE-->", "Hello SSR!")
-        .replace("<!--PAGE_HEAD-->", "")
-        .replace("<!--PAGE_CONTENT-->", renderResult);
+        .replace("$$PAGE_LANGUAGE$$", renderResult.language)
+        .replace("$$PAGE_TITLE$$", renderResult.title)
+        .replace("$$PAGE_HEAD$$", renderResult.head)
+        .replace("$$PAGE_CONTENT$$", renderResult.content)
   
       res.status(200);
       res.set({ "Content-Type": "text/html" });
