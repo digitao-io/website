@@ -1,7 +1,13 @@
 import fs from "node:fs/promises";
 import express from "express";
 import { createServer } from "vite";
+
+import type { Page } from "frontend-types/site/page";
+
 import type { RenderResult } from "./src/entry-server";
+import { sendHttpRequest } from "./src/common/http-client";
+import { BackendResponseStatus } from "frontend-types/app/backend-response";
+import { PageDetails } from "frontend-types/site/data-resolving";
 
 const BASE_URL = "/";
 
@@ -23,8 +29,15 @@ const BASE_URL = "/";
       const originalHtml = await fs.readFile("./public/index.html", "utf-8");
       const template = await vite.transformIndexHtml(url, originalHtml);
 
-      const vueSsrRender: () => Promise<RenderResult> = (await vite.ssrLoadModule("./src/entry-server.ts")).vueSsrRender;
-      const renderResult = await vueSsrRender();
+      const pages = await sendHttpRequest<undefined, undefined, Page[]>("/site/page-list");
+
+      if (pages.status !== BackendResponseStatus.OK) {
+        throw Error("HTTP Request Broken");
+      }
+
+      const vueSsrRender: (page: PageDetails) => Promise<RenderResult>
+        = (await vite.ssrLoadModule("./src/entry-server.ts")).vueSsrRender;
+      const renderResult = await vueSsrRender(pages.data[0].details);
 
       const html = template
         .replace("$$PAGE_LANGUAGE$$", renderResult.language)

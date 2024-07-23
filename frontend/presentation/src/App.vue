@@ -1,17 +1,39 @@
 <script setup lang="ts">
-const slotName = "main";
+import { useSSRContext } from "vue";
+
+import { StaticConfigResolver } from "./resolving/static-config-resolver";
+
+const ctx = useSSRContext();
+
+const resolver = new StaticConfigResolver(ctx!.page);
+await resolver.resolve();
+
+const template = resolver.getTempalte();
+const slots = resolver.getSlots();
+const getComponents = (slot: string) => resolver.getComponents(slot);
 </script>
 
 <template>
-  <default-template :config="{ primaryMenuEntries: [], secondaryMenuEntries: [] }">
-    <template #[slotName]>
-      <markdown-component :config="{ markdown: '# Hello World\nThis is a hello world from somewhere ...' }" />
+  <component
+    :is="template.template"
+    :config="template.staticConfig"
+  >
+    <template
+      v-for="slot of slots"
+      #[slot]
+    >
+      <template
+        v-for="component, i of getComponents(slot)"
+        :key="`${slot}-${component.component}-${i}`"
+      >
+        <component
+          :is="component.component"
+          :config="component.staticConfig"
+        />
+      </template>
     </template>
-  </default-template>
+  </component>
 </template>
 
 <style scoped>
-.message {
-  color: green;
-}
 </style>

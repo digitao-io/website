@@ -1,4 +1,7 @@
 import { renderToString } from "vue/server-renderer";
+
+import type { Page } from "frontend-types/site/page";
+
 import { createApp } from "./app";
 
 export type RenderResult = {
@@ -8,10 +11,10 @@ export type RenderResult = {
   content: string;
 };
 
-export async function vueSsrRender(): Promise<RenderResult> {
+export async function vueSsrRender(page: Page): Promise<RenderResult> {
   const app = createApp();
 
-  const ctx = {};
+  const ctx = { page };
   const content = await renderToString(app, ctx);
 
   return {
