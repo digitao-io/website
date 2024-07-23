@@ -16,12 +16,14 @@ const props = defineProps<{
 
 <template>
   <header class="page-header">
-    <div class="page-header__logo">
-      [加上Logo]
-    </div>
+    <div class="logo-area">
+      <div class="page-header__logo">
+        logo
+      </div>
 
-    <div class="page-header__logo-text">
-      [加上digiTAO Software字样]
+      <div class="page-header__logo-text">
+        digiTAO <br> Software
+      </div>
     </div>
 
     <div class="page-header__menu-container">
@@ -59,4 +61,23 @@ const props = defineProps<{
 </template>
 
 <style scoped>
+.page-header {
+  display: flex;
+  justify-content: space-between;
+}
+.logo-area {
+  display: flex;
+}
+.page-header__logo {
+  width: 50px;
+  height: 60px;
+}
+.page-header__logo-text {
+  text-align: left;
+  font-family: var(--font-raleway);
+  font-size: 14px;
+  font-weight: bold;
+  color: var(--color-primary);
+  line-height: 15px;
+}
 </style>
