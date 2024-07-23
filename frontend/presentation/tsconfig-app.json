@@ -5,6 +5,7 @@
   ],
   "include": [
     "env.d.ts",
+    "service-dev.ts",
     "src/**/*",
     "src/**/*.vue"
   ],

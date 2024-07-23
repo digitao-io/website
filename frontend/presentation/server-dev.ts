@@ -3,7 +3,7 @@ import express from "express";
 import { createServer } from "vite";
 import type { RenderResult } from "./src/entry-server";
 
-const BASE_URL="/";
+const BASE_URL = "/";
 
 (async () => {
   const app = express();
@@ -13,16 +13,16 @@ const BASE_URL="/";
     appType: "custom",
     base: BASE_URL,
   });
-  
+
   app.use(vite.middlewares);
-  
+
   app.use("*", async (req, res) => {
     try {
       const url = req.originalUrl.replace(BASE_URL, "");
-  
+
       const originalHtml = await fs.readFile("./public/index.html", "utf-8");
       const template = await vite.transformIndexHtml(url, originalHtml);
-  
+
       const vueSsrRender: () => Promise<RenderResult> = (await vite.ssrLoadModule("./src/entry-server.ts")).vueSsrRender;
       const renderResult = await vueSsrRender();
 
@@ -30,8 +30,8 @@ const BASE_URL="/";
         .replace("$$PAGE_LANGUAGE$$", renderResult.language)
         .replace("$$PAGE_TITLE$$", renderResult.title)
         .replace("$$PAGE_HEAD$$", renderResult.head)
-        .replace("$$PAGE_CONTENT$$", renderResult.content)
-  
+        .replace("$$PAGE_CONTENT$$", renderResult.content);
+
       res.status(200);
       res.set({ "Content-Type": "text/html" });
       res.send(html);
@@ -44,8 +44,8 @@ const BASE_URL="/";
       res.end((e as Error).stack);
     }
   });
-  
+
   app.listen(8080, () => {
     console.log("Server started at http://localhost:8080");
-  });  
+  });
 })();

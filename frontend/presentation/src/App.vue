@@ -1,11 +1,13 @@
 <script setup lang="ts">
+const slotName = "main";
 </script>
 
 <template>
-  <example-template>
-    <example-component />
-    <p class="message">This is a proper "hello world" rendered by server!</p>
-  </example-template>
+  <default-template :config="{ primaryMenuEntries: [], secondaryMenuEntries: [] }">
+    <template #[slotName]>
+      <markdown-component :config="{ markdown: '# Hello World\nThis is a hello world from somewhere ...' }" />
+    </template>
+  </default-template>
 </template>
 
 <style scoped>

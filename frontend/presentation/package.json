@@ -4,20 +4,26 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "tsx server-dev"
+    "dev": "tsx server-dev",
+    "lint": "eslint ."
   },
   "dependencies": {
     "express": "^4.19.2",
     "vue": "^3.4.33"
   },
   "devDependencies": {
+    "@stylistic/eslint-plugin": "^2.3.0",
     "@tsconfig/node20": "^20.1.4",
     "@types/express": "^4.17.21",
     "@types/mustache": "^4.2.5",
     "@types/node": "^20.14.11",
+    "@typescript-eslint/eslint-plugin": "^7.17.0",
     "@vitejs/plugin-vue": "^5.0.5",
     "@vue/tsconfig": "^0.5.1",
+    "eslint": "^8.57.0",
+    "eslint-plugin-vue": "^9.27.0",
     "frontend-resources": "file:../resources",
+    "my-eslint-rules": "github:path-undefined/my-eslint-rules",
     "tsx": "^4.16.2",
     "typescript": "^5.5.3",
     "vite": "^5.3.4",
