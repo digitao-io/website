@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import type { PropType } from "vue";
-
 export type DefaultTemplateConfig = {
   primaryMenuEntries: DefaultTemplateConfigMenuEntry[];
   secondaryMenuEntries: DefaultTemplateConfigMenuEntry[];
