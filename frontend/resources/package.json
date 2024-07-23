@@ -26,13 +26,7 @@
     "vue": "^3.4.33"
   },
   "devDependencies": {
-    "@chromatic-com/storybook": "^1.6.1",
     "@storybook/addon-essentials": "^8.2.5",
-    "@storybook/addon-interactions": "^8.2.5",
-    "@storybook/addon-links": "^8.2.5",
-    "@storybook/addon-onboarding": "^8.2.5",
-    "@storybook/blocks": "^8.2.5",
-    "@storybook/test": "^8.2.5",
     "@storybook/vue3": "^8.2.5",
     "@storybook/vue3-vite": "^8.2.5",
     "@stylistic/eslint-plugin": "^2.3.0",
@@ -43,17 +37,11 @@
     "@vitejs/plugin-vue": "^5.0.5",
     "@vue/tsconfig": "^0.5.1",
     "eslint": "^8.57.0",
-    "eslint-plugin-storybook": "^0.8.0",
     "eslint-plugin-vue": "^9.27.0",
     "my-eslint-rules": "github:path-undefined/my-eslint-rules",
     "storybook": "^8.2.5",
     "typescript": "^5.5.3",
     "vite": "^5.3.4",
     "vue-tsc": "^2.0.26"
-  },
-  "eslintConfig": {
-    "extends": [
-      "plugin:storybook/recommended"
-    ]
   }
 }
