@@ -1,1 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+:root {
+  --font-open-sans: "Open Sans", sans-serif;
+  --font-raleway: "Raleway", sans-serif;
+
+  --color-primary: #242424;
+  --color-secondary: #ffffff;
+}
+
+body {
+  font-family: var(--font-open-sans);
+  color: var(--primary-color);
+}
