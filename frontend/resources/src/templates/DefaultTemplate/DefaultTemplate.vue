@@ -64,8 +64,4 @@ const props = defineProps({
 </template>
 
 <style scoped>
-.example-template {
-  margin: 0 auto;
-  max-width: 400px;
-}
 </style>

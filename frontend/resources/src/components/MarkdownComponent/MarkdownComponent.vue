@@ -41,5 +41,4 @@ const htmlContent = computed(() => marked.parse(props.config.markdown));
 </template>
 
 <style scoped>
-.markdown-component {}
 </style>
