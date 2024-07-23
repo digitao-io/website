@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, defineProps } from "vue";
+import { computed } from "vue";
 import type { PropType } from "vue";
 
 import { Marked } from "marked";
@@ -11,6 +11,13 @@ export type MarkdownComponentConfig = {
   markdown: string;
 };
 
+const props = defineProps({
+  config: {
+    type: Object as PropType<MarkdownComponentConfig>,
+    required: true,
+  },
+});
+
 const marked = new Marked(
   markedHighlight({
     langPrefix: "hljs language-",
@@ -20,13 +27,6 @@ const marked = new Marked(
     },
   }),
 );
-
-const props = defineProps({
-  config: {
-    type: Object as PropType<MarkdownComponentConfig>,
-    required: true,
-  },
-});
 
 const htmlContent = computed(() => marked.parse(props.config.markdown));
 </script>
