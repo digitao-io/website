@@ -11,12 +11,9 @@ export type DefaultTemplateConfigMenuEntry = {
   url: string;
 };
 
-const props = defineProps({
-  config: {
-    type: Object as PropType<DefaultTemplateConfig>,
-    required: true,
-  },
-});
+const props = defineProps<{
+  config: DefaultTemplateConfig;
+}>();
 </script>
 
 <template>

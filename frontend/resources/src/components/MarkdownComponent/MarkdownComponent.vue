@@ -1,22 +1,19 @@
 <script setup lang="ts">
 import { computed } from "vue";
-import type { PropType } from "vue";
 
 import { Marked } from "marked";
 import { markedHighlight } from "marked-highlight";
 import hljs from "highlight.js";
+
 import "highlight.js/styles/github.css";
 
 export type MarkdownComponentConfig = {
   markdown: string;
 };
 
-const props = defineProps({
-  config: {
-    type: Object as PropType<MarkdownComponentConfig>,
-    required: true,
-  },
-});
+const props = defineProps<{
+  config: MarkdownComponentConfig;
+}>();
 
 const marked = new Marked(
   markedHighlight({

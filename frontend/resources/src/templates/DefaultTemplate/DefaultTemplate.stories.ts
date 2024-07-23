@@ -8,7 +8,9 @@ const meta: Meta<typeof DefaultTemplate> = {
 
   render: (args) => ({
     components: { DefaultTemplate },
-    setup: () => args,
+    setup() {
+      return args;
+    },
     template: `
       <default-template :config="config">
         <template v-slot:["main"]>
