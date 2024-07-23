@@ -9,22 +9,45 @@ export default [
   ...eslintPluginVue.configs["flat/recommended"],
 
   {
-    plugins: {
-      "@stylistic": stylisticEslintPlugin,
-      "@typescript-eslint": typescriptEslintPlugin,
-    },
-
     files: [
-      "*.mjs",
-      "*.ts",
-      "src/**/*",
+      "src/**/*.vue",
     ],
 
     languageOptions: {
       parserOptions: {
         parser: typescriptEslintParser,
+        extraFileExtensions: [".vue"],
         sourceType: "module",
       },
+    },
+  },
+
+  {
+    files: [
+      "*.mjs",
+      "*.ts",
+      "src/**/*.ts",
+    ],
+
+    languageOptions: {
+      parser: typescriptEslintParser,
+      parserOptions: {
+        sourceType: "module",
+      },
+    },
+  },
+
+  {
+    files: [
+      "*.mjs",
+      "*.ts",
+      "src/**/*.ts",
+      "src/**/*.vue",
+    ],
+
+    plugins: {
+      "@stylistic": stylisticEslintPlugin,
+      "@typescript-eslint": typescriptEslintPlugin,
     },
 
     rules: {

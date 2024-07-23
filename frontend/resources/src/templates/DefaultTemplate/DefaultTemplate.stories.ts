@@ -8,9 +8,7 @@ const meta: Meta<typeof DefaultTemplate> = {
 
   render: (args) => ({
     components: { DefaultTemplate },
-    setup() {
-      return args;
-    },
+    setup: () => args,
     template: `
       <default-template :config="config">
         <template v-slot:["main"]>
@@ -41,6 +39,6 @@ export const Default: Story = {
         { label: "Legal Notice", url: "http://example.org" },
         { label: "Data Protection", url: "http://example.org" },
       ],
-    }
+    },
   },
 };
