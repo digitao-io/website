@@ -1,26 +1,28 @@
 export type PageDetails = {
   template: string;
-  staticConfig: Record<string, StaticConfigValue>;
+  language: string;
+  title: string;
+  config: Record<string, ConfigValue>;
   slots: Record<string, ComponentDetails[]>;
 }
 
 export type ComponentDetails = {
   component: string;
-  staticConfig: Record<string, StaticConfigValue>;
+  config: Record<string, ConfigValue>;
 }
 
-export type StaticConfigValue =
-| StaticConfigResolvingInfo
-| StaticConfigResolvedValue;
+export type ConfigValue =
+| ConfigResolvingInfo
+| ConfigResolvedValue;
 
-export type StaticConfigResolvingInfo = {
+export type ConfigResolvingInfo = {
   source: string[];
-  parameters?: Record<string, StaticConfigValue>;
-  defaultValue?: StaticConfigResolvedValue;
+  parameters?: Record<string, ConfigValue>;
+  defaultValue?: ConfigResolvedValue;
   field?: (string|number)[];
 };
 
-export type StaticConfigResolvedValue =
+export type ConfigResolvedValue =
 | string
 | number
 | boolean

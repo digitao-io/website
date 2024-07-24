@@ -1,8 +1,7 @@
 import { renderToString } from "vue/server-renderer";
 
-import type { Page } from "frontend-types/site/page";
-
 import { createApp } from "./app";
+import type { ResolvedPageDetails } from "./resolving/page-details-resolver";
 
 export type RenderResult = {
   language: string;
@@ -11,16 +10,18 @@ export type RenderResult = {
   content: string;
 };
 
-export async function vueSsrRender(page: Page): Promise<RenderResult> {
+export type RenderFunction = (pageDetails: ResolvedPageDetails) => Promise<RenderResult>;
+
+export async function render(pageDetails: ResolvedPageDetails): Promise<RenderResult> {
   const app = createApp();
 
-  const ctx = { page };
+  const ctx = { pageDetails };
   const content = await renderToString(app, ctx);
 
   return {
-    language: "en",
-    title: "Hello World",
-    head: "",
-    content: content,
+    language: pageDetails.language,
+    title: pageDetails.title,
+    head: `<script>window.context = ${JSON.stringify(ctx)}</script>`,
+    content,
   };
 }

@@ -3,16 +3,21 @@ import express from "express";
 import { createServer } from "vite";
 
 import type { Page } from "frontend-types/site/page";
-
-import type { RenderResult } from "./src/entry-server";
-import { sendHttpRequest } from "./src/common/http-client";
 import { BackendResponseStatus } from "frontend-types/app/backend-response";
-import { PageDetails } from "frontend-types/site/data-resolving";
+
+import { sendHttpRequest } from "./src/common/http-client";
+import { RenderFunction } from "./src/entry-server";
+import { DynamicRouter } from "./src/server/dynamic-router";
+import { PageDetailsResolver } from "./src/resolving/page-details-resolver";
+import { dataValueResolver } from "./src/resolving/resolvers/data-value-resolver";
 
 const BASE_URL = "/";
 
 (async () => {
   const app = express();
+  const dynamicRouter = new DynamicRouter();
+  const pageDetailsResolver = new PageDetailsResolver()
+    .with(dataValueResolver);
 
   const vite = await createServer({
     server: { middlewareMode: true },
@@ -22,40 +27,30 @@ const BASE_URL = "/";
 
   app.use(vite.middlewares);
 
-  app.use("*", async (req, res) => {
-    try {
+  app.use(
+    "*",
+    async (req, _, next) => {
       const url = req.originalUrl.replace(BASE_URL, "");
 
       const originalHtml = await fs.readFile("./public/index.html", "utf-8");
-      const template = await vite.transformIndexHtml(url, originalHtml);
+      const htmlTemplate = await vite.transformIndexHtml(url, originalHtml);
 
-      const pages = await sendHttpRequest<undefined, undefined, Page[]>("/site/page-list");
+      const pages = await sendHttpRequest<undefined, undefined, Page[]>("http://localhost:3000", "/site/page-list");
 
       if (pages.status !== BackendResponseStatus.OK) {
         throw Error("HTTP Request Broken");
       }
 
-      const vueSsrRender: (page: PageDetails) => Promise<RenderResult>
-        = (await vite.ssrLoadModule("./src/entry-server.ts")).vueSsrRender;
-      const renderResult = await vueSsrRender(pages.data[0].details);
+      const render: RenderFunction = (await vite.ssrLoadModule("./src/entry-server.ts")).render;
 
-      const html = template
-        .replace("$$PAGE_LANGUAGE$$", renderResult.language)
-        .replace("$$PAGE_TITLE$$", renderResult.title)
-        .replace("$$PAGE_HEAD$$", renderResult.head)
-        .replace("$$PAGE_CONTENT$$", renderResult.content);
+      dynamicRouter.buildRoutes(pages.data, pageDetailsResolver, render, htmlTemplate);
 
-      res.status(200);
-      res.set({ "Content-Type": "text/html" });
-      res.send(html);
-    } catch (e) {
-      vite.ssrFixStacktrace(e as Error);
+      next();
+    },
+  );
 
-      console.log((e as Error).stack);
-
-      res.status(500);
-      res.end((e as Error).stack);
-    }
+  app.use("/", (req, res, next) => {
+    dynamicRouter.getRouter()(req, res, next);
   });
 
   app.listen(8080, () => {

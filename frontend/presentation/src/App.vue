@@ -1,34 +1,30 @@
 <script setup lang="ts">
 import { useSSRContext } from "vue";
 
-import { StaticConfigResolver } from "./resolving/static-config-resolver";
-
-const ctx = useSSRContext();
-
-const resolver = new StaticConfigResolver(ctx!.page);
-await resolver.resolve();
-
-const template = resolver.getTempalte();
-const slots = resolver.getSlots();
-const getComponents = (slot: string) => resolver.getComponents(slot);
+const ctx = import.meta.env.SSR
+  ? useSSRContext()
+  : window.context;
+const pageDetails = ctx.pageDetails;
+const slots = Object.keys(pageDetails.slots);
+const componentDetailsArrayBySlot = ctx.pageDetails.slots;
 </script>
 
 <template>
   <component
-    :is="template.template"
-    :config="template.staticConfig"
+    :is="pageDetails.template"
+    :config="pageDetails.config"
   >
     <template
       v-for="slot of slots"
       #[slot]
     >
       <template
-        v-for="component, i of getComponents(slot)"
-        :key="`${slot}-${component.component}-${i}`"
+        v-for="componentDetails, i of componentDetailsArrayBySlot[slot]"
+        :key="`${slot}-${componentDetails.component}-${i}`"
       >
         <component
-          :is="component.component"
-          :config="component.staticConfig"
+          :is="componentDetails.component"
+          :config="componentDetails.config"
         />
       </template>
     </template>
