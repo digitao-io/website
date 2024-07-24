@@ -24,87 +24,117 @@ const toggleMenuActivated = () => {
 </script>
 
 <template>
-  <header class="page-header">
-    <div class="logo">
-      <svg
-        class="logo-svg"
-        viewBox="0 0 32 42"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
+  <div class="page-container">
+    <div class="header-container">
+      <header
+        class="header"
+        :class="{
+          'header-menu-activated': menuActivated,
+        }"
       >
-        <path d="M21 21H31V41H1V11H21V21ZM21 21V31H11V21H21Z" />
-        <path d="M31 1H21V11H31V1Z" />
-      </svg>
+        <div class="toolbar">
+          <div class="logo">
+            <svg
+              class="logo-svg"
+              viewBox="0 0 32 42"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path d="M21 21H31V41H1V11H21V21ZM21 21V31H11V21H21Z" />
+              <path d="M31 1H21V11H31V1Z" />
+            </svg>
 
-      <div class="logo-text">
-        digiTAO<br>Software
-      </div>
-    </div>
+            <div class="logo-text">
+              digiTAO<br>Software
+            </div>
+          </div>
 
-    <div class="page-header__menu-container">
-      <default-template-menu-button
-        :activated="menuActivated"
-        @click="toggleMenuActivated"
-      />
-    </div>
-
-    <nav
-      v-if="menuActivated"
-      class="page-header__main-menu"
-    >
-      <div class="logo-menu">
-        <svg
-          class="logo-svg-menu"
-          viewBox="0 0 32 42"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path d="M21 21H31V41H1V11H21V21ZM21 21V31H11V21H21Z" />
-          <path d="M31 1H21V11H31V1Z" />
-        </svg>
-
-        <div class="logo-text-menu">
-          digiTAO<br>Software
+          <default-template-menu-button
+            class="menu-button"
+            :activated="menuActivated"
+            @click="toggleMenuActivated"
+          />
         </div>
-      </div>
 
-      <div class="page-header__menu-container-menu">
-        <default-template-menu-button
-          :activated="menuActivated"
-          @click="toggleMenuActivated"
-        />
-      </div>
-      <ul class="page-header__list-menu">
-        <li
-          v-for="menuEntry of props.config.primaryMenuEntries"
-          :key="menuEntry.url"
+        <nav
+          class="primary-menu"
+          :class="{
+            'primary-menu-menu-activated': menuActivated,
+          }"
         >
-          {{ menuEntry.label }}
-        </li>
-      </ul>
-    </nav>
-  </header>
-  <main class="page-content">
-    <slot name="main" />
-  </main>
-  <footer class="page-footer">
-    [这里添加版权信息等]
-    <nav class="page-header__secondary-menu">
-      <p>该部分内容仅作示例，请删除：</p>
-      <ul>
-        <li
-          v-for="menuEntry of props.config.secondaryMenuEntries"
-          :key="menuEntry.url"
-        >
-          {{ menuEntry.label }}
-        </li>
-      </ul>
-    </nav>
-  </footer>
+          <ul class="primary-menu-list">
+            <li
+              v-for="menuEntry of props.config.primaryMenuEntries"
+              :key="menuEntry.url"
+            >
+              <a
+                class="primary-menu-link"
+                :href="menuEntry.url"
+              >{{ menuEntry.label }}</a>
+            </li>
+          </ul>
+        </nav>
+      </header>
+    </div>
+
+    <div class="content-container">
+      <main class="content">
+        <slot name="main" />
+      </main>
+
+      <footer class="footer">
+        <hr>
+
+        <p class="copyright">
+          Except where otherwise noted, the website itself is licensed under GNU General Public License v3.0,
+          and the content of the website is licensed under Creative Commons Attribution 4.0 International (CC BY 4.0).
+        </p>
+
+        <nav class="secondary-menu">
+          <ul class="secondary-menu-list">
+            <li
+              v-for="menuEntry of props.config.secondaryMenuEntries"
+              :key="menuEntry.url"
+            >
+              <a
+                class="secondary-menu-link"
+                :href="menuEntry.url"
+              >{{ menuEntry.label }}</a>
+            </li>
+          </ul>
+        </nav>
+      </footer>
+    </div>
+  </div>
 </template>
 
 <style scoped>
-.page-header {
+.header {
+  padding: 16px;
+  color: var(--color-primary);
+  background-color: transparent;
+}
+.content {
+  padding: 16px;
+}
+.footer {
+  padding: 32px 16px;
+  color: var(--color-primary-t1);
+  font-size: var(--font-size-s);
+  line-height: var(--line-height-s);
+}
+
+.header-menu-activated {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  color: var(--color-secondary-s1);
+  background-color: var(--color-primary);
+}
+
+.toolbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -115,7 +145,7 @@ const toggleMenuActivated = () => {
   align-items: end;
 }
 .logo-svg {
-  stroke: var(--color-primary);
+  stroke: currentColor;
   width: 32px;
   stroke-width: 2;
 }
@@ -124,43 +154,142 @@ const toggleMenuActivated = () => {
   font-family: var(--font-raleway);
   font-size: 14px;
   font-weight: bold;
-  color: var(--color-primary);
   line-height: 15px;
-}
-.page-header__main-menu {
-  position:fixed;
-  margin: 0%;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background-color: var(--color-primary);
-}
-.logo-menu {
-  display: flex;
-  align-items: end;
-}
-.logo-svg-menu {
-  stroke: var(--color-secondary);
-  width: 32px;
-  stroke-width: 2;
 }
 
-.logo-text-menu {
-  margin-left: 10px;
-  font-family: var(--font-raleway);
-  font-size: 14px;
-  font-weight: bold;
-  color: var(--color-secondary);
-  line-height: 15px;
+.primary-menu {
+  display: none;
 }
-.page-header__list-menu {
-  list-style-type: none;
-  font-family: var(--font-open-sans);
-  font-size: 20px;
+.primary-menu-menu-activated {
+  display: block;
+}
+
+.primary-menu-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 48px;
+  padding: 0;
+  list-style: none;
   font-weight: lighter;
-  color: var(--color-secondary);
+  font-size: 20px;
   line-height: 48px;
-  text-align: center;
+}
+
+.primary-menu-link {
+  color: inherit;
+  text-decoration: none;
+  text-transform: uppercase;
+  border-bottom: 0;
+  transition: 0.3s;
+}
+.primary-menu-link:hover {
+  color: var(--color-secondary-s2);
+  border-bottom: 1px solid var(--color-secondary-s2);
+}
+
+.secondary-menu-list {
+  list-style: none;
+  padding: 0;
+}
+.secondary-menu-list > li {
+  display: inline-block;
+}
+.secondary-menu-list > li:not(:last-child):after {
+  display: inline-block;
+  margin: 0 10px;
+  content: "|";
+}
+
+.secondary-menu-link {
+  color: var(--color-primary-t1);
+}
+.secondary-menu-link:hover {
+  color: var(--color-primary-t2);
+}
+
+@media (min-width: 500px) {
+  .header,
+  .content,
+  .footer {
+    margin: 0 auto;
+    max-width: 850px;
+  }
+  .header {
+    padding-top: 36px;
+  }
+
+  .toolbar {
+    flex-direction: column;
+    justify-content: start;
+  }
+  .logo {
+    display: block;
+    text-align: right;
+  }
+  .logo-svg {
+    width: 96px;
+    shape-rendering: crispEdges;
+    stroke-width: 1.6;
+  }
+  .logo-text {
+    margin: 0;
+    text-align: right;
+    font-size: 24px;
+    line-height: 26px;
+  }
+
+  .menu-button {
+    display: none;
+  }
+
+  .primary-menu {
+    display: block;
+  }
+  .primary-menu-list {
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 36px 0;
+    font-size: 16px;
+    line-height: 24px;
+  }
+  .primary-menu-list > li {
+    margin: 0 16px;
+  }
+
+  .primary-menu-link:hover {
+    color: var(--color-primary-t2);
+    border-bottom: 1px solid var(--color-primary-t2);
+  }
+}
+
+@media (min-width: 1000px) {
+  .page-container {
+    display: flex;
+    justify-content: center;
+  }
+
+  .header {
+    padding-right: 114px;
+    width: 120px;
+  }
+  .content {
+    margin-top: 32px;
+  }
+
+  .toolbar {
+    align-items: end;
+  }
+  .primary-menu-list {
+    flex-direction: column;
+    align-items: end;
+    margin: 36px 0;
+    font-size: 20px;
+    line-height: 48px;
+  }
+  .primary-menu-list > li {
+    margin: 0;
+  }
 }
 </style>

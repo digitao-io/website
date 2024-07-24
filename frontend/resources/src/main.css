@@ -2,11 +2,35 @@
   --font-open-sans: "Open Sans", sans-serif;
   --font-raleway: "Raleway", sans-serif;
 
+  --font-size-s: 12.8px;
+  --line-height-s: 16px;
+  --font-size-m: 16px;
+  --line-height-m: 24px;
+  --font-size-l: 24px;
+  --line-height-l: 24px;
+  --font-size-xl: 32px;
+  --line-height-xl: 32px;
+  --font-size-xxl: 40px;
+  --line-height-xxl: 40px;
+
   --color-primary: #242424;
-  --color-secondary: #ffffff;
+  --color-primary-t1: #484848;
+  --color-primary-t2: #6c6c6c;
+  --color-primary-s1: #000000;
+  --color-secondary: #fcfcfc;
+  --color-secondary-s1: #d8d8d8;
+  --color-secondary-s2: #b4b4b4;
 }
 
 body {
-  font-family: var(--font-open-sans);
+  margin: 0;
+  padding: 0;
   color: var(--primary-color);
+  font-family: var(--font-open-sans);
+}
+
+hr {
+  border: 0;
+  height: 0;
+  border-top: 1px solid var(--color-primary-t1);
 }

@@ -6,6 +6,10 @@ const meta: Meta<typeof DefaultTemplate> = {
   title: "Templates/DefaultTemplate",
   component: DefaultTemplate,
 
+  parameters: {
+    layout: "fullscreen",
+  },
+
   render: (args) => ({
     components: { DefaultTemplate },
     setup() {

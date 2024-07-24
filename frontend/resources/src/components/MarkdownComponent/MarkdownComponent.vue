@@ -31,11 +31,42 @@ const htmlContent = computed(() => marked.parse(props.config.markdown));
 <template>
   <!-- eslint-disable vue/no-v-html -->
   <div
-    class="markdown-component"
+    class="markdown-content"
     v-html="htmlContent"
   />
   <!-- eslint-enable vue/no-v-html -->
 </template>
 
 <style scoped>
+:deep(h1),
+:deep(h5),
+:deep(h6) {
+  display: none;
+}
+
+:deep(h2) {
+  margin: 0.6em 0 0.5em 0;
+  font-family: var(--font-raleway);
+  font-size: var(--font-size-xxl);
+  line-height: var(--line-height-xxl);
+}
+
+:deep(h3) {
+  margin: 0.6em 0 0.5em 0;
+  font-family: var(--font-raleway);
+  font-size: var(--font-size-xl);
+  line-height: var(--line-height-xl);
+}
+
+:deep(h4) {
+  margin: 0.6em 0 0.5em 0;
+  font-family: var(--font-raleway);
+  font-size: var(--font-size-l);
+  line-height: var(--line-height-l);
+}
+
+:deep(code) {
+  font-size: var(--font-size-m);
+  background-color: var(--color-secondary);
+}
 </style>
