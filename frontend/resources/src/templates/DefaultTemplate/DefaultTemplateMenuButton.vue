@@ -36,7 +36,7 @@ const initialState = ref(true);
 .menu-button > div {
   width: 4em;
   height: 0.3em;
-  background-color: var(--color-primary);
+  background-color: var(--color-secondary);
 }
 
 .menu-button > div::before,
