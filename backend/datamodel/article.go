@@ -13,10 +13,11 @@ type ArticleIdentifier struct {
 }
 
 type ArticleData struct {
-	Title   *string   `json:"title" bson:"title,omitempty"`
-	TagKeys *[]string `json:"tagKeys" bson:"tagKeys,omitempty"`
-	Summary *string   `json:"summary" bson:"summary,omitempty"`
-	Content *string   `json:"content" bson:"content,omitempty"`
+	Title        *string   `json:"title" bson:"title,omitempty"`
+	TagKeys      *[]string `json:"tagKeys" bson:"tagKeys,omitempty"`
+	Summary      *string   `json:"summary" bson:"summary,omitempty"`
+	Content      *string   `json:"content" bson:"content,omitempty"`
+	ThumbnailUrl *string   `json:"thumbnailUrl" bson:"thumbnailUrl,omitempty"`
 }
 
 type ArticleExtra struct {

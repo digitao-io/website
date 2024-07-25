@@ -7,7 +7,8 @@ Content-Type: application/json
   "title": "How to Setup SDL2 in a C++ Project",
   "tagKeys": [ "cpp", "sdl" ],
   "summary": "In this article, we have introduced a way to use CMake to setup SDL2 in a C++ project.",
-  "content": "..."
+  "content": "...",
+  "thumbnailUr": "https://picsum.photos/640/480"
 }
 
 @articleId1 = {{CreateArticle1.response.body.$.data.newArticleId}}
@@ -21,7 +22,8 @@ Content-Type: application/json
   "title": "SSR with Vue Explained",
   "tagKeys": [ "javascript", "vue" ],
   "summary": "What is SSR? Why it is good? And how to implement SSR using vue3? In this article, we will explain everything you need about SSR.",
-  "content": "..."
+  "content": "...",
+  "thumbnailUr": "https://picsum.photos/640/480"
 }
 
 @articleId2 = {{CreateArticle2.response.body.$.data.newArticleId}}
