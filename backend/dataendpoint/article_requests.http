@@ -8,7 +8,7 @@ Content-Type: application/json
   "tagKeys": [ "cpp", "sdl" ],
   "summary": "In this article, we have introduced a way to use CMake to setup SDL2 in a C++ project.",
   "content": "...",
-  "thumbnailUr": "https://picsum.photos/640/480"
+  "thumbnailUrl": "https://picsum.photos/640/480"
 }
 
 @articleId1 = {{CreateArticle1.response.body.$.data.newArticleId}}
@@ -23,7 +23,7 @@ Content-Type: application/json
   "tagKeys": [ "javascript", "vue" ],
   "summary": "What is SSR? Why it is good? And how to implement SSR using vue3? In this article, we will explain everything you need about SSR.",
   "content": "...",
-  "thumbnailUr": "https://picsum.photos/640/480"
+  "thumbnailUrl": "https://picsum.photos/640/480"
 }
 
 @articleId2 = {{CreateArticle2.response.body.$.data.newArticleId}}
@@ -39,7 +39,8 @@ Content-Type: application/json
   "title": "How to Setup SDL2 in a C++ Project Using CMake",
   "tagKeys": [ "cpp", "sdl", "cmake" ],
   "summary": "In this article, we will introduce a way to setup SDL2 in a C++ project with CMake.",
-  "content": "updated"
+  "content": "updated",
+  "thumbnailUrl": "https://picsum.photos/800/600"
 }
 
 ### List all articles
