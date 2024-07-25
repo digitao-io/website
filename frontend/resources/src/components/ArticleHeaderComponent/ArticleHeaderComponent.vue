@@ -1,14 +1,25 @@
+<script setup lang="ts">
+
+export type ArticleHeaderComponentConfig = {
+  title: string;
+  createdAt: string;
+  summary: string;
+};
+
+const props = defineProps<{
+  config: ArticleHeaderComponentConfig;
+}>();
+</script>
+
 <template>
   <h1 class="blog-title">
-    [这里要写超大号标题]
+    {{ props.config.title }}
   </h1>
 
-  <p>Written on: <time class="blog-time">2024-07-24</time></p>
+  <p>Written on: <time class="blog-time">{{ props.config.createdAt }}</time></p>
 
   <p class="blog-summarize">
-    [这里要写一段文章的总结性文字] A website as a product is soulless. It is nothing else than a pile of text, pictures ...
-    However, the goal of website is making the data flow among the users, the business and the world. It is the
-    dataflow makes the website meaningful, thus alive, thus have a soul.
+    {{ props.config.summary }}
   </p>
   <hr>
 </template>
