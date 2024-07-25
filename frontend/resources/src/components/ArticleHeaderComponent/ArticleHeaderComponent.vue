@@ -19,6 +19,7 @@
    font-size: 48px;
    font-weight: bold;
    line-height: 48px;
+   color: var(--color-primary);
 }
 
 .blog-title{
