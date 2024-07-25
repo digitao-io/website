@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { computed } from "vue";
+import { DateTime } from "luxon";
 
 export type ArticleHeaderComponentConfig = {
   title: string;
@@ -9,55 +11,61 @@ export type ArticleHeaderComponentConfig = {
 const props = defineProps<{
   config: ArticleHeaderComponentConfig;
 }>();
+
+const writtenOn = computed(() =>
+  DateTime
+    .fromISO(props.config.createdAt)
+    .setZone("Europe/Berlin")
+    .setLocale("us")
+    .toLocaleString(DateTime.DATE_HUGE));
 </script>
 
 <template>
-  <h1 class="blog-title">
+  <h1 class="title">
     {{ props.config.title }}
   </h1>
 
-  <p>Written on: <time class="blog-time">{{ props.config.createdAt }}</time></p>
+  <p class="date">
+    Written on <time>{{ writtenOn }}</time>
+  </p>
 
-  <p class="blog-summarize">
+  <p class="summary">
     {{ props.config.summary }}
   </p>
   <hr>
 </template>
 
 <style scoped>
-.blog-title {
-   font-family: var(--font-raleway);
-   font-size: 48px;
-   font-weight: bold;
-   line-height: 48px;
-   color: var(--color-primary);
+.title {
+  margin: 0;
+  font-family: var(--font-raleway);
+  font-size: var(--font-size-xxxl);
+  line-height: var(--line-height-xxxl);
+  font-weight: bold;
 }
 
-.blog-title{
+.date {
+  margin: 32px 0 0 0;
   font-size: var(--font-size-s);
   line-height: var(--line-height-s);
-}
-
-.blog-summarize {
-  font-family: var(--font-open-sans);
-  font-size: 16px;
   font-weight: lighter;
   font-style: italic;
-  line-height: auto;
+}
+
+.summary {
+  margin: 36px 0 36px 0;
   color: var(--color-primary-s1);
+  font-family: var(--font-open-sans);
+  font-size: var(--font-size-m);
+  line-height: var(--line-height-m);
+  font-weight: lighter;
+  font-style: italic;
 }
 
 @media (min-width: 500px) {
-  .blog-title{
-    font-size: 64px;
-    line-height: 64px;
-  }
-}
-
-@media (min-width: 100px) {
-  .blog-title{
-    font-size: 64px;
-    line-height: 64px;
+  .title {
+    font-size: var(--font-size-max);
+    line-height: var(--line-height-max);
   }
 }
 </style>

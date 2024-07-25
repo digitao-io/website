@@ -16,8 +16,8 @@ export const Default: Story = {
     config: {
       title: "digiTAO: Organize the Dataflow",
       createdAt: "2024-07-24T23:46:10.249Z",
-      summary: "A website as a product is soulless. It is nothing else than a pile of text, pictures ..."
-      + "However, the goal of website is making the data flow among the users, the business and the world."
+      summary: "A website as a product is soulless. It is nothing else than a pile of text, pictures ... "
+      + "However, the goal of website is making the data flow among the users, the business and the world. "
       + "It is the dataflow makes the website meaningful, thus alive, thus have a soul.",
     },
   },

@@ -12,6 +12,10 @@
   --line-height-xl: 32px;
   --font-size-xxl: 40px;
   --line-height-xxl: 40px;
+  --font-size-xxxl: 48px;
+  --line-height-xxxl: 48px;
+  --font-size-max: 64px;
+  --line-height-max: 64px;
 
   --color-primary: #242424;
   --color-primary-t1: #484848;
