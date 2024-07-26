@@ -128,7 +128,6 @@ const toggleMenuActivated = () => {
 .footer {
   grid-area: footer;
   padding: 32px 16px;
-  color: var(--color-primary-t1);
   font-size: var(--font-size-s);
   line-height: var(--line-height-s);
 }
@@ -211,7 +210,7 @@ const toggleMenuActivated = () => {
 }
 
 .secondary-menu-link {
-  color: var(--color-primary-t1);
+  color: var(--color-primary);
 }
 .secondary-menu-link:hover {
   color: var(--color-primary-t2);

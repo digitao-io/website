@@ -19,3 +19,12 @@ export type ArticleExtra = {
   createdAt: string;
   updatedAt: string;
 };
+
+export type ArticleSearchQuery = {
+  q: string;
+  tag: string[];
+  sort: string;
+  order: string;
+  take: number;
+  skip: number;
+}
