@@ -24,100 +24,109 @@ const toggleMenuActivated = () => {
 </script>
 
 <template>
-  <div class="page-container">
-    <div class="header-container">
-      <header
-        class="header"
-        :class="{
-          'header-menu-activated': menuActivated,
-        }"
-      >
-        <div class="toolbar">
-          <div class="logo">
-            <svg
-              class="logo-svg"
-              viewBox="0 0 32 42"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path d="M21 21H31V41H1V11H21V21ZM21 21V31H11V21H21Z" />
-              <path d="M31 1H21V11H31V1Z" />
-            </svg>
+  <div class="page">
+    <header
+      class="header"
+      :class="{
+        'header-menu-activated': menuActivated,
+      }"
+    >
+      <div class="toolbar">
+        <div class="logo">
+          <svg
+            class="logo-svg"
+            viewBox="0 0 32 42"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path d="M21 21H31V41H1V11H21V21ZM21 21V31H11V21H21Z" />
+            <path d="M31 1H21V11H31V1Z" />
+          </svg>
 
-            <div class="logo-text">
-              digiTAO<br>Software
-            </div>
+          <div class="logo-text">
+            digiTAO<br>Software
           </div>
-
-          <default-template-menu-button
-            class="menu-button"
-            :activated="menuActivated"
-            @click="toggleMenuActivated"
-          />
         </div>
 
-        <nav
-          class="primary-menu"
-          :class="{
-            'primary-menu-menu-activated': menuActivated,
-          }"
-        >
-          <ul class="primary-menu-list">
-            <li
-              v-for="menuEntry of props.config.primaryMenuEntries"
-              :key="menuEntry.url"
-            >
-              <a
-                class="primary-menu-link"
-                :href="menuEntry.url"
-              >{{ menuEntry.label }}</a>
-            </li>
-          </ul>
-        </nav>
-      </header>
-    </div>
+        <default-template-menu-button
+          class="menu-button"
+          :activated="menuActivated"
+          @click="toggleMenuActivated"
+        />
+      </div>
 
-    <div class="content-container">
-      <main class="content">
-        <slot name="main" />
-      </main>
+      <nav
+        class="primary-menu"
+        :class="{
+          'primary-menu-menu-activated': menuActivated,
+        }"
+      >
+        <ul class="primary-menu-list">
+          <li
+            v-for="menuEntry of props.config.primaryMenuEntries"
+            :key="menuEntry.url"
+          >
+            <a
+              class="primary-menu-link"
+              :href="menuEntry.url"
+            >{{ menuEntry.label }}</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
 
-      <footer class="footer">
-        <hr>
+    <main class="content">
+      <slot name="main" />
+    </main>
 
-        <p class="copyright">
-          Except where otherwise noted, the website itself is licensed under GNU General Public License v3.0,
-          and the content of the website is licensed under Creative Commons Attribution 4.0 International (CC BY 4.0).
-        </p>
+    <footer class="footer">
+      <hr>
 
-        <nav class="secondary-menu">
-          <ul class="secondary-menu-list">
-            <li
-              v-for="menuEntry of props.config.secondaryMenuEntries"
-              :key="menuEntry.url"
-            >
-              <a
-                class="secondary-menu-link"
-                :href="menuEntry.url"
-              >{{ menuEntry.label }}</a>
-            </li>
-          </ul>
-        </nav>
-      </footer>
-    </div>
+      <p class="copyright">
+        Except where otherwise noted, the website itself is licensed under GNU General Public License v3.0,
+        and the content of the website is licensed under Creative Commons Attribution 4.0 International (CC BY 4.0).
+      </p>
+
+      <nav class="secondary-menu">
+        <ul class="secondary-menu-list">
+          <li
+            v-for="menuEntry of props.config.secondaryMenuEntries"
+            :key="menuEntry.url"
+          >
+            <a
+              class="secondary-menu-link"
+              :href="menuEntry.url"
+            >{{ menuEntry.label }}</a>
+          </li>
+        </ul>
+      </nav>
+    </footer>
   </div>
 </template>
 
 <style scoped>
+.page {
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: repeat(3, min-content);
+  grid-template-areas:
+    "header"
+    "content"
+    "footer";
+}
+
 .header {
+  grid-area: header;
   padding: 16px;
   color: var(--color-primary);
   background-color: transparent;
 }
 .content {
+  grid-area: content;
   padding: 16px;
 }
 .footer {
+  grid-area: footer;
   padding: 32px 16px;
   color: var(--color-primary-t1);
   font-size: var(--font-size-s);
@@ -209,9 +218,7 @@ const toggleMenuActivated = () => {
 }
 
 @media (min-width: 500px) {
-  .header,
-  .content,
-  .footer {
+  .page {
     margin: 0 auto;
     max-width: 800px;
   }
@@ -265,14 +272,20 @@ const toggleMenuActivated = () => {
 }
 
 @media (min-width: 1000px) {
-  .page-container {
-    display: flex;
-    justify-content: center;
+  .page {
+    grid-template-columns: 200px 1fr;
+    grid-template-rows: 1fr min-content;
+    grid-template-areas:
+      "header content"
+      "header footer";
+    margin: 0 auto;
+    max-width: 1000px;
   }
 
   .header {
-    padding-right: 114px;
-    width: 120px;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
   }
   .content {
     margin-top: 32px;

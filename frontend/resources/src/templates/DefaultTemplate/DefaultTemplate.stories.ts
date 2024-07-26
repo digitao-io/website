@@ -18,8 +18,7 @@ const meta: Meta<typeof DefaultTemplate> = {
     template: `
       <default-template :config="config">
         <template v-slot:["main"]>
-          <h1>Hello World!</h1>
-          <p>Example content of the slot.</p>
+          <p>Example content of the main slot.</p>
         </template>
       </default-template>
     `,
