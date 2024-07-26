@@ -1,17 +1,18 @@
 import type { Meta, StoryObj } from "@storybook/vue3";
 
-import { default as MarkdownComponent } from "./MarkdownComponent.vue";
+import { default as ArticleHeaderComponent } from "./ArticleComponent.vue";
 
-const meta: Meta<typeof MarkdownComponent> = {
-  title: "Components/MarkdownComponent",
-  component: MarkdownComponent,
+const meta: Meta<typeof ArticleHeaderComponent> = {
+  title: "Components/ArticleComponent",
+  component: ArticleHeaderComponent,
 };
 
 export default meta;
 
-type Story = StoryObj<typeof MarkdownComponent>;
+type Story = StoryObj<typeof ArticleHeaderComponent>;
 
-const markdown = `
+const content = `
+
 # H1 Shouldn't be Rendered
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam lectus nisi, aliquam a laoreet eu,
 lobortis facilisis quam. Nulla facilisi. Nulla facilisi. Fusce sodales aliquam sem id sollicitudin.
@@ -50,7 +51,24 @@ auctor:
 export const Default: Story = {
   args: {
     config: {
-      markdown,
+      article: {
+        id: "00000000-0000-0000-0000-000000000000",
+        title: "Goodbye Product, Hello Dataflow!",
+        tagKeys: ["cpp", "sdl"],
+        summary: "A website as a product is soulless. It is nothing else than a pile of text, pictures ... "
+        + "However, the goal of website is making the data flow among the users, the business and the world. "
+        + "It is the dataflow makes the website meaningful, thus alive, thus have a soul.",
+        content,
+        thumbnailUrl: "https://picsum.photos/1600/1200",
+        createdAt: "2024-07-26T07:09:29.584+02:00",
+        updatedAt: "2024-07-26T07:35:16.278+02:00",
+      },
+      tags: [
+        { key: "cpp", name: "C++" },
+        { key: "sdl", name: "SDL" },
+        { key: "vue", name: "Vue" },
+        { key: "js", name: "JavaScript" },
+      ],
     },
   },
 };

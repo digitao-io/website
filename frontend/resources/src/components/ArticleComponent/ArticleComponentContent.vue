@@ -7,12 +7,8 @@ import hljs from "highlight.js";
 
 import "highlight.js/styles/github.css";
 
-export type MarkdownComponentConfig = {
-  markdown: string;
-};
-
 const props = defineProps<{
-  config: MarkdownComponentConfig;
+  content: string;
 }>();
 
 const marked = new Marked(
@@ -25,13 +21,13 @@ const marked = new Marked(
   }),
 );
 
-const htmlContent = computed(() => marked.parse(props.config.markdown));
+const htmlContent = computed(() => marked.parse(props.content));
 </script>
 
 <template>
   <!-- eslint-disable vue/no-v-html -->
   <div
-    class="markdown-content"
+    class="article-content"
     v-html="htmlContent"
   />
   <!-- eslint-enable vue/no-v-html -->

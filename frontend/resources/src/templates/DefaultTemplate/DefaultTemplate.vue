@@ -213,7 +213,7 @@ const toggleMenuActivated = () => {
   .content,
   .footer {
     margin: 0 auto;
-    max-width: 850px;
+    max-width: 800px;
   }
   .header {
     padding-top: 36px;
