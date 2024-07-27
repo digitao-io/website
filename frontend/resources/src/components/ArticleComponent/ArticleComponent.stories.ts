@@ -58,7 +58,7 @@ const meta: Meta<typeof ArticleComponent> = {
 
 export default meta;
 
-type Story = StoryObj<typeof ArticleHeaderComponent>;
+type Story = StoryObj<typeof ArticleComponent>;
 
 export const Default: Story = {
   args: {
