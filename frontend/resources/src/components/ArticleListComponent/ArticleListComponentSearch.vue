@@ -44,13 +44,14 @@ const triggerSearch = () => {
 </script>
 
 <template>
-  <div class="article-search">
+  <div class="search-area">
     <div class="input-area">
       <input
         v-model="searchInputText"
         class="search-input"
         type="text"
         placeholder="Search an article"
+        size="10"
         @keyup.enter="triggerSearch()"
       >
       <button
@@ -93,16 +94,13 @@ const triggerSearch = () => {
 </template>
 
 <style scoped>
-.article-search {
-  margin-bottom: 60px;
-}
-
 .input-area {
   display: flex;
 }
 
 .search-input {
   flex-grow: 1;
+  flex-shrink: 0;
   border: 1px solid var(--color-primary);
   outline: 0;
   padding: 0 12px;
@@ -116,7 +114,7 @@ const triggerSearch = () => {
 .search-button {
   box-sizing: content-box;
   border: 1px solid var(--color-primary);
-  padding: 0 12px;
+  padding: 0 24px;
   height: 36px;
   color: var(--color-secondary);
   background-color: var(--color-primary);
@@ -142,7 +140,7 @@ const triggerSearch = () => {
   box-sizing: content-box;
   margin: 8px 0 4px 0;
   border: 1px solid var(--color-primary);
-  padding: 0 12px;
+  padding: 0 16px;
   height: 36px;
   font-family: var(--font-open-sans);
   font-weight: bold;
@@ -192,10 +190,6 @@ const triggerSearch = () => {
 }
 
 @media (min-width: 500px) {
-  .article-search {
-    margin-bottom: 80px;
-  }
-
   .tag-unselected {
     display: inline-block;
   }

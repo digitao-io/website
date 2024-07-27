@@ -11,7 +11,7 @@ const generateArticles = (): Article[] => [
     + "However, the goal of website is making the data flow among the users, the business and the world. "
     + "It is the dataflow makes the website meaningful, thus alive, thus have a soul.",
     content: "Not important here",
-    thumbnailUrl: "https://picsum.photos/640/480",
+    thumbnailUrl: `https://picsum.photos/640/480?random=${Math.floor(100 + Math.random() * 900)}`,
     createdAt: "2024-07-26T07:09:29.584+02:00",
     updatedAt: "2024-07-26T07:35:16.278+02:00",
   },
@@ -23,7 +23,7 @@ const generateArticles = (): Article[] => [
     + "laoreet eu, lobortis facilisis quam. Nulla facilisi. Nulla facilisi. Fusce sodales aliquam sem id "
     + "sollicitudin. Sed nulla dolor, egestas condimentum nulla eu, dapibus dictum lectus.",
     content: "Not important here",
-    thumbnailUrl: "https://picsum.photos/640/480",
+    thumbnailUrl: `https://picsum.photos/640/480?random=${Math.floor(100 + Math.random() * 900)}`,
     createdAt: "2024-07-25T07:09:29.584+02:00",
     updatedAt: "2024-07-25T07:35:16.278+02:00",
   },
@@ -35,7 +35,7 @@ const generateArticles = (): Article[] => [
     + "laoreet eu, lobortis facilisis quam. Nulla facilisi. Nulla facilisi. Fusce sodales aliquam sem id "
     + "sollicitudin. Sed nulla dolor, egestas condimentum nulla eu, dapibus dictum lectus.",
     content: "Not important here",
-    thumbnailUrl: "https://picsum.photos/640/480",
+    thumbnailUrl: `https://picsum.photos/640/480?random=${Math.floor(100 + Math.random() * 900)}`,
     createdAt: "2024-07-25T07:09:29.584+02:00",
     updatedAt: "2024-07-25T07:35:16.278+02:00",
   },
@@ -58,6 +58,18 @@ const meta: Meta<typeof ArticleListComponent> = {
       },
     ],
   },
+
+  render: (args) => ({
+    components: { ArticleListComponent },
+    setup() {
+      return args;
+    },
+    template: `
+      <div style="max-width: 800px;">
+        <article-list-component :config="config" />
+      </div>
+    `,
+  }),
 };
 
 export default meta;
@@ -69,6 +81,7 @@ export const Default: Story = {
     config: {
       showSearch: true,
       headingLevel: 2,
+      numberPerLoad: 3,
       articleBaseUrl: "https://example.org",
       tags: [
         { key: "cpp", name: "C++" },

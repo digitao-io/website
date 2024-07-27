@@ -69,26 +69,23 @@ const tagText = computed(() =>
 }
 
 .date {
-  margin-top: 32px;
+  margin: 32px 0 0 0;
 }
 
 .tags {
-  margin-top: 8px;
+  margin: 8px 0 0 0;
 }
 
 .thumbnail {
   display: block;
-  margin-top: 36px;
+  margin: 36px 0 0 0;
   width: 100%;
   max-height: 450px;
   object-fit: cover;
 }
 
 .summary {
-  margin-top: 36px;
-  margin-bottom: 36px;
-  color: var(--color-primary-s1);
-  font-family: var(--font-open-sans);
+  margin: 36px 0;
   font-size: var(--font-size-m);
   line-height: var(--line-height-m);
   font-weight: lighter;

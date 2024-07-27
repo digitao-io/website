@@ -1,15 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/vue3";
 
-import { default as ArticleHeaderComponent } from "./ArticleComponent.vue";
-
-const meta: Meta<typeof ArticleHeaderComponent> = {
-  title: "Components/ArticleComponent",
-  component: ArticleHeaderComponent,
-};
-
-export default meta;
-
-type Story = StoryObj<typeof ArticleHeaderComponent>;
+import { default as ArticleComponent } from "./ArticleComponent.vue";
 
 const content = `
 
@@ -47,6 +38,27 @@ auctor:
   * Sub-list point 2
 * Another point
 `;
+
+const meta: Meta<typeof ArticleComponent> = {
+  title: "Components/ArticleComponent",
+  component: ArticleComponent,
+
+  render: (args) => ({
+    components: { ArticleComponent },
+    setup() {
+      return args;
+    },
+    template: `
+      <div style="max-width: 800px;">
+        <article-component :config="config" />
+      </div>
+    `,
+  }),
+};
+
+export default meta;
+
+type Story = StoryObj<typeof ArticleHeaderComponent>;
 
 export const Default: Story = {
   args: {

@@ -17,24 +17,10 @@ const formatWrittenOn = (createdAt: string) =>
     .setLocale("us")
     .toLocaleString(DateTime.DATE_HUGE);
 
-const tagsText = function (keys: string[]) {
-  let tagText = "";
-  for (let i = 0; i < keys.length; i++) {
-    const key = keys[i];
-
-    for (let j = 0; j < props.tags.length; j++) {
-      if (key === props.tags[j].key) {
-        tagText += props.tags[j].name;
-        break;
-      }
-    }
-
-    if (i < keys.length - 1) {
-      tagText += " / ";
-    }
-  }
-  return tagText;
-};
+const generateTagsText = (keys: string[]): string => keys
+  .map((key) => props.tags.find((t) => t.key === key)!.name)
+  .sort((tag1, tag2) => tag1.localeCompare(tag2))
+  .join(", ");
 
 </script>
 
@@ -45,60 +31,102 @@ const tagsText = function (keys: string[]) {
       :key="article.id"
       class="article"
     >
-      <div>
-        <img
-          calss="thumbnail"
-          :src="article.thumbnailUrl"
-        >
-      </div>
+      <img
+        class="thumbnail"
+        :src="article.thumbnailUrl"
+      >
+
       <component
         :is="`h${props.headingLevel}`"
         class="title"
       >
         {{ article.title }}
       </component>
-      <div class="blog-content">
-        <div class="written-and-tags">
-          <p>Written on <time>{{ formatWrittenOn(article.createdAt) }}</time></p>
-          <p>Tags: {{ tagsText(article.tagKeys) }}</p>
-        </div>
 
-        <p class="summary">
-          {{ article.summary }}
-        </p>
-      </div>
-      <a :href="`${articleBaseUrl}/${article.id}`">[Read More 按钮]</a>
+      <p class="date">
+        Written on <time>{{ formatWrittenOn(article.createdAt) }}</time>
+      </p>
+      <p class="tags">
+        Tags: {{ generateTagsText(article.tagKeys) }}
+      </p>
+
+      <p class="summary">
+        {{ article.summary }}
+      </p>
+
+      <a
+        class="read-more-button"
+        :href="`${articleBaseUrl}/${article.id}`"
+      >READ MORE</a>
     </div>
   </div>
 </template>
 
 <style scoped>
+.article {
+  margin: 64px 0;
+}
+
 .thumbnail {
   display: block;
   width: 100%;
-  object-fit: fill;
+  max-height: 450px;
+  object-fit: cover;
 }
 
 .title {
+  margin: 16px 0 0 0;
   font-family: var(--font-raleway);
-  font-size: var(--font-size-xxl);
-  line-height: var(--line-height-xxl);
-  color: var(--color-primary-s1);
-  font-weight: bold;
+  font-size: var(--font-size-xl);
+  line-height: var(--line-height-xl);
 }
 
-.blog-content {
-  font-family: var(--font-open-sans);
-  font-weight: lighter;
-  color: var(--color-primary-s1);
-}
-
-.written-and-tags {
+.date,
+.tags {
   font-size: var(--font-size-s);
   line-height: var(--line-height-s);
+  font-weight: lighter;
 }
+
+.date {
+  margin: 16px 0 0 0;
+}
+
+.tags {
+  margin: 8px 0 0 0;
+}
+
 .summary {
-  font-size: 16px;
-  line-height: auto;
+  margin: 16px 0 0 0;
+  font-size: var(--font-size-m);
+  line-height: var(--line-height-m);
+  font-weight: lighter;
+}
+
+.read-more-button {
+  display: inline-flex;
+  align-items: center;
+  margin: 16px 0 0 0;
+  border: 1px solid var(--color-primary);
+  padding: 0 24px;
+  height: 36px;
+  color: var(--color-secondary);
+  background-color: var(--color-primary);
+  font-family: var(--font-open-sans);
+  font-weight: bold;
+  font-size: var(--font-size-s);
+  line-height: var(--line-height-s);
+  text-decoration: none;
+}
+.read-more-button:hover {
+  border-color: var(--color-primary-t1);
+  background-color: var(--color-primary-t1);
+}
+
+@media (min-width: 500px) {
+  .title {
+    font-size: var(--font-size-xxl);
+    line-height: var(--line-height-xxl);
+  }
 }
 </style>

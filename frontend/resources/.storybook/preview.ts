@@ -14,6 +14,9 @@ const preview: Preview = {
     mockAddonConfigs: {
       globalMockData: [],
       ignoreQueryParams: true,
+      refreshStoryOnUpdate: true,
+      disableUsingOriginal: false,
+      disable: true,
     },
     controls: {
       matchers: {
