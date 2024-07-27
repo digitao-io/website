@@ -44,6 +44,16 @@ func ArticleList(ctx *app.Context) gin.HandlerFunc {
 			)
 		}
 
+		if param.Type != nil && len(*param.Type) != 0 {
+			filter = append(
+				filter,
+				bson.E{
+					Key:   "type",
+					Value: *param.Type,
+				},
+			)
+		}
+
 		if param.Tags != nil && len(*param.Tags) != 0 {
 			filter = append(
 				filter,

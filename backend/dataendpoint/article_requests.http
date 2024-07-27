@@ -5,6 +5,7 @@ Content-Type: application/json
 
 {
   "title": "How to Setup SDL2 in a C++ Project",
+  "type": "page",
   "tagKeys": [ "cpp", "sdl" ],
   "summary": "In this article, we have introduced a way to use CMake to setup SDL2 in a C++ project.",
   "content": "...",
@@ -20,6 +21,7 @@ Content-Type: application/json
 
 {
   "title": "SSR with Vue Explained",
+  "type": "blog",
   "tagKeys": [ "javascript", "vue" ],
   "summary": "What is SSR? Why it is good? And how to implement SSR using vue3? In this article, we will explain everything you need about SSR.",
   "content": "...",
@@ -37,6 +39,7 @@ Content-Type: application/json
 
 {
   "title": "How to Setup SDL2 in a C++ Project Using CMake",
+  "type": "page",
   "tagKeys": [ "cpp", "sdl", "cmake" ],
   "summary": "In this article, we will introduce a way to setup SDL2 in a C++ project with CMake.",
   "content": "updated",
@@ -45,6 +48,9 @@ Content-Type: application/json
 
 ### List all articles
 POST http://localhost:3000/data/article-list?sort=createdAt&order=DESC&take=5&skip=0 HTTP/1.1
+
+### List articles filtered by type
+POST http://localhost:3000/data/article-list?type=blog&sort=createdAt&order=DESC&take=5&skip=0 HTTP/1.1
 
 ### List articles filtered by query
 POST http://localhost:3000/data/article-list?q=this%20article&sort=score&order=DESC&take=5&skip=0 HTTP/1.1

@@ -14,6 +14,7 @@ type ArticleIdentifier struct {
 
 type ArticleData struct {
 	Title        *string   `json:"title" bson:"title,omitempty"`
+	Type         *string   `json:"type" bson:"type,omitempty"`
 	TagKeys      *[]string `json:"tagKeys" bson:"tagKeys,omitempty"`
 	Summary      *string   `json:"summary" bson:"summary,omitempty"`
 	Content      *string   `json:"content" bson:"content,omitempty"`
@@ -27,6 +28,7 @@ type ArticleExtra struct {
 
 type ArticleSearchParams struct {
 	Query *string   `form:"q"`
+	Type  *string   `form:"type"`
 	Tags  *[]string `form:"tag"`
 
 	Sort  *string `form:"sort"`
