@@ -5,7 +5,6 @@ import (
 	"fmt"
 
 	"digitao.io/website/app"
-	_ "github.com/doug-martin/goqu/v9/dialect/mysql"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 )

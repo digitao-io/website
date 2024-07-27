@@ -6,7 +6,6 @@ import (
 
 	"digitao.io/website/app"
 	"digitao.io/website/datamodel"
-	_ "github.com/doug-martin/goqu/v9/dialect/mysql"
 	"github.com/gin-gonic/gin"
 	"github.com/google/uuid"
 )
