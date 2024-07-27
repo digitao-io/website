@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, ref } from "vue";
-import type { Tag } from "frontend-types/data/tag";
+import type { Tag } from "../../types/data/tag";
 
 const props = defineProps<{
   tags: Tag[];

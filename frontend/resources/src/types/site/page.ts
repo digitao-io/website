@@ -1,4 +1,4 @@
-import type { PageDetails } from "./data-resolving";
+import type { PageDetails } from "./page-details";
 
 export type Page = {
   title: string;

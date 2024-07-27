@@ -3,7 +3,7 @@ import type {
   ConfigResolvingInfo,
   ConfigValue,
   PageDetails,
-} from "frontend-types/site/data-resolving";
+} from "frontend-resources";
 import { PageDetailsResolvingCache } from "./page-details-resolving-cache";
 
 export type ConfigValueResolver = {

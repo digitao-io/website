@@ -41,7 +41,6 @@
     "@vue/tsconfig": "^0.5.1",
     "eslint": "^8.57.0",
     "eslint-plugin-vue": "^9.27.0",
-    "frontend-types": "file:../types",
     "my-eslint-rules": "github:path-undefined/my-eslint-rules",
     "storybook": "^8.2.5",
     "storybook-addon-mock": "^5.0.0",

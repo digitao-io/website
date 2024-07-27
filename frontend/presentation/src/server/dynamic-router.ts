@@ -1,7 +1,7 @@
 
 import express from "express";
 import type { Router } from "express";
-import type { Page } from "frontend-types/site/page";
+import type { Page } from "frontend-resources";
 import type { RenderFunction } from "../entry-server";
 import type { PageDetailsResolver } from "src/resolving/page-details-resolver";
 

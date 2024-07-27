@@ -1,7 +1,7 @@
-import type { ConfigResolvedValue } from "frontend-types/site/data-resolving";
-import { BackendResponseStatus } from "frontend-types/app/backend-response";
+import type { ConfigResolvedValue } from "frontend-resources";
+import { ResponseStatus } from "frontend-resources";
+import { sendHttpRequest } from "frontend-resources";
 import type { ConfigValueResolver } from "../page-details-resolver";
-import { sendHttpRequest } from "../../common/http-client";
 
 export const dataValueResolver: ConfigValueResolver = {
   sourceMatcher: ["data"],
@@ -18,7 +18,7 @@ export const dataValueResolver: ConfigValueResolver = {
       parameters,
     );
 
-    if (response.status !== BackendResponseStatus.OK) {
+    if (response.status !== ResponseStatus.OK) {
       return null;
     }
 

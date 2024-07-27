@@ -9,6 +9,7 @@ export type ArticleIdentifier = {
 
 export type ArticleData = {
   title: string;
+  type: string;
   tagKeys: string[];
   summary: string;
   content: string;
@@ -22,9 +23,10 @@ export type ArticleExtra = {
 
 export type ArticleSearchQuery = {
   q: string;
+  type: string;
   tag: string[];
   sort: string;
   order: string;
   take: number;
   skip: number;
-}
+};

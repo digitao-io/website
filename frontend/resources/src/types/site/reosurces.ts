@@ -10,8 +10,8 @@ export type ResourceIdentifier = {
 };
 
 export type ResourceDetails =
-| string
-| number
-| boolean
-| null
-| object;
+  | string
+  | number
+  | boolean
+  | null
+  | object;

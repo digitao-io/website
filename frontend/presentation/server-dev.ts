@@ -2,10 +2,10 @@ import fs from "node:fs/promises";
 import express from "express";
 import { createServer } from "vite";
 
-import type { Page } from "frontend-types/site/page";
-import { BackendResponseStatus } from "frontend-types/app/backend-response";
+import type { Page } from "frontend-resources";
+import { ResponseStatus } from "frontend-resources";
+import { sendHttpRequest } from "frontend-resources";
 
-import { sendHttpRequest } from "./src/common/http-client";
 import { RenderFunction } from "./src/entry-server";
 import { DynamicRouter } from "./src/server/dynamic-router";
 import { PageDetailsResolver } from "./src/resolving/page-details-resolver";
@@ -37,8 +37,8 @@ const BASE_URL = "/";
 
       const pages = await sendHttpRequest<undefined, undefined, Page[]>("http://localhost:3000", "/site/page-list");
 
-      if (pages.status !== BackendResponseStatus.OK) {
-        throw Error("HTTP Request Broken");
+      if (pages.status !== ResponseStatus.OK) {
+        throw Error("Cannot fetch pages for some unknown reason");
       }
 
       const render: RenderFunction = (await vite.ssrLoadModule("./src/entry-server.ts")).render;

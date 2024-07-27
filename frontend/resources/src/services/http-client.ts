@@ -1,13 +1,13 @@
 import axios from "axios";
 
-import { BackendResponseStatus, type BackendResponse } from "frontend-types/app/backend-response";
+import { ResponseStatus, type Response } from "../types/app/response";
 
 export async function sendHttpRequest<Q, B, R>(
   baseUrl: string,
   path: string,
   query?: Q,
   body?: B,
-): Promise<BackendResponse<R>> {
+): Promise<Response<R>> {
   try {
     const response = await axios({
       method: "POST",
@@ -22,7 +22,7 @@ export async function sendHttpRequest<Q, B, R>(
   } catch (e) {
     console.log(e);
     return {
-      status: BackendResponseStatus.UNKNOWN_ERROR,
+      status: ResponseStatus.UNKNOWN_ERROR,
     };
   }
 }

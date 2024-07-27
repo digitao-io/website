@@ -4,7 +4,8 @@ import App from "./App.vue";
 import {
 
   // Components:
-  MarkdownComponent,
+  ArticleComponent,
+  ArticleListComponent,
 
   // Templates:
   DefaultTemplate,
@@ -15,7 +16,8 @@ export function createApp() {
   const app = createSSRApp(App)
 
     // Components:
-    .component("markdown-component", MarkdownComponent)
+    .component("article-component", ArticleComponent)
+    .component("article-list-component", ArticleListComponent)
 
     // Templates:
     .component("default-template", DefaultTemplate);

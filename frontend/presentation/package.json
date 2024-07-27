@@ -4,8 +4,9 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "tsx server-dev",
-    "lint": "eslint ."
+    "dev": "npm run build-dependency && tsx server-dev",
+    "lint": "eslint .",
+    "build-dependency": "cd ../resources && npm run build && cd ../presentation && npm update frontend-resources"
   },
   "dependencies": {
     "axios": "^1.7.2",
@@ -24,7 +25,6 @@
     "eslint": "^8.57.0",
     "eslint-plugin-vue": "^9.27.0",
     "frontend-resources": "file:../resources",
-    "frontend-types": "file:../types",
     "my-eslint-rules": "github:path-undefined/my-eslint-rules",
     "tsx": "^4.16.2",
     "typescript": "^5.5.3",

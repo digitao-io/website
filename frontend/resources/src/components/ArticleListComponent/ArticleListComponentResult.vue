@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import type { Article } from "frontend-types/data/article";
-import type { Tag } from "frontend-types/data/tag";
+import type { Article } from "../../types/data/article";
+import type { Tag } from "../../types/data/tag";
 import { DateTime } from "luxon";
 
 const props = defineProps<{

@@ -1,7 +1,7 @@
 import type {
   ConfigResolvedValue,
   ConfigResolvingInfo,
-} from "frontend-types/site/data-resolving";
+} from "frontend-resources";
 import type { ConfigValueResolver } from "./page-details-resolver";
 
 export type CacheResult =

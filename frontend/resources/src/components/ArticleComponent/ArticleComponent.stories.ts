@@ -66,6 +66,7 @@ export const Default: Story = {
       article: {
         id: "00000000-0000-0000-0000-000000000000",
         title: "Goodbye Product, Hello Dataflow!",
+        type: "page",
         tagKeys: ["cpp", "sdl"],
         summary: "A website as a product is soulless. It is nothing else than a pile of text, pictures ... "
         + "However, the goal of website is making the data flow among the users, the business and the world. "

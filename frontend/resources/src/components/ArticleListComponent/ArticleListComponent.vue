@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import type { Article, ArticleSearchQuery } from "frontend-types/data/article";
-import type { Tag } from "frontend-types/data/tag";
-import { BackendResponseStatus } from "frontend-types/app/backend-response";
+import { ResponseStatus } from "../../types/app/response";
+import type { Article, ArticleSearchQuery } from "../../types/data/article";
+import type { Tag } from "../../types/data/tag";
 import { sendHttpRequest } from "../../services/http-client";
 import ArticleListComponentSearch from "./ArticleListComponentSearch.vue";
 import ArticleListComponentResult from "./ArticleListComponentResult.vue";
@@ -22,6 +22,7 @@ const props = defineProps<{
 
 const articles = ref(props.config.articles);
 const currentSearchQuery = ref({
+  type: "blog",
   q: "",
   tag: [],
   sort: "createdAt",
@@ -35,6 +36,7 @@ const searchArticles = async (searchQuery: { q: string; tagKeys: string[] }) => 
   articles.value = [];
 
   const urlQuery: ArticleSearchQuery = {
+    type: "blog",
     q: searchQuery.q,
     tag: searchQuery.tagKeys,
     sort: searchQuery.q ? "score" : "createdAt",
@@ -52,7 +54,7 @@ const searchArticles = async (searchQuery: { q: string; tagKeys: string[] }) => 
     urlQuery,
   );
 
-  if (responseBody.status !== BackendResponseStatus.OK) {
+  if (responseBody.status !== ResponseStatus.OK) {
     return;
   }
 
@@ -76,7 +78,7 @@ const loadMoreArticles = async () => {
     urlQuery,
   );
 
-  if (responseBody.status !== BackendResponseStatus.OK) {
+  if (responseBody.status !== ResponseStatus.OK) {
     return;
   }
 

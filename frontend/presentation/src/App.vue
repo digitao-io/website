@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { useSSRContext } from "vue";
 
-const ctx = import.meta.env.SSR
-  ? useSSRContext()
-  : window.context;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const ctx = import.meta.env.SSR ? useSSRContext() : (window as any).context;
+
 const pageDetails = ctx.pageDetails;
 const slots = Object.keys(pageDetails.slots);
 const componentDetailsArrayBySlot = ctx.pageDetails.slots;
