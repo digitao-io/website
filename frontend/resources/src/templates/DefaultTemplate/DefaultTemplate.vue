@@ -284,10 +284,11 @@ const toggleMenuActivated = () => {
   .header {
     display: flex;
     flex-direction: column;
-    align-items: start;
+    align-items: end;
+    padding-right: 80px;
   }
   .content {
-    margin-top: 32px;
+    margin-top: 56px;
   }
 
   .toolbar {

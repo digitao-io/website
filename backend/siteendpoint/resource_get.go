@@ -12,11 +12,6 @@ import (
 
 func ResourceGet(ctx *app.Context) gin.HandlerFunc {
 	return func(g *gin.Context) {
-		if !app.CheckPermission(g, ctx.Configuration) {
-			app.ResponseWithAuthenticationFailed(g)
-			return
-		}
-
 		param := sitemodel.ResourceIdentifier{}
 		err := g.ShouldBindQuery(&param)
 		if err != nil {

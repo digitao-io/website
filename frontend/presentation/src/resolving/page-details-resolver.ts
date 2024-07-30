@@ -98,6 +98,10 @@ export class PageDetailsResolver {
     return this;
   }
 
+  public clearCache() {
+    this.cache.clearAllCache();
+  }
+
   public async resolve(pageContext: PageContext, pageDetails: PageDetails): Promise<ResolvedPageDetails> {
     const resolvedLanguageAndTitle = await this.resolveConfig(
       pageContext,
@@ -156,13 +160,12 @@ export class PageDetailsResolver {
     resolvingInfo: ConfigResolvingInfo,
   ): Promise<ConfigResolvedValue> {
     let currentLookup: ConfigValueResolver | ConfigValueResolverLookup = this.resolverLookup;
-
     for (const lookupKey of resolvingInfo.source) {
-      if (!this.resolverLookup[lookupKey]) {
+      if (!currentLookup[lookupKey]) {
         return null;
       }
 
-      currentLookup = this.resolverLookup[lookupKey];
+      currentLookup = currentLookup[lookupKey];
       if (isConfigValueResolver(currentLookup)) {
         break;
       }

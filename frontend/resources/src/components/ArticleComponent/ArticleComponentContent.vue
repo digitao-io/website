@@ -61,6 +61,10 @@ const htmlContent = computed(() => marked.parse(props.content));
   line-height: var(--line-height-l);
 }
 
+:deep(strong) {
+  font-weight: 600;
+}
+
 :deep(code) {
   font-size: var(--font-size-m);
   background-color: var(--color-secondary);

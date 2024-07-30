@@ -4,18 +4,23 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "npm run build-dependency && tsx server-dev",
+    "dev": "SERVICE_CONFIG_PATH=./config.test.json tsx server-dev",
     "lint": "eslint .",
+    "build": "vite build --ssrManifest --outDir dist/client && vite build --ssr ./server.ts --outDir dist/server",
     "build-dependency": "cd ../resources && npm run build && cd ../presentation && npm update frontend-resources"
   },
   "dependencies": {
     "axios": "^1.7.2",
+    "compression": "^1.7.4",
     "express": "^4.19.2",
+    "helmet": "^7.1.0",
+    "sirv": "^2.0.4",
     "vue": "^3.4.33"
   },
   "devDependencies": {
     "@stylistic/eslint-plugin": "^2.3.0",
     "@tsconfig/node20": "^20.1.4",
+    "@types/compression": "^1.7.5",
     "@types/express": "^4.17.21",
     "@types/mustache": "^4.2.5",
     "@types/node": "^20.14.11",

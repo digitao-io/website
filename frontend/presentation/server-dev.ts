@@ -1,28 +1,33 @@
-import fs from "node:fs/promises";
+import { readFile } from "node:fs/promises";
 import express from "express";
 import { createServer } from "vite";
 
-import type { Page } from "frontend-resources";
-import { ResponseStatus } from "frontend-resources";
-import { sendHttpRequest } from "frontend-resources";
+import { readConfig } from "./src/server/config-reader";
+import { fetchPages } from "./src/server/page-fetcher";
 
 import { RenderFunction } from "./src/entry-server";
 import { DynamicRouter } from "./src/server/dynamic-router";
-import { PageDetailsResolver } from "./src/resolving/page-details-resolver";
-import { dataValueResolver } from "./src/resolving/resolvers/data-value-resolver";
 
-const BASE_URL = "/";
+import { PageDetailsResolver } from "./src/resolving/page-details-resolver";
+import { articleListValueResolver } from "./src/resolving/resolvers/article-list-value-resolver";
+import { articleValueResolver } from "./src/resolving/resolvers/article-value-resolver";
+import { resourceValueResolver } from "./src/resolving/resolvers/resource-value-resolver";
+import { tagValueResolver } from "./src/resolving/resolvers/tag-value-resolver";
 
 (async () => {
+  const config = readConfig();
   const app = express();
   const dynamicRouter = new DynamicRouter();
   const pageDetailsResolver = new PageDetailsResolver()
-    .with(dataValueResolver);
+    .with(articleListValueResolver)
+    .with(articleValueResolver)
+    .with(resourceValueResolver)
+    .with(tagValueResolver);
 
   const vite = await createServer({
     server: { middlewareMode: true },
     appType: "custom",
-    base: BASE_URL,
+    base: config.pageBaseUrl,
   });
 
   app.use(vite.middlewares);
@@ -30,20 +35,16 @@ const BASE_URL = "/";
   app.use(
     "*",
     async (req, _, next) => {
-      const url = req.originalUrl.replace(BASE_URL, "");
+      const url = req.originalUrl.replace(config.pageBaseUrl, "");
 
-      const originalHtml = await fs.readFile("./public/index.html", "utf-8");
+      const originalHtml = await readFile("./index.html", { encoding: "utf8" });
       const htmlTemplate = await vite.transformIndexHtml(url, originalHtml);
-
-      const pages = await sendHttpRequest<undefined, undefined, Page[]>("http://localhost:3000", "/site/page-list");
-
-      if (pages.status !== ResponseStatus.OK) {
-        throw Error("Cannot fetch pages for some unknown reason");
-      }
 
       const render: RenderFunction = (await vite.ssrLoadModule("./src/entry-server.ts")).render;
 
-      dynamicRouter.buildRoutes(pages.data, pageDetailsResolver, render, htmlTemplate);
+      const pages = await fetchPages(config);
+
+      dynamicRouter.buildRoutes(config, pages, pageDetailsResolver, render, htmlTemplate);
 
       next();
     },
@@ -53,7 +54,7 @@ const BASE_URL = "/";
     dynamicRouter.getRouter()(req, res, next);
   });
 
-  app.listen(8080, () => {
-    console.log("Server started at http://localhost:8080");
+  app.listen(config.port, () => {
+    console.log(`Server started at http://localhost:${config.port}`);
   });
 })();

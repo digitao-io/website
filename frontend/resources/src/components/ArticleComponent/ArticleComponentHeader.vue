@@ -19,6 +19,7 @@ const writtenOn = computed(() =>
     .setLocale("us")
     .toLocaleString(DateTime.DATE_HUGE));
 
+const hasTags = computed(() => props.tagKeys.length !== 0);
 const tagText = computed(() =>
   props.tagKeys
     .map((tagKey) => props.tags.find((tag) => tag.key === tagKey)!.name)
@@ -35,12 +36,16 @@ const tagText = computed(() =>
       Written on <time>{{ writtenOn }}</time>
     </p>
 
-    <p class="tags">
+    <p
+      v-if="hasTags"
+      class="tags"
+    >
       Tags: {{ tagText }}
     </p>
 
     <img
       class="thumbnail"
+      crossorigin="anonymous"
       :src="thumbnailUrl"
     >
 
@@ -80,7 +85,7 @@ const tagText = computed(() =>
   display: block;
   margin: 36px 0 0 0;
   width: 100%;
-  max-height: 450px;
+  max-height: 400px;
   object-fit: cover;
 }
 
@@ -88,7 +93,6 @@ const tagText = computed(() =>
   margin: 36px 0;
   font-size: var(--font-size-m);
   line-height: var(--line-height-m);
-  font-weight: lighter;
   font-style: italic;
 }
 

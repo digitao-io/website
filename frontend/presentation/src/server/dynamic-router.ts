@@ -4,6 +4,7 @@ import type { Router } from "express";
 import type { Page } from "frontend-resources";
 import type { RenderFunction } from "../entry-server";
 import type { PageDetailsResolver } from "src/resolving/page-details-resolver";
+import type { Config } from "./config-reader";
 
 export class DynamicRouter {
   private router: Router;
@@ -12,15 +13,21 @@ export class DynamicRouter {
     this.router = express.Router();
   }
 
-  public buildRoutes(pages: Page[], resolver: PageDetailsResolver, render: RenderFunction, htmlTemplate: string) {
+  public buildRoutes(
+    config: Config,
+    pages: Page[],
+    resolver: PageDetailsResolver,
+    render: RenderFunction,
+    htmlTemplate: string,
+  ) {
     for (const page of pages) {
       const { urlPattern, details } = page;
 
       this.router.get(urlPattern, async (req, res) => {
         try {
           const resolvedPageDetails = await resolver.resolve({
-            apiBaseUrl: "http://localhost:3000",
-            pageBaseUrl: "http://localhost:8080",
+            apiBaseUrl: config.apiBaseUrl,
+            pageBaseUrl: config.pageBaseUrl,
             pageUrlPath: req.path,
             pageUrlParams: req.params,
             pageUrlQueries: req.query as Record<string, string | string[]>,

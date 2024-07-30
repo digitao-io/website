@@ -70,7 +70,7 @@ const generateTagsText = (keys: string[]): string => keys
 .thumbnail {
   display: block;
   width: 100%;
-  max-height: 450px;
+  max-height: 400px;
   object-fit: cover;
 }
 

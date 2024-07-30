@@ -1,0 +1,19 @@
+{
+	"folders": [
+		{
+			"path": "backend"
+		},
+		{
+			"path": "database"
+		},
+		{
+			"path": "devenv"
+		},
+		{
+			"path": "frontend/presentation"
+		},
+		{
+			"path": "frontend/resources"
+		}
+	]
+}

@@ -34,13 +34,19 @@ export class PageDetailsResolvingCache {
     this.cachedValue = {};
   }
 
+  public clearAllCache() {
+    for (const key of Object.keys(this.cachedValue)) {
+      delete this.cachedValue[key];
+    }
+  }
+
   public clearCacheValuesAfterResolving() {
     for (const [key, entry] of Object.entries(this.cachedValue)) {
       if (entry.type === "resolve") {
         delete this.cachedValue[key];
       }
 
-      if (entry.type === "time" && Date.now() > entry.expiredAt) {
+      if (entry.type === "time" && this.getCurrentTimeInSecs() > entry.expiredAt) {
         delete this.cachedValue[key];
       }
     }
@@ -67,7 +73,7 @@ export class PageDetailsResolvingCache {
       case "time":
         this.cachedValue[cacheKey] = {
           type: "time",
-          expiredAt: Date.now() + resolver.cacheOption.timeToLive,
+          expiredAt: this.getCurrentTimeInSecs() + resolver.cacheOption.timeToLive,
           value,
         };
         break;
@@ -103,7 +109,7 @@ export class PageDetailsResolvingCache {
 
     switch (cacheEntry.type) {
       case "time":
-        if (Date.now() > cacheEntry.expiredAt) {
+        if (this.getCurrentTimeInSecs() > cacheEntry.expiredAt) {
           return { hit: true, value: cacheEntry.value };
         } else {
           return { hit: false };
@@ -113,5 +119,9 @@ export class PageDetailsResolvingCache {
       default:
         return { hit: false };
     }
+  }
+
+  private getCurrentTimeInSecs() {
+    return Math.floor(Date.now() / 1000);
   }
 }
