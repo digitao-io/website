@@ -3,6 +3,30 @@ import { ref } from "vue";
 
 const username = ref("");
 const password = ref("");
+
+async function loginFetch() {
+  const loginUrl = "http://localhost:3000/site/user-login";
+
+  try {
+    const response = await fetch(loginUrl, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        username: username.value,
+        password: password.value,
+      }),
+    });
+
+    if (!response.ok) {
+      throw new Error("login failed!");
+    }
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 </script>
 <template>
   <div class="from-table">
@@ -19,7 +43,9 @@ const password = ref("");
       type="password"
       placeholder="password"
     >
-    <button>Login</button>
+    <button @click="loginFetch">
+      Login
+    </button>
   </div>
 </template>
 
