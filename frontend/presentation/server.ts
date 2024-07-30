@@ -30,8 +30,6 @@ import { tagValueResolver } from "./src/resolving/resolvers/tag-value-resolver";
     .with(tagValueResolver);
 
   const dynamicRouter = new DynamicRouter();
-  const pages = await fetchPages(config);
-  dynamicRouter.buildRoutes(config, pages, pageDetailsResolver, render, htmlTemplate);
 
   app.use(helmet({
     contentSecurityPolicy: {
@@ -41,8 +39,9 @@ import { tagValueResolver } from "./src/resolving/resolvers/tag-value-resolver";
       },
     },
   }));
+
   app.use(compression());
-  app.use(config.pageBaseUrl, sirv("./dist/client", { extensions: [] }));
+  app.use("/", sirv("./dist/client", { extensions: [] }));
 
   app.post("/maintenance/cache-clear", (_, res) => {
     pageDetailsResolver.clearCache();
@@ -60,7 +59,7 @@ import { tagValueResolver } from "./src/resolving/resolvers/tag-value-resolver";
     res.json({ status: ResponseStatus.OK });
   });
 
-  app.get(config.pageBaseUrl, (req, res, next) => {
+  app.get("/", (req, res, next) => {
     dynamicRouter.getRouter()(req, res, next);
   });
 

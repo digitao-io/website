@@ -13,6 +13,7 @@
     "axios": "^1.7.2",
     "compression": "^1.7.4",
     "express": "^4.19.2",
+    "frontend-resources": "file:../resources",
     "helmet": "^7.1.0",
     "sirv": "^2.0.4",
     "vue": "^3.4.33"
@@ -28,7 +29,6 @@
     "@vue/tsconfig": "^0.5.1",
     "eslint": "^8.57.0",
     "eslint-plugin-vue": "^9.27.0",
-    "frontend-resources": "file:../resources",
     "my-eslint-rules": "github:path-undefined/my-eslint-rules",
     "tsx": "^4.16.2",
     "typescript": "^5.5.3",

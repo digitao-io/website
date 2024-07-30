@@ -18,13 +18,13 @@ func UserLogin(ctx *app.Context) gin.HandlerFunc {
 			app.ResponseWithParseError(g, "Cannot parse request body")
 		}
 
+		hashBytes := sha256.Sum256([]byte(*data.Password))
+		hashStr := base64.URLEncoding.EncodeToString(hashBytes[:])
+
 		for _, user := range ctx.Configuration.Users {
 			if user.Username != *data.Username {
 				continue
 			}
-
-			hashBytes := sha256.Sum256([]byte(*data.Password))
-			hashStr := base64.URLEncoding.EncodeToString(hashBytes[:])
 
 			if user.PasswordHash != hashStr {
 				continue

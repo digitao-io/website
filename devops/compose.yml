@@ -1,0 +1,31 @@
+services:
+
+  database:
+    image: mongo:latest
+    ports:
+      - 27017:27017
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=7MNMjYjae8Vy
+    volumes:
+      - ./database_data:/data/db
+
+  objstorage:
+    image: quay.io/minio/minio:latest
+    ports:
+      - 9000:9000
+    command: server /data
+    environment:
+      - MINIO_ROOT_USER=root
+      - MINIO_ROOT_PASSWORD=mgqyUJ3PhNkP
+      - MINIO_DEFAULT_BUCKETS=website_test
+    volumes:
+      - ./objectstorage_data:/data
+
+  backend:
+    ports:
+      - 3000:3000
+
+  frontend:
+    ports:
+      - 8080:8080
