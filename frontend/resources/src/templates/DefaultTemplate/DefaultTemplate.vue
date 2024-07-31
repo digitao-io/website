@@ -189,7 +189,6 @@ const toggleMenuActivated = () => {
   text-decoration: none;
   text-transform: uppercase;
   border-bottom: 0;
-  transition: 0.3s;
 }
 .primary-menu-link:hover {
   color: var(--color-secondary-s2);

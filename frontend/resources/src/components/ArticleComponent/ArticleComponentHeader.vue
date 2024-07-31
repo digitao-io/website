@@ -83,8 +83,8 @@ const tagText = computed(() =>
 
 .thumbnail {
   display: block;
-  margin: 36px 0 0 0;
-  width: 100%;
+  margin: 36px -16px 0 -16px;
+  width: calc(100% + 32px);
   max-height: 400px;
   object-fit: cover;
 }
@@ -100,6 +100,11 @@ const tagText = computed(() =>
   .title {
     font-size: var(--font-size-max);
     line-height: var(--line-height-max);
+  }
+
+  .thumbnail {
+    margin: 36px 0 0 0;
+    width: 100%;
   }
 }
 </style>

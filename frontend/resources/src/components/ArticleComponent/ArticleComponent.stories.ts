@@ -14,6 +14,8 @@ eget nulla vulputate, euismod mi id, aliquam lacus. Pellentesque congue dolor in
 Aliquam nec orci vitae erat convallis interdum sed eget nibh. Nam mi neque, tempor a nulla rhoncus,
 faucibus placerat elit.
 
+Usually, the link is blended in the text. [And there is a link](https://example.org) as promised.
+
 ## Another Headline H2
 ### Another Headline H3
 #### Another Headline H4

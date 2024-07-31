@@ -1,7 +1,13 @@
 FROM node:20-alpine
 
-COPY ./frontend/presentation /app/presentation
 COPY ./frontend/resources /app/resources
+
+WORKDIR /app/resources
+
+RUN npm install
+RUN npm run build
+
+COPY ./frontend/presentation /app/presentation
 
 WORKDIR /app/presentation
 

@@ -20,6 +20,8 @@ export class DynamicRouter {
     render: RenderFunction,
     htmlTemplate: string,
   ) {
+    this.router = express.Router();
+
     for (const page of pages) {
       const { urlPattern, details } = page;
 

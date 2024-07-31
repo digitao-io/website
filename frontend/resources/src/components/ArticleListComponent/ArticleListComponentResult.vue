@@ -69,7 +69,8 @@ const generateTagsText = (keys: string[]): string => keys
 
 .thumbnail {
   display: block;
-  width: 100%;
+  margin: 0 -16px 0 -16px;
+  width: calc(100% + 32px);
   max-height: 400px;
   object-fit: cover;
 }
@@ -127,6 +128,11 @@ const generateTagsText = (keys: string[]): string => keys
   .title {
     font-size: var(--font-size-xxl);
     line-height: var(--line-height-xxl);
+  }
+
+  .thumbnail {
+    margin: 0;
+    width: 100%;
   }
 }
 </style>

@@ -69,4 +69,12 @@ const htmlContent = computed(() => marked.parse(props.content));
   font-size: var(--font-size-m);
   background-color: var(--color-secondary);
 }
+
+:deep(a) {
+  font-weight: 600;
+  color: var(--color-primary);
+}
+:deep(a):hover {
+  color: var(--color-primary-t2);
+}
 </style>

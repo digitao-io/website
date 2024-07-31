@@ -59,7 +59,7 @@ import { tagValueResolver } from "./src/resolving/resolvers/tag-value-resolver";
     res.json({ status: ResponseStatus.OK });
   });
 
-  app.get("/", (req, res, next) => {
+  app.use("/", (req, res, next) => {
     dynamicRouter.getRouter()(req, res, next);
   });
 
