@@ -5,7 +5,7 @@ const username = ref("");
 const password = ref("");
 
 async function loginFetch() {
-  const loginUrl = "http://localhost:3000/site/user-login";
+  const loginUrl = "http://localhost:5173/site/user-login";
 
   try {
     const response = await fetch(loginUrl, {
