@@ -15,7 +15,8 @@ func UserLogin(ctx *app.Context) gin.HandlerFunc {
 		data := sitemodel.LoginRequest{}
 		err := g.ShouldBindJSON(&data)
 		if err != nil {
-			app.ResponseWithParseError(g, "Cannot parse request body")
+			app.ResponseWithValidationFailed(g, "Invalid request body")
+			return
 		}
 
 		hashBytes := sha256.Sum256([]byte(*data.Password))

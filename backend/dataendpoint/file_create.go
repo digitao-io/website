@@ -21,7 +21,7 @@ func FileCreate(ctx *app.Context) gin.HandlerFunc {
 		data := datamodel.FileData{}
 		err := g.ShouldBindJSON(&data)
 		if err != nil {
-			app.ResponseWithParseError(g, "Cannot parse request body")
+			app.ResponseWithValidationFailed(g, "Invalid request body")
 			return
 		}
 

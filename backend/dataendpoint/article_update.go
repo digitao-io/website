@@ -20,14 +20,14 @@ func ArticleUpdate(ctx *app.Context) gin.HandlerFunc {
 		param := datamodel.ArticleIdentifier{}
 		err := g.ShouldBindQuery(&param)
 		if err != nil {
-			app.ResponseWithParseError(g, "Cannot parse request query parameters")
+			app.ResponseWithValidationFailed(g, "Invalid URL query")
 			return
 		}
 
 		data := datamodel.ArticleData{}
 		err = g.ShouldBindJSON(&data)
 		if err != nil {
-			app.ResponseWithParseError(g, "Cannot parse request body")
+			app.ResponseWithValidationFailed(g, "Invalid request body")
 			return
 		}
 

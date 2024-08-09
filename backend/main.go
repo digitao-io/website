@@ -40,6 +40,8 @@ func main() {
 
 	r := gin.Default()
 
+	setup.SetupValidator()
+
 	siteendpoint.SetupRoutes(&ctx, r)
 	dataendpoint.SetupRoutes(&ctx, r)
 

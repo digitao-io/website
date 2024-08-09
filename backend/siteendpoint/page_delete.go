@@ -19,7 +19,7 @@ func PageDelete(ctx *app.Context) gin.HandlerFunc {
 		param := sitemodel.PageIdentifier{}
 		err := g.ShouldBindQuery(&param)
 		if err != nil {
-			app.ResponseWithParseError(g, "Cannot parse request query parameters")
+			app.ResponseWithValidationFailed(g, "Invalid URL query")
 			return
 		}
 

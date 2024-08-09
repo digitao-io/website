@@ -18,7 +18,7 @@ func ResourceCreate(ctx *app.Context) gin.HandlerFunc {
 		data := sitemodel.Resource{}
 		err := g.ShouldBindJSON(&data)
 		if err != nil {
-			app.ResponseWithParseError(g, "Cannot parse request body")
+			app.ResponseWithValidationFailed(g, "Invalid request body")
 			return
 		}
 

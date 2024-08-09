@@ -30,7 +30,7 @@ Content-Type: application/json
   "key": "new-home",
   "title": "New Home Page",
   "description": "The updated home page of the website",
-  "urlPattern": "/new-home",
+  "urlPattern": "/article/:articleId",
   "details": {
     "message": "this is updated"
   }

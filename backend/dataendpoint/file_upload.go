@@ -22,12 +22,12 @@ func FileUpload(ctx *app.Context) gin.HandlerFunc {
 
 		file, err := g.FormFile("file")
 		if err != nil {
-			app.ResponseWithParseError(g, "Cannot read file")
+			app.ResponseWithValidationFailed(g, "Cannot read file")
 			return
 		}
 		fileReader, err := file.Open()
 		if err != nil {
-			app.ResponseWithParseError(g, "Cannot read file")
+			app.ResponseWithValidationFailed(g, "Cannot read file")
 			return
 		}
 		defer fileReader.Close()

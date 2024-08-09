@@ -20,7 +20,7 @@ func FileGet(ctx *app.Context) gin.HandlerFunc {
 		param := datamodel.FileIdentifier{}
 		err := g.ShouldBindQuery(&param)
 		if err != nil {
-			app.ResponseWithParseError(g, "Cannot parse request query parameters")
+			app.ResponseWithValidationFailed(g, "Invalid URL query")
 			return
 		}
 

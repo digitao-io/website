@@ -9,16 +9,16 @@ type Article struct {
 }
 
 type ArticleIdentifier struct {
-	Id *string `json:"id" form:"id" bson:"_id,omitempty"`
+	Id *string `json:"id" form:"id" bson:"_id,omitempty" binding:"required,uuid"`
 }
 
 type ArticleData struct {
-	Title        *string   `json:"title" bson:"title,omitempty"`
-	Type         *string   `json:"type" bson:"type,omitempty"`
-	TagKeys      *[]string `json:"tagKeys" bson:"tagKeys,omitempty"`
-	Summary      *string   `json:"summary" bson:"summary,omitempty"`
-	Content      *string   `json:"content" bson:"content,omitempty"`
-	ThumbnailUrl *string   `json:"thumbnailUrl" bson:"thumbnailUrl,omitempty"`
+	Title        *string   `json:"title" bson:"title,omitempty" binding:"required,min=1"`
+	Type         *string   `json:"type" bson:"type,omitempty" binding:"required,min=1"`
+	TagKeys      *[]string `json:"tagKeys" bson:"tagKeys,omitempty" binding:"required,unique,dive,min=1"`
+	Summary      *string   `json:"summary" bson:"summary,omitempty" binding:"required,min=1"`
+	Content      *string   `json:"content" bson:"content,omitempty" binding:"required,min=1"`
+	ThumbnailUrl *string   `json:"thumbnailUrl" bson:"thumbnailUrl,omitempty" binding:"required,http_url"`
 }
 
 type ArticleExtra struct {
@@ -27,13 +27,13 @@ type ArticleExtra struct {
 }
 
 type ArticleSearchParams struct {
-	Query *string   `form:"q"`
-	Type  *string   `form:"type"`
-	Tags  *[]string `form:"tag"`
+	Query *string   `form:"q" binding:"omitnil,min=1"`
+	Type  *string   `form:"type" binding:"omitnil,min=1"`
+	Tags  *[]string `form:"tag" binding:"omitnil,unique,dive,min=1"`
 
-	Sort  *string `form:"sort"`
-	Order *string `form:"order"`
+	Sort  *string `form:"sort" binding:"required"`
+	Order *string `form:"order" binding:"required,oneof=ASC DESC"`
 
-	Skip *int64 `form:"skip"`
-	Take *int64 `form:"take"`
+	Take *int64 `form:"take" binding:"required,gt=0"`
+	Skip *int64 `form:"skip" binding:"required,gte=0"`
 }

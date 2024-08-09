@@ -26,13 +26,6 @@ func ResponseWithData(g *gin.Context, data any) {
 	})
 }
 
-func ResponseWithParseError(g *gin.Context, err string) {
-	g.AbortWithStatusJSON(200, gin.H{
-		"status": STATUS_PARSE_ERROR,
-		"error":  err,
-	})
-}
-
 func ResponseWithValidationFailed(g *gin.Context, err string) {
 	g.AbortWithStatusJSON(200, gin.H{
 		"status": STATUS_VALIDATION_FAILED,
