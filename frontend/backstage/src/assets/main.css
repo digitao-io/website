@@ -1,0 +1,69 @@
+/* Reset */
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+/* Tokens */
+:root {
+  --color-flavor-1: #c5b46b;
+  --color-flavor-1-t1: #dfc96a;
+  --color-flavor-1-t2: #ebdda2;
+  --color-flavor-2: #d1676b;
+  --color-content-light: #ffffff;
+  --color-content-dark: #424b54;
+
+  --color-bg: var(--color-content-light);
+  --color-bg-dark: var(--color-content-dark);
+  --color-bg-flavor: var(--color-flavor-1);
+  --color-bg-flavor-t: var(--color-flavor-1-t2);
+  --color-text: var(--color-content-dark);
+  --color-text-light: var(--color-content-light);
+
+  --font-family-content: "Roboto", sans-serif;
+
+  --font-weight-r: 400;
+  --font-weight-m: 500;
+  --font-weight-b: 700;
+
+  --font-size-s: 12px;
+  --font-size-m: 16px;
+  --font-size-l: 20px;
+
+  --line-height-m: 1.5;
+
+  --margin-s: 8px;
+  --margin-m: 16px;
+  --margin-l: 32px;
+
+  --border-xs: 1px;
+  --border-s: 2px;
+  --border-m: 4px;
+  --border-l: 8px;
+
+  --padding-s: 8px;
+  --padding-m: 16px;
+}
+
+/* Global Styles */
+body {
+  color: var(--color-text);
+  font-family: var(--font-family-content);
+  font-weight: var(--font-weight-r);
+  font-style: normal;
+  font-size: var(--font-size-m);
+  line-height: var(--line-height-m);
+}
+
+a {
+  font-weight: var(--font-weight-m);
+  color: var(--color-flavor-2);
+}
+
+a:hover {
+  color: var(--color-text-light);
+  background-color: var(--color-flavor-2);
+  text-decoration: none;
+}

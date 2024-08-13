@@ -1,3 +1,3 @@
 <template>
-  <p>This is Home</p>
+  <p>This is Resources</p>
 </template>

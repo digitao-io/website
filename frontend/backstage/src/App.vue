@@ -1,39 +1,48 @@
 <script setup lang="ts">
-import { RouterLink, RouterView } from "vue-router";
+import { RouterView } from "vue-router";
+import NavigationMenu from "@/components/App/NavigationMenu.vue";
 </script>
 
 <template>
-  <div class="test">
-    <div class="sidebar">
-      <RouterLink
-        class="home-content"
-        to="/"
-      >
-        Home
-      </RouterLink>
-      <RouterLink to="/files">
-        Files
-      </RouterLink>
-    </div>
+  <div class="app">
+    <header class="app-header">
+      <div class="app-title">
+        Backstage
+      </div>
+      <navigation-menu />
+    </header>
+
+    <main class="app-content">
+      <router-view />
+    </main>
   </div>
-  <RouterView />
 </template>
 
 <style scoped>
-.sidebar {
-  display: flex;
-  flex-direction: column;
-  padding: 0;
-  position: fixed;
-  width: 150px;
+.app {
+  display: grid;
+  grid-template-columns: 150px 1fr;
+  grid-template-rows: 1fr;
+  grid-template-areas:
+    "header content";
+
+  min-height: 100vh;
 }
 
-.content {
-  position: fixed;
-  top: 52px;
-  right: 0;
-  bottom:0;
-  overflow: scroll;
+.app-header {
+  grid-area: header;
+  color: var(--color-text-light);
+  background-color: var(--color-bg-dark);
 }
 
+.app-title {
+  padding: var(--padding-m);
+  font-weight: var(--font-weight-b);
+  font-size: var(--font-size-l);
+  line-height: var(--line-height-m);
+}
+
+.app-content {
+  grid-area: content;
+}
 </style>

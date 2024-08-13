@@ -1,3 +1,3 @@
 <template>
-  <p>hello! pages</p>
+  <p>This is Pages</p>
 </template>
