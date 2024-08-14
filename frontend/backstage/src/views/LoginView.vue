@@ -50,6 +50,7 @@ const login = async () => {
         }"
         error-message="Username cannot be empty"
       />
+
       <text-input
         v-model="password"
         class="login-password-input"
@@ -62,6 +63,7 @@ const login = async () => {
         }"
         error-message="Password cannot be empty"
       />
+
       <text-button
         class="login-button"
         label="Login"
