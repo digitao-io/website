@@ -1,7 +1,7 @@
 <script setup lang="ts">
 /* eslint-disable @typescript-eslint/no-explicit-any */
 type DataExtractor = (rowData: any) => string | number | boolean | null;
-type KeyExtractor = (rowData: any) => string | number;
+type KeyExtractor = (rowData: any) => string;
 
 type ColumnDefinition = {
   label: string;
@@ -14,17 +14,17 @@ const props = defineProps<{
   columns: ColumnDefinition[];
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   data: any[];
-  selected?: string | number | null;
+  selected: string[];
 }>();
 
 const emit = defineEmits<{
-  rowSelect: [string | number];
+  select: [string[]];
 }>();
 
 const keyExtractor = props.columns.find((column) => column.isKey)!.dataExtractor as KeyExtractor;
 const onRowClick = (rowData: any) => {
   const key = keyExtractor(rowData);
-  emit("rowSelect", key);
+  emit("select", [key]);
 };
 
 /* eslint-enable @typescript-eslint/no-explicit-any */
@@ -55,7 +55,7 @@ const onRowClick = (rowData: any) => {
           :key="keyExtractor(rowData)"
           class="data-table-body-row"
           :class="{
-            'data-table-body-row__selected': props.selected === keyExtractor(rowData)
+            'data-table-body-row__selected': props.selected.includes(keyExtractor(rowData))
           }"
           @click="onRowClick(rowData)"
         >

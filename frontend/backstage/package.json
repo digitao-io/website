@@ -13,13 +13,16 @@
   },
   "dependencies": {
     "ajv": "^8.17.1",
+    "axios": "^1.7.4",
     "frontend-resources": "file:../resources",
+    "luxon": "^3.5.0",
     "vue": "^3.4.29",
     "vue-router": "^4.3.3"
   },
   "devDependencies": {
     "@stylistic/eslint-plugin": "^2.4.0",
     "@tsconfig/node20": "^20.1.4",
+    "@types/luxon": "^3.4.2",
     "@types/node": "^20.14.5",
     "@typescript-eslint/eslint-plugin": "^7.18.0",
     "@vitejs/plugin-vue": "^5.0.5",

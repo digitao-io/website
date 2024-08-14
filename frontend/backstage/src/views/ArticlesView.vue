@@ -1,3 +1,3 @@
 <template>
-  <p>This is Articles</p>
+  <p>This is Article</p>
 </template>

@@ -6,7 +6,7 @@ import PageLayout from "@/components/Shared/PageLayout.vue";
 import DataTable from "@/components/Shared/DataTable.vue";
 
 const tags = ref<Tag[]>([]);
-const selectedTagKey = ref<string | null>(null);
+const selectedTagKeys = ref<string[]>([]);
 
 onBeforeMount(async () => {
   const response = await sendHttpRequest<undefined, undefined, Tag[]>("", "/data/tag-list");
@@ -17,8 +17,8 @@ onBeforeMount(async () => {
   tags.value = response.data;
 });
 
-const onRowSelected = (selected: string | number) => {
-  selectedTagKey.value = selected as string;
+const onSelect = (selected: string[]) => {
+  selectedTagKeys.value = selected;
 };
 </script>
 
@@ -34,8 +34,8 @@ const onRowSelected = (selected: string | number) => {
           { label: 'Name', dataExtractor: (tag) => tag.name, align: 'left' },
         ]"
         :data="tags"
-        :selected="selectedTagKey"
-        @row-select="onRowSelected"
+        :selected="selectedTagKeys"
+        @select="onSelect"
       />
     </template>
   </page-layout>

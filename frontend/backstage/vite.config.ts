@@ -3,7 +3,6 @@ import { fileURLToPath, URL } from "node:url";
 import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
 
-// https://vitejs.dev/config/
 export default defineConfig({
   base: "/admin",
   plugins: [
@@ -16,8 +15,8 @@ export default defineConfig({
   },
   server: {
     proxy: {
-      "/site": "http://localhost:3000",
-      "/data": "http://localhost:3000",
+      "/site": "https://digitao.io",
+      "/data": "https://digitao.io",
     },
   },
 });

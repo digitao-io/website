@@ -4,15 +4,23 @@ import { ResponseStatus, sendHttpRequest } from "frontend-resources";
 import type { File, FileSearchParams } from "frontend-resources";
 import PageLayout from "@/components/Shared/PageLayout.vue";
 import DataTable from "@/components/Shared/DataTable.vue";
+import EditorSwitch from "@/components/Shared/EditorSwitch.vue";
+import FileUploadForm from "@/components/Files/FileUploadForm.vue";
+import FileDetailsList from "@/components/Files/FileDetailsList.vue";
+import FileDeleteForm from "@/components/Files/FileDeleteForm.vue";
 
 const files = ref<File[]>([]);
-const selectedFileId = ref<string | null>(null);
+const selectedFileIds = ref<string[]>([]);
 
-onBeforeMount(async () => {
+onBeforeMount(() => {
+  loadData();
+});
+
+const loadData = async () => {
   const query: FileSearchParams = {
     sort: "createdAt",
     order: "DESC",
-    take: 20,
+    take: 100,
     skip: 0,
   };
 
@@ -22,10 +30,10 @@ onBeforeMount(async () => {
   }
 
   files.value = response.data;
-});
+};
 
-const onRowSelected = (selected: string | number) => {
-  selectedFileId.value = selected as string;
+const onSelect = (selected: string[]) => {
+  selectedFileIds.value = selected;
 };
 </script>
 
@@ -42,21 +50,46 @@ const onRowSelected = (selected: string | number) => {
           { label: 'Type', dataExtractor: (file) => file.mimeType, align: 'left' },
         ]"
         :data="files"
-        :selected="selectedFileId"
-        @row-select="onRowSelected"
+        :selected="selectedFileIds"
+        @select="onSelect"
       />
+    </template>
+
+    <template #editor>
+      <editor-switch
+        :editors="[
+          { name: 'upload', label: 'Upload File', type: 'global', default: true },
+          { name: 'details', label: 'Details', type: 'single', default: true },
+          { name: 'delete', label: 'Delete', type: 'single' },
+        ]"
+        :selected="selectedFileIds"
+        @select="onSelect"
+      >
+        <template
+          #upload="{ changeTo }"
+        >
+          <file-upload-form
+            @create="changeTo(null); loadData();"
+          />
+        </template>
+
+        <template #details>
+          <file-details-list
+            :file-id="selectedFileIds[0]"
+          />
+        </template>
+
+        <template #delete="{ changeTo }">
+          <file-delete-form
+            :file-id="selectedFileIds[0]"
+            @delete="changeTo(null); loadData();"
+            @cancel="changeTo('details')"
+          />
+        </template>
+      </editor-switch>
     </template>
   </page-layout>
 </template>
 
 <style scoped>
-.files {
-  display: flex;
-  flex-wrap: wrap;
-  margin: var(--margin-m);
-}
-
-.files-table-area {
-  margin-right: var(--margin-m);
-}
 </style>

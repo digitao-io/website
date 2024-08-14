@@ -25,3 +25,8 @@ export type FileSearchParams = {
   take: number;
   skip: number;
 };
+
+export type FileCreateResponse = {
+  newFileId: string;
+  fileUploadUrl: string;
+};
