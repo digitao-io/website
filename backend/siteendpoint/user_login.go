@@ -12,7 +12,7 @@ import (
 
 func UserLogin(ctx *app.Context) gin.HandlerFunc {
 	return func(g *gin.Context) {
-		data := sitemodel.LoginRequest{}
+		data := sitemodel.UserLoginRequest{}
 		err := g.ShouldBindJSON(&data)
 		if err != nil {
 			app.ResponseWithValidationFailed(g, "Invalid request body")

@@ -6,21 +6,43 @@ body {
   padding: 0;
 }
 
+p {
+  margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+}
+
+ul,
+ol {
+  margin: 0;
+}
+
 /* Tokens */
 :root {
-  --color-flavor-1: #c5b46b;
-  --color-flavor-1-t1: #dfc96a;
-  --color-flavor-1-t2: #ebdda2;
+  --color-flavor-1-t2: #ffe3e4;
+  --color-flavor-1-t1: #eeb0b3;
+  --color-flavor-1: #d1676b;
+  --color-flavor-1-s1: #ac5f62;
+  --color-flavor-1-s2: #834547;
   --color-flavor-2: #d1676b;
   --color-content-light: #ffffff;
   --color-content-dark: #424b54;
 
   --color-bg: var(--color-content-light);
   --color-bg-dark: var(--color-content-dark);
-  --color-bg-flavor: var(--color-flavor-1);
   --color-bg-flavor-t: var(--color-flavor-1-t2);
+  --color-bg-flavor: var(--color-flavor-1);
+  --color-bg-flavor-s: var(--color-flavor-1-s1);
   --color-text: var(--color-content-dark);
   --color-text-light: var(--color-content-light);
+  --color-text-flavor: var(--color-flavor-1);
 
   --font-family-content: "Roboto", sans-serif;
 
@@ -31,6 +53,8 @@ body {
   --font-size-s: 12px;
   --font-size-m: 16px;
   --font-size-l: 20px;
+  --font-size-xl: 24px;
+  --font-size-xxl: 28px;
 
   --line-height-m: 1.5;
 
@@ -55,15 +79,4 @@ body {
   font-style: normal;
   font-size: var(--font-size-m);
   line-height: var(--line-height-m);
-}
-
-a {
-  font-weight: var(--font-weight-m);
-  color: var(--color-flavor-2);
-}
-
-a:hover {
-  color: var(--color-text-light);
-  background-color: var(--color-flavor-2);
-  text-decoration: none;
 }

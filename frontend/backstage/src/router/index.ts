@@ -1,6 +1,7 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 import type { RouteRecordRaw } from "vue-router";
-import HomeView from "../views/HomeView.vue";
+import { sendHttpRequest, ResponseStatus } from "frontend-resources";
+import HomeView from "@/views/HomeView.vue";
 import LoginView from "@/views/LoginView.vue";
 
 type RouteRecordExtra = {
@@ -56,4 +57,11 @@ export const routes: RouteRecord[] = [
 export const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
   routes,
+});
+
+router.beforeEach(async (to) => {
+  const response = await sendHttpRequest<undefined, undefined, undefined>("", "/site/user-auth-challenge");
+  if (response.status !== ResponseStatus.OK && to.name !== "login") {
+    return { name: "login" };
+  }
 });

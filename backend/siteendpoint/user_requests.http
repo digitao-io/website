@@ -7,5 +7,8 @@ Content-Type: application/json
   "password": "no-password"
 }
 
+### User auth challenge
+POST http://localhost:3000/site/user-auth-challenge HTTP/1.1
+
 ### User logout
 POST http://localhost:3000/site/user-logout HTTP/1.1

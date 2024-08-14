@@ -9,6 +9,7 @@ func SetupRoutes(ctx *app.Context, r *gin.Engine) {
 	r.GET("/site/health-check", HealthCheck(ctx))
 
 	r.POST("/site/user-login", UserLogin(ctx))
+	r.POST("/site/user-auth-challenge", UserAuthChallenge(ctx))
 	r.POST("/site/user-logout", UserLogout(ctx))
 
 	r.POST("/site/page-create", PageCreate(ctx))

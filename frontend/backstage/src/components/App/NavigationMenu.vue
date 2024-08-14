@@ -47,11 +47,10 @@ const menuEntries = ref<MenuEntry[]>(routes
   background-color: var(--color-bg-flavor);
 }
 .navigation-menu-item-link:hover {
-  border-right: var(--border-l) solid var(--color-bg-flavor-t);
+  border-right: var(--border-l) solid var(--color-bg-flavor-s);
 }
 
 .navigation-menu-item-link__active {
-  color: var(--color-text);
-  background-color: var(--color-bg-flavor-t);
+  background-color: var(--color-bg-flavor-s);
 }
 </style>

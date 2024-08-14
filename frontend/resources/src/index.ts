@@ -13,4 +13,5 @@ export * from "./types/data/file";
 export * from "./types/data/tag";
 export * from "./types/site/page-details";
 export * from "./types/site/page";
-export * from "./types/site/reosurces";
+export * from "./types/site/resource";
+export * from "./types/site/user";
