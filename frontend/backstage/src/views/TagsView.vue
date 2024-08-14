@@ -1,50 +1,45 @@
 <script setup lang="ts">
 import { onBeforeMount, ref } from "vue";
+import { ResponseStatus, sendHttpRequest } from "frontend-resources";
+import type { Tag } from "frontend-resources";
+import PageLayout from "@/components/Shared/PageLayout.vue";
+import DataTable from "@/components/Shared/DataTable.vue";
 
-const tagArray = ref();
+const tags = ref<Tag[]>([]);
+const selectedTagKey = ref<string | null>(null);
 
-onBeforeMount(() => {
-  getTags();
+onBeforeMount(async () => {
+  const response = await sendHttpRequest<undefined, undefined, Tag[]>("", "/data/tag-list");
+  if (response.status !== ResponseStatus.OK) {
+    return;
+  }
+
+  tags.value = response.data;
 });
 
-async function getTags() {
-  const tageUrl = "http://localhost:5173/data/tag-list";
-
-  try {
-    const response = await fetch(tageUrl, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-
-    if (!response.ok) {
-      throw new Error(`Response status: ${response.status}`);
-    }
-
-    tagArray.value = await response.json();
-  } catch (error) {
-    console.log(error);
-  }
-}
-
+const onRowSelected = (selected: string | number) => {
+  selectedTagKey.value = selected as string;
+};
 </script>
+
 <template>
-  <table>
-    <thead>
-      <tr>
-        <th>key</th>
-        <th>name</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr
-        v-for="tag in tagArray.data"
-        :key="tag.key"
-      >
-        <td>{{ tag.key }}</td>
-        <td>{{ tag.name }}</td>
-      </tr>
-    </tbody>
-  </table>
+  <page-layout
+    class="tags"
+    title="Tags"
+  >
+    <template #table>
+      <data-table
+        :columns="[
+          { label: 'Key', dataExtractor: (tag) => tag.key, align: 'left', isKey: true },
+          { label: 'Name', dataExtractor: (tag) => tag.name, align: 'left' },
+        ]"
+        :data="tags"
+        :selected="selectedTagKey"
+        @row-select="onRowSelected"
+      />
+    </template>
+  </page-layout>
 </template>
+
+<style scoped>
+</style>

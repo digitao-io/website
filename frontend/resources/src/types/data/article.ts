@@ -22,9 +22,9 @@ export type ArticleExtra = {
 };
 
 export type ArticleSearchQuery = {
-  q: string;
-  type: string;
-  tag: string[];
+  q?: string;
+  type?: string;
+  tag?: string[];
   sort: string;
   order: string;
   take: number;

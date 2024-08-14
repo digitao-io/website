@@ -1,5 +1,5 @@
 services:
   backend:
-    image: digitao-website-backend:20240731
+    image: digitao-website-backend:20240814
   presentation:
-    image: digitao-website-presentation:20240731
+    image: digitao-website-presentation:20240814

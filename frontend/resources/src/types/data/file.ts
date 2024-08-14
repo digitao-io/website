@@ -18,8 +18,8 @@ export type FileExtra = {
 };
 
 export type FileSearchParams = {
-  q: string;
-  mimeType: string;
+  q?: string;
+  mimeType?: string;
   sort: string;
   order: string;
   take: number;

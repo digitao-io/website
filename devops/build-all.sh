@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-VERSION_NUMBER=20240731
+VERSION_NUMBER=20240814
 
 rm -rf digitao-website-images-*.tar.gz
 
