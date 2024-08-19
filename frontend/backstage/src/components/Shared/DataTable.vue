@@ -7,6 +7,7 @@ type ColumnDefinition = {
   label: string;
   dataExtractor: DataExtractor;
   align: "left" | "right";
+  multiline?: true;
   isKey?: true;
 };
 
@@ -64,6 +65,7 @@ const onRowClick = (rowData: any) => {
             :key="column.label"
             class="data-table-body-cell"
             :class="{
+              'data-table-body-cell__multiline': column.multiline,
               'data-table-body-cell__align-left': column.align === 'left',
               'data-table-body-cell__align-right': column.align === 'right',
             }"
@@ -101,6 +103,14 @@ const onRowClick = (rowData: any) => {
 .data-table-head-cell.data-table-head-cell__align-right,
 .data-table-body-cell.data-table-body-cell__align-right {
   text-align: right;
+}
+
+.data-table-body-cell {
+  white-space: nowrap;
+}
+
+.data-table-body-cell__multiline {
+  white-space: normal;
 }
 
 .data-table-head-row {

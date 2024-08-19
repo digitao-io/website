@@ -60,7 +60,7 @@ ol {
 
   --margin-s: 8px;
   --margin-m: 16px;
-  --margin-l: 32px;
+  --margin-l: 24px;
 
   --border-xs: 1px;
   --border-s: 2px;
@@ -69,6 +69,7 @@ ol {
 
   --padding-s: 8px;
   --padding-m: 16px;
+  --padding-l: 24px;
 }
 
 /* Global Styles */

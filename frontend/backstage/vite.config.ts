@@ -15,8 +15,8 @@ export default defineConfig({
   },
   server: {
     proxy: {
-      "/site": "http://localhost:3000",
-      "/data": "http://localhost:3000",
+      "/site": "https://digitao.io",
+      "/data": "https://digitao.io",
     },
   },
 });

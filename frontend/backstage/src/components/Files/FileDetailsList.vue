@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onBeforeMount, ref, watch } from "vue";
+import { computed, ref, watch } from "vue";
 import { DateTime } from "luxon";
 import { ResponseStatus, sendHttpRequest, type File, type FileIdentifier } from "frontend-resources";
 import DetailsList from "@/components/Shared/DetailsList.vue";
@@ -24,15 +24,7 @@ const details = computed(() => {
   ];
 });
 
-onBeforeMount(() => {
-  loadData();
-});
-
-watch(() => props.fileId, () => {
-  loadData();
-});
-
-const loadData = async () => {
+watch(() => props.fileId, async () => {
   const query = { id: props.fileId };
   const response = await sendHttpRequest<FileIdentifier, undefined, File>("", "/data/file-get", query);
   if (response.status !== ResponseStatus.OK) {
@@ -40,7 +32,7 @@ const loadData = async () => {
   }
 
   file.value = response.data;
-};
+}, { immediate: true });
 </script>
 
 <template>
