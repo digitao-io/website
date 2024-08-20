@@ -30,3 +30,10 @@ const jsonHtml = computed(() => hljs.highlight(jsonString.value, { language: "js
     <!-- eslint-enable vue/no-v-html -->
   </div>
 </template>
+
+<style scoped>
+.json-display {
+  border: var(--border-xs) solid var(--color-text-t);
+  padding: var(--padding-s);
+}
+</style>

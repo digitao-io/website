@@ -24,6 +24,11 @@ ol {
   margin: 0;
 }
 
+pre,
+code {
+  margin: 0;
+}
+
 /* Tokens */
 :root {
   --color-flavor-1-t2: #ffe3e4;
