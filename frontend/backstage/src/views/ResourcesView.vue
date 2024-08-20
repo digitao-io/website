@@ -53,6 +53,7 @@ const onSelect = (selected: string[]) => {
         :editors="[
           { name: 'create', label: 'Create Resource', type: 'global', default: true },
           { name: 'details', label: 'Info', type: 'single', default: true },
+          { name: 'edit', label: 'Edit', type: 'single' },
           { name: 'delete', label: 'Delete', type: 'single' },
         ]"
         :selected="selectedResourceKeys"
@@ -67,6 +68,13 @@ const onSelect = (selected: string[]) => {
         <template #details>
           <resource-details-list
             :resource-key="selectedResourceKeys[0]"
+          />
+        </template>
+
+        <template #edit="{ changeTo }">
+          <resource-create-update-form
+            :resource-key="selectedResourceKeys[0]"
+            @save="changeTo('details'); loadData();"
           />
         </template>
 

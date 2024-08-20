@@ -8,13 +8,13 @@ const props = defineProps<{
   validation: object;
   errorMessage: string;
   password?: boolean;
+  disabled?: boolean;
 }>();
 
 const model = defineModel<string>();
 
 const interacted = ref(false);
 const hasError = computed(() => !(new Ajv()).validate(props.validation, model.value));
-
 </script>
 
 <template>
@@ -29,6 +29,7 @@ const hasError = computed(() => !(new Ajv()).validate(props.validation, model.va
         size="1"
         :type="props.password ? 'password' : 'text'"
         :placeholder="placeholder"
+        :disabled="!!props.disabled"
         @input="interacted = true"
       >
     </label>
@@ -68,6 +69,11 @@ const hasError = computed(() => !(new Ajv()).validate(props.validation, model.va
 }
 .text-input-input:focus {
   border: var(--border-xs) solid var(--color-text-flavor);
+}
+.text-input-input:disabled {
+  color: var(--color-text-t);
+  background-color: var(--color-bg-s);
+  cursor: not-allowed;
 }
 
 .text-input-error-message {

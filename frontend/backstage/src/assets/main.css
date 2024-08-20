@@ -32,16 +32,20 @@ ol {
   --color-flavor-1-s1: #ac5f62;
   --color-flavor-1-s2: #834547;
   --color-flavor-2: #d1676b;
-  --color-content-light: #ffffff;
-  --color-content-dark: #424b54;
+  --color-neutral-light: #ffffff;
+  --color-neutral-light-s1: #e7e9ea;
+  --color-neutral-dark-t1: #71787f;
+  --color-neutral-dark: #424b54;
 
-  --color-bg: var(--color-content-light);
-  --color-bg-dark: var(--color-content-dark);
+  --color-bg: var(--color-neutral-light);
+  --color-bg-s: var(--color-neutral-light-s1);
+  --color-bg-dark: var(--color-neutral-dark);
   --color-bg-flavor-t: var(--color-flavor-1-t2);
   --color-bg-flavor: var(--color-flavor-1);
   --color-bg-flavor-s: var(--color-flavor-1-s1);
-  --color-text: var(--color-content-dark);
-  --color-text-light: var(--color-content-light);
+  --color-text: var(--color-neutral-dark);
+  --color-text-t: var(--color-neutral-dark-t1);
+  --color-text-light: var(--color-neutral-light);
   --color-text-flavor: var(--color-flavor-1);
 
   --font-family-content: "Roboto", sans-serif;

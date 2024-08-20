@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { computed, ref } from "vue";
+import { computed, onMounted, ref } from "vue";
 import { ResponseStatus, sendHttpRequest } from "frontend-resources";
-import type { Resource } from "frontend-resources";
+import type { Resource, ResourceIdentifier, Response } from "frontend-resources";
 import TextButton from "@/components/Shared/TextButton.vue";
 import TextInput from "@/components/Shared/TextInput.vue";
 import CodeEditor from "@/components/Shared/CodeEditor.vue";
@@ -20,7 +20,36 @@ const type = ref<string>("");
 const description = ref<string>("");
 const details = ref<string>("");
 
+const codeEditor = ref<typeof CodeEditor | null>(null);
+
 const updating = computed(() => !!props.resourceKey);
+
+onMounted(async () => {
+  if (!updating.value) {
+    return;
+  }
+
+  const query = {
+    key: props.resourceKey!,
+  };
+
+  const response = await sendHttpRequest<ResourceIdentifier, undefined, Resource>("", "/site/resource-get", query);
+  if (response.status !== ResponseStatus.OK) {
+    return;
+  }
+
+  key.value = response.data.key;
+  title.value = response.data.title;
+  type.value = response.data.type;
+  description.value = response.data.description;
+
+  details.value = JSON.stringify(response.data.details, null, 2);
+  codeEditor.value?.setText(details.value);
+});
+
+const onCodeInput = (text: string) => {
+  details.value = text;
+};
 
 const onSaveClick = async () => {
   const body = {
@@ -31,7 +60,16 @@ const onSaveClick = async () => {
     details: JSON.parse(details.value),
   };
 
-  const response = await sendHttpRequest<undefined, Resource, undefined>("", "/site/resource-create", undefined, body);
+  let response: Response<undefined>;
+
+  if (!updating.value) {
+    response = await sendHttpRequest<undefined, Resource, undefined>("", "/site/resource-create", undefined, body);
+  } else {
+    const query = {
+      key: props.resourceKey!,
+    };
+    response = await sendHttpRequest<ResourceIdentifier, Resource, undefined>("", "/site/resource-update", query, body);
+  }
 
   if (response.status !== ResponseStatus.OK) {
     return;
@@ -89,10 +127,11 @@ const onSaveClick = async () => {
     />
 
     <code-editor
-      v-model="details"
+      ref="codeEditor"
       label="Details"
       placeholder="Details of the resource, should be JSON object or JSON array ..."
       lang="json"
+      @input="onCodeInput"
     />
 
     <text-button

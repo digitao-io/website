@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, ref } from "vue";
+import { onMounted, ref, shallowRef } from "vue";
 import { EditorView, minimalSetup } from "codemirror";
 import { placeholder as cmPlaceholder } from "@codemirror/view";
 import { json } from "@codemirror/lang-json";
@@ -11,8 +11,27 @@ const props = defineProps<{
   placeholder: string;
 }>();
 
-const model = defineModel<string>();
+const emit = defineEmits<{
+  input: [string];
+}>();
 
+defineExpose({
+  setText: (text: string) => {
+    if (!editorView.value) {
+      return;
+    }
+
+    editorView.value.dispatch({
+      changes: {
+        from: 0,
+        to: editorView.value.state.doc.length,
+        insert: text,
+      },
+    });
+  },
+});
+
+const editorView = shallowRef<EditorView | null>(null);
 const mountPoint = ref<Element | null>(null);
 
 onMounted(() => {
@@ -21,15 +40,14 @@ onMounted(() => {
     "markdown": markdown,
   };
 
-  new EditorView({
-    doc: model.value,
+  editorView.value = new EditorView({
     extensions: [
       minimalSetup,
       editors[props.lang](),
       cmPlaceholder(props.placeholder),
       EditorView.updateListener.of((e) => {
         if (e.docChanged) {
-          model.value = e.state.doc.toString();
+          emit("input", e.state.doc.toString());
         }
       }),
     ],
